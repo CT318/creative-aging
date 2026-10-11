@@ -1,0 +1,11 @@
+{
+  "id": "causality-placeholder",
+  "title": "宏觀背景因果鏈（預留）",
+  "summary": "[待填入最新調研資料]",
+  "status": "placeholder",
+  "chain": [
+    { "step": 1, "label": "社會結構轉折", "description": "[待填入最新調研資料]" },
+    { "step": 2, "label": "時間真空", "description": "[待填入最新調研資料]" },
+    { "step": 3, "label": "精神連結", "description": "[待填入最新調研資料]" }
+  ]
+}

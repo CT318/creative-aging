@@ -1,0 +1,16 @@
+{
+  "id": "concept-001",
+  "title": "[待填入最新調研資料]",
+  "summary": "[待填入最新調研資料]",
+  "status": "in-progress",
+  "updatedAt": "YYYY-MM-DD",
+  "tags": [],
+  "type": "service",
+  "role": "[此概念在整體方案中的角色]",
+  "personas": ["A"],
+  "painPoints": ["[對應的痛點]"],
+  "specs": ["[規格或功能]"],
+  "iterations": [
+    { "version": "v0.1", "date": "YYYY-MM-DD", "change": "[這次改了什麼、為什麼]" }
+  ]
+}

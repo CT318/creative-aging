@@ -1,0 +1,20 @@
+{
+  "id": "field-001",
+  "title": "[待填入最新調研資料]",
+  "summary": "[待填入最新調研資料]",
+  "status": "in-progress",
+  "updatedAt": "YYYY-MM-DD",
+  "tags": [],
+  "fieldType": "expert-interview",
+  "location": "[田野場域]",
+  "date": "YYYY-MM-DD",
+  "participant": { "code": "[受訪者代號]", "role": "[身分]", "background": "[背景]" },
+  "quotes": [
+    { "text": "[逐字稿萃取的關鍵引言]", "tag": "[主題標籤]" }
+  ],
+  "insights": ["[待填入最新調研資料]"],
+  "metrics": [
+    { "name": "[指標名稱]", "value": 0, "unit": "[單位]" }
+  ],
+  "sources": []
+}

@@ -1,17 +1,19 @@
 /* 色彩 Design Tokens — 換主題時優先修改此檔 */
 :root {
-  /* 中性色階 */
-  --color-bg: #faf9f7;
+  /* 中性色階：白底、深灰文字 */
+  --color-bg: #ffffff;
   --color-surface: #ffffff;
-  --color-surface-alt: #f1efeb;
-  --color-border: #e4e1db;
-  --color-text: #1f1e1c;
-  --color-text-muted: #6b6760;
+  --color-surface-alt: #f5f8fc;
+  --color-border: #e3e8ef;
+  --color-text: #2b2f36;
+  --color-text-muted: #5f6672;
 
-  /* 品牌色 (佔位，請替換) */
-  --color-brand: #2f2c28;
+  /* 品牌色：深灰按鈕 + 柔和淡藍點綴 */
+  --color-brand: #2b2f36;
   --color-brand-contrast: #ffffff;
-  --color-accent: #b08968;
+  --color-accent: #3f6fa8;        /* 文字用藍（白底對比 > 5:1） */
+  --color-accent-soft: #e8f1fb;   /* 淡藍底色 */
+  --color-accent-line: #a9c7e8;   /* 淡藍線條 / 圓點 */
 
   /* 狀態 */
   --color-focus: #3b6fd4;

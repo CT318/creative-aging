@@ -1,16 +1,15 @@
-// 網站全域設定 — 套用到新主題時，先改這裡。
+// 網站全域設定 — 只放版型相關設定；專案內容一律放在 research-archive/。
 export const site = {
-  brand: 'BRAND NAME',
-  tagline: '品牌標語佔位文字',
-  email: 'hello@example.com',
+  brand: 'LOGO',
+  tagline: '[待填入品牌標語]',
   nav: [
     { key: 'home', label: '首頁', href: './index.html' },
-    { key: 'philosophy', label: '品牌理念', href: './index.html#philosophy' },
+    { key: 'concepts', label: '概念', href: './index.html#pillars' },
+    { key: 'background', label: '研究背景', href: './index.html#background' },
   ],
-  cta: { label: '關於設計歷程', href: './process.html' },
+  cta: { label: '完整設計研究歷程', href: './process.html' },
   social: [
     { label: 'Instagram', href: '#' },
     { label: 'Facebook', href: '#' },
-    { label: 'YouTube', href: '#' },
   ],
 };

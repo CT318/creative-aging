@@ -1,0 +1,16 @@
+{
+  "id": "persona-a",
+  "title": "[Persona 暱稱]",
+  "summary": "[待填入最新調研資料]",
+  "status": "in-progress",
+  "updatedAt": "YYYY-MM-DD",
+  "tags": [],
+  "persona": "A",
+  "segment": "[所屬象限與選擇理由]",
+  "profile": { "age": "[年齡]", "occupation": "[職業]", "context": "[生活情境]" },
+  "goals": ["[待填入最新調研資料]"],
+  "painPoints": ["[待填入最新調研資料]"],
+  "scopingPath": [
+    { "step": 1, "decision": "[收斂決策]", "reason": "[理由]" }
+  ]
+}

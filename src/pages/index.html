@@ -3,99 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>品牌名稱 | Brand Official Site</title>
-    <meta name="description" content="品牌官方網站公版 — 品牌理念與產品體驗。" />
+    <title>品牌概念 | Brand</title>
+    <meta name="description" content="品牌概念推廣入口 — 內容由 research-archive 動態載入。" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <script type="module" src="../components/main.js"></script>
+    <script type="module" src="/components/main.js"></script>
   </head>
   <body>
     <div data-component="navbar" data-active="home"></div>
 
     <main>
-      <!-- Hero -->
-      <section class="hero">
+      <!-- Hero：核心願景與引言金句來自 research-archive/meta.json -->
+      <section class="hero" data-archive="hero">
         <div class="container hero__grid">
           <div>
-            <span class="eyebrow">Brand Archive</span>
-            <h1>極簡大標題<br />放在這裡</h1>
-            <p class="hero__lead">這是副標題佔位文字，用一到兩句話說明品牌想為生活帶來的改變。</p>
+            <span class="eyebrow">Vision</span>
+            <h1 data-bind="vision"></h1>
+            <blockquote class="hero__quote">
+              <p data-bind="quote"></p>
+              <cite data-bind="quote-author"></cite>
+            </blockquote>
             <div class="hero__actions">
-              <a class="btn" href="#experience">探索體驗</a>
-              <a class="btn btn--ghost" href="./process.html">設計歷程</a>
+              <a class="btn" href="#pillars">探索概念</a>
+              <a class="btn btn--ghost" href="./process.html">設計研究歷程</a>
             </div>
           </div>
           <div class="media ratio-4x3">
-            <img src="../assets/placeholders/ph-4x3.svg" alt="主視覺佔位圖" />
+            <img data-bind="hero-image" alt="主視覺展示位" />
           </div>
         </div>
       </section>
 
-      <!-- 品牌三大核心價值 -->
-      <section class="section bg-alt" id="philosophy">
+      <!-- 概念：「概念提案」階段的圖片 -->
+      <section class="section bg-alt" id="pillars">
         <div class="container">
           <div class="section__head">
-            <span class="eyebrow">Philosophy</span>
-            <h2>品牌三大核心價值</h2>
-            <p class="muted">以下為佔位文字，請替換為品牌真實的理念陳述。</p>
+            <span class="eyebrow">Concepts</span>
+            <h2>品牌定調與產品概念</h2>
+            <p class="muted">來自「概念提案」階段，點圖可放大。</p>
           </div>
-          <div class="grid grid--3">
-            <article class="card">
-              <div class="card__icon">01</div>
-              <h3>特色</h3>
-              <p class="muted">Lorem ipsum 佔位文字，描述品牌最鮮明的產品或服務特色。</p>
-            </article>
-            <article class="card">
-              <div class="card__icon">02</div>
-              <h3>理念</h3>
-              <p class="muted">Lorem ipsum 佔位文字，描述品牌背後所堅持的信念與價值觀。</p>
-            </article>
-            <article class="card">
-              <div class="card__icon">03</div>
-              <h3>生活願景</h3>
-              <p class="muted">Lorem ipsum 佔位文字，描述品牌期待帶給使用者的生活樣貌。</p>
-            </article>
-          </div>
+          <div data-archive="gallery" data-stage="concepts"></div>
         </div>
       </section>
 
-      <!-- 精選展示 / 體驗預覽 -->
-      <section class="section" id="experience">
+      <!-- 背景：「宏觀背景」階段的圖片 -->
+      <section class="section" id="background">
         <div class="container">
           <div class="section__head">
-            <span class="eyebrow">Experience</span>
-            <h2>精選體驗預覽</h2>
-            <p class="muted">預留 2–3 個產品 / 服務體驗展示模組，可複製增減。</p>
+            <span class="eyebrow">Background</span>
+            <h2>研究背景與問題因果</h2>
+            <p class="muted">來自「宏觀背景」階段，點圖可放大。</p>
           </div>
-
-          <article class="showcase">
-            <div class="media ratio-4x3"><img src="../assets/placeholders/ph-4x3.svg" alt="體驗一佔位圖" loading="lazy" /></div>
-            <div>
-              <span class="tag">體驗 01</span>
-              <h3>體驗標題一</h3>
-              <p class="muted">圖文展示模組的說明文字佔位，可描述使用情境、感受與價值。</p>
-              <a class="btn btn--ghost btn--sm" href="#">了解更多</a>
-            </div>
-          </article>
-
-          <article class="showcase">
-            <div class="media ratio-4x3"><img src="../assets/placeholders/ph-4x3.svg" alt="體驗二佔位圖" loading="lazy" /></div>
-            <div>
-              <span class="tag">體驗 02</span>
-              <h3>體驗標題二</h3>
-              <p class="muted">圖文展示模組的說明文字佔位，電腦版會自動左右交錯排列。</p>
-              <a class="btn btn--ghost btn--sm" href="#">了解更多</a>
-            </div>
-          </article>
-
-          <article class="showcase">
-            <div class="media ratio-4x3"><img src="../assets/placeholders/ph-4x3.svg" alt="體驗三佔位圖" loading="lazy" /></div>
-            <div>
-              <span class="tag">體驗 03</span>
-              <h3>體驗標題三</h3>
-              <p class="muted">圖文展示模組的說明文字佔位，可替換為產品或服務介紹。</p>
-              <a class="btn btn--ghost btn--sm" href="#">了解更多</a>
-            </div>
-          </article>
+          <div data-archive="gallery" data-stage="macro"></div>
         </div>
       </section>
     </main>

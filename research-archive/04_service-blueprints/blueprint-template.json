@@ -1,0 +1,20 @@
+{
+  "id": "blueprint-001",
+  "title": "[待填入最新調研資料]",
+  "summary": "[待填入最新調研資料]",
+  "status": "in-progress",
+  "updatedAt": "YYYY-MM-DD",
+  "tags": [],
+  "persona": "A",
+  "stages": [
+    {
+      "name": "[歷程階段名稱]",
+      "userActions": ["[使用者行為]"],
+      "frontstage": ["[前台接觸點]"],
+      "backstage": ["[後台流程]"],
+      "painPoints": ["[痛點]"],
+      "opportunities": ["[介入機會點]"]
+    }
+  ],
+  "sources": []
+}
