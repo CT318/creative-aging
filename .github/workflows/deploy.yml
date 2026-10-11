@@ -23,11 +23,14 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: 最高管理層/網站部/官網程式/package-lock.json
       - run: npm ci
+        working-directory: 最高管理層/網站部/官網程式
       - run: npm run build
+        working-directory: 最高管理層/網站部/官網程式
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: 最高管理層/網站部/官網程式/dist
 
   deploy:
     needs: build

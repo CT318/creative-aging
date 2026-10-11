@@ -1,5 +1,5 @@
 // 把 research-archive 階段資料夾的圖檔渲染成 HTML。這裡不放任何專案文字。
-import { archive, getStage } from '../../research-archive/database-index.js';
+import { archive, getStage } from '../data/database-index.js';
 import heroPlaceholder from '../assets/placeholders/ph-4x3.svg';
 
 const TBD = '[待填入最新調研資料]';
@@ -37,7 +37,7 @@ function renderPending(stage) {
     <span class="badge">資料收斂中</span>
     <h3>${esc(stage.title)}：研究進行中 / 資料收斂中</h3>
     <p class="muted">${TBD}</p>
-    <p class="muted">把圖片放進 research-archive/ 對應的階段資料夾後，會自動顯示在這裡。</p>
+    <p class="muted">把圖片放進 調研部/research-archive/ 對應的階段資料夾後，會自動顯示在這裡。</p>
   </article>`;
 }
 

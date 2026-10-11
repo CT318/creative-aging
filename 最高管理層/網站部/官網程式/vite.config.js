@@ -18,7 +18,8 @@ export default defineConfig({
   publicDir: resolve(__dirname, 'public'),
   server: {
     host: true, // 允許同一 Wi-Fi 下用手機 / QR Code 開啟預覽
-    fs: { allow: [resolve(__dirname)] },
+    // 網站讀取 調研部/ 的內容，需開放到最高管理層資料夾。
+    fs: { allow: [resolve(__dirname, '../..')] },
   },
   build: {
     outDir: resolve(__dirname, 'dist'),

@@ -1,4 +1,4 @@
-// 網站全域設定 — 只放版型相關設定；專案內容一律放在 research-archive/。
+// 網站全域設定 — 只放版型相關設定；專案內容一律放在 調研部/research-archive/。
 export const site = {
   brand: 'LOGO',
   tagline: '[待填入品牌標語]',

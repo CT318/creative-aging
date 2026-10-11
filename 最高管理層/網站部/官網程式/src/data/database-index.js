@@ -1,8 +1,8 @@
 // 網站資料中樞。
-// 資料來源 = research-archive/01_ ~ 05_ 各階段資料夾裡的圖檔（要放上網站的內容）。
-// 注意：專案根目錄的「討論資料/」是跟 Claude 討論用的素材，網站不讀取、不發佈。
+// 資料來源 = 調研部/research-archive/01_ ~ 05_ 各階段資料夾裡的圖檔（要放上網站的內容）。
+// 注意：調研部/討論資料/ 是跟 Claude 討論用的素材，網站不讀取、不發佈。
 // 丟新圖片進階段資料夾，存檔即自動出現，不需要改程式。
-import meta from './meta.json';
+import meta from '../../../../品牌部/site-content/meta.json';
 
 // 階段定義（順序即網站顯示順序）。
 export const STAGES = [
@@ -14,13 +14,13 @@ export const STAGES = [
 ];
 const OTHER = { key: 'other', title: '其他資料', subtitle: '尚未歸入階段的資料夾（在下方 FOLDER_STAGE 指定歸屬）' };
 
-// research-archive/ 第一層資料夾 → 階段。以 01_ ~ 05_ 開頭的資料夾會自動歸入對應階段
+// 調研部/research-archive/ 第一層資料夾 → 階段。以 01_ ~ 05_ 開頭的資料夾會自動歸入對應階段
 // （01 宏觀背景 … 05 概念提案），階段資料夾內可再分子資料夾，子資料夾名稱會成為群組標題。
 // 其他名稱的資料夾可在這裡加一行（資料夾名稱 → 階段 key）；都沒有的會顯示在「其他資料」。
 export const FOLDER_STAGE = {};
 
-const ROOT = './';
-const files = import.meta.glob('./*/**/*.{jpg,jpeg,png,webp,gif,avif,svg}', {
+const ROOT = '../../../../調研部/research-archive/';
+const files = import.meta.glob('../../../../調研部/research-archive/*/**/*.{jpg,jpeg,png,webp,gif,avif,svg}', {
   eager: true,
   query: '?url',
   import: 'default',
