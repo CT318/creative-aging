@@ -1,0 +1,18 @@
+/* 色彩 Design Tokens — 換主題時優先修改此檔 */
+:root {
+  /* 中性色階 */
+  --color-bg: #faf9f7;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1efeb;
+  --color-border: #e4e1db;
+  --color-text: #1f1e1c;
+  --color-text-muted: #6b6760;
+
+  /* 品牌色 (佔位，請替換) */
+  --color-brand: #2f2c28;
+  --color-brand-contrast: #ffffff;
+  --color-accent: #b08968;
+
+  /* 狀態 */
+  --color-focus: #3b6fd4;
+}

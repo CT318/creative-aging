@@ -1,0 +1,16 @@
+/* 字型 Tokens — 預設使用系統無襯線字體，零外部依賴。
+   若要導入 Web Font，請在此加入 @import 或 @font-face，再修改 --font-sans。 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+:root {
+  --font-sans: 'Noto Sans TC', system-ui, -apple-system, 'Segoe UI', 'PingFang TC',
+    'Microsoft JhengHei', sans-serif;
+
+  /* 自適應字級 (手機 → 桌機) */
+  --fs-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --fs-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --fs-h2: clamp(1.625rem, 1.3rem + 1.5vw, 2.5rem);
+  --fs-h1: clamp(2.25rem, 1.6rem + 3.2vw, 4.25rem);
+}
