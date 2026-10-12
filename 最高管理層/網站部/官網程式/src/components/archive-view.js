@@ -1,6 +1,6 @@
 // 把 research-archive 階段資料夾的圖檔渲染成 HTML。這裡不放任何專案文字。
 import { archive, getStage } from '../data/database-index.js';
-import heroPlaceholder from '../assets/placeholders/ph-4x3.svg';
+import { brand, products } from './site.config.js';
 
 const TBD = '[待填入最新調研資料]';
 
@@ -48,19 +48,55 @@ export function renderGallery(root) {
   initLightbox(root);
 }
 
+// 首頁 Hero：品牌名（字標）、標語、描述語、願景，全部來自 meta.json；缺哪欄就不顯示哪欄。
 export function renderHero(root) {
-  const { vision, quote, quoteAuthor } = archive.meta;
-  root.querySelector('[data-bind="vision"]').textContent = vision || TBD;
-  root.querySelector('[data-bind="quote"]').textContent = quote || TBD;
-  root.querySelector('[data-bind="hero-image"]').src = heroPlaceholder;
-  const author = root.querySelector('[data-bind="quote-author"]');
-  if (quoteAuthor) author.textContent = `— ${quoteAuthor}`;
-  else author.remove();
+  const set = (name, text) => {
+    const el = root.querySelector(`[data-bind="${name}"]`);
+    if (!el) return;
+    if (text) el.textContent = text;
+    else el.remove();
+  };
+  set('brand', brand.name);
+  set('tagline', brand.tagline);
+  set('descriptor', brand.descriptor);
+  set('vision', brand.vision);
 }
 
-export function renderFooterMeta() {
-  const { members } = archive.meta;
-  return { members: members?.length ? members : [TBD], updatedAt: archive.updatedAt };
+// 品牌理念：願景（大字）＋引言；兩者皆空則整區隱藏。
+export function renderStatement(root) {
+  if (!brand.vision && !brand.quote) { root.remove(); return; }
+  const vision = root.querySelector('[data-bind="vision"]');
+  if (brand.vision) vision.textContent = brand.vision; else vision.remove();
+  const q = root.querySelector('.hero__quote');
+  if (!brand.quote) { q.remove(); return; }
+  q.querySelector('[data-bind="quote"]').textContent = brand.quote;
+  const author = q.querySelector('[data-bind="quote-author"]');
+  if (brand.quoteAuthor) author.textContent = `— ${brand.quoteAuthor}`; else author.remove();
+}
+
+// 產品卡：資料來自 products.json；圖片留空位固定 4:3，空圖不顯示文字；summary / link 空則不顯示。
+export function renderProducts(root) {
+  if (!products.length) { root.remove(); return; }
+  root.querySelector('.products__grid').innerHTML = products
+    .map(
+      (p) => `
+    <article class="pcard">
+      <div class="pcard__img">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" />` : ''}</div>
+      <div class="pcard__body">
+        <h3 class="pcard__name">${esc(p.name)}</h3>
+        ${p.summary ? `<p class="pcard__summary">${esc(p.summary)}</p>` : ''}
+        ${p.link ? `<a class="btn btn--sm btn--ghost" href="${esc(p.link)}">了解更多</a>` : ''}
+      </div>
+    </article>`
+    )
+    .join('');
+}
+
+// 首頁底部「研究歷程」小入口：列出有資料的階段，連到研究歷程頁對應階段。
+export function renderStageEntry(root) {
+  const ready = archive.stages.filter((s) => s.ready);
+  if (!ready.length) { root.closest('section')?.remove(); return; }
+  root.innerHTML = ready.map((s) => `<li><a href="./process.html#${esc(s.key)}">${esc(s.title)}</a></li>`).join('');
 }
 
 /* ---------- 設計歷程頁：Tabs ---------- */
@@ -80,7 +116,7 @@ export function renderProcess(root) {
     .map(
       (s, i) => `
       <section class="panel" role="tabpanel" id="panel-${s.key}" aria-labelledby="tab-${s.key}" ${i === 0 ? '' : 'hidden'}>
-        <div class="section__head"><span class="eyebrow">STAGE ${String(i + 1).padStart(2, '0')}</span><h2>${esc(s.title)}</h2><p class="muted">${esc(s.subtitle)}</p></div>
+        <div class="section__head"><span class="eyebrow">第 ${String(i + 1).padStart(2, '0')} 階段</span><h2>${esc(s.title)}</h2><p class="muted">${esc(s.subtitle)}</p></div>
         ${s.ready ? renderGroups(s) : renderPending(s)}
       </section>`
     )

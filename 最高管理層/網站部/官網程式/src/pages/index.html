@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>品牌概念 | Brand</title>
-    <meta name="description" content="品牌概念推廣入口 — 內容由 research-archive 動態載入。" />
+    <title></title>
+    <meta name="description" content="" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <script type="module" src="/components/main.js"></script>
   </head>
@@ -12,48 +12,44 @@
     <div data-component="navbar" data-active="home"></div>
 
     <main>
-      <!-- Hero：核心願景與引言金句來自 品牌部/site-content/meta.json -->
-      <section class="hero" data-archive="hero">
-        <div class="container hero__grid">
-          <div>
-            <span class="eyebrow">Vision</span>
-            <h1 data-bind="vision"></h1>
-            <blockquote class="hero__quote">
-              <p data-bind="quote"></p>
-              <cite data-bind="quote-author"></cite>
-            </blockquote>
+      <!-- Hero：滿版視覺區（圖片位置先留空）；品牌名、標語、描述語來自 品牌部/site-content/meta.json -->
+      <section class="hero hero--brand" data-archive="hero">
+        <div class="hero__visual" data-slot="hero-image">
+          <div class="container">
+            <p class="hero__descriptor" data-bind="descriptor"></p>
+            <h1 class="hero__wordmark" data-bind="brand"></h1>
+            <p class="hero__tagline" data-bind="tagline"></p>
             <div class="hero__actions">
-              <a class="btn" href="#pillars">探索概念</a>
-              <a class="btn btn--ghost" href="./process.html">設計研究歷程</a>
+              <a class="btn btn--lg" href="#products">認識我們</a>
             </div>
           </div>
-          <div class="media ratio-4x3">
-            <img data-bind="hero-image" alt="主視覺展示位" />
-          </div>
         </div>
       </section>
 
-      <!-- 概念：「概念提案」階段的圖片 -->
-      <section class="section bg-alt" id="pillars">
+      <!-- 品牌理念：meta.json 的 vision / quote；沒資料自動隱藏 -->
+      <section class="section statement" data-archive="statement">
         <div class="container">
-          <div class="section__head">
-            <span class="eyebrow">Concepts</span>
-            <h2>品牌定調與產品概念</h2>
-            <p class="muted">來自「概念提案」階段，點圖可放大。</p>
-          </div>
-          <div data-archive="gallery" data-stage="concepts"></div>
+          <p class="statement__vision" data-bind="vision"></p>
+          <blockquote class="hero__quote">
+            <p data-bind="quote"></p>
+            <cite data-bind="quote-author"></cite>
+          </blockquote>
         </div>
       </section>
 
-      <!-- 背景：「宏觀背景」階段的圖片 -->
-      <section class="section" id="background">
+      <!-- 產品卡：品牌部/site-content/products.json；沒有資料自動隱藏 -->
+      <section class="section" id="products" data-archive="products">
         <div class="container">
-          <div class="section__head">
-            <span class="eyebrow">Background</span>
-            <h2>研究背景與問題因果</h2>
-            <p class="muted">來自「宏觀背景」階段，點圖可放大。</p>
-          </div>
-          <div data-archive="gallery" data-stage="macro"></div>
+          <div class="products__grid"></div>
+        </div>
+      </section>
+
+      <!-- 研究歷程入口（子項目，小區塊） -->
+      <section class="research-strip" id="research">
+        <div class="container research-strip__inner">
+          <h2>研究歷程</h2>
+          <ul class="research-strip__list" data-archive="stage-entry"></ul>
+          <a class="btn btn--ghost btn--sm" href="./process.html">看完整歷程</a>
         </div>
       </section>
     </main>

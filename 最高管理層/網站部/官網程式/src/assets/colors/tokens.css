@@ -5,8 +5,9 @@
   --color-surface: #ffffff;
   --color-surface-alt: #f5f8fc;
   --color-border: #e3e8ef;
+  --color-placeholder: #eef2f7;   /* 圖片留空位的中性淡色底 */
   --color-text: #2b2f36;
-  --color-text-muted: #5f6672;
+  --color-text-muted: #4a505b;
 
   /* 品牌色：深灰按鈕 + 柔和淡藍點綴 */
   --color-brand: #2b2f36;
