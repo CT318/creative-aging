@@ -1,0 +1,444 @@
+<title>LINE 數位中樞介面動畫</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* 版面概念：上方切換三個功能；左側 iPhone 的 LINE 官方帳號畫面自動播放，右側是逐步說明。
+   頁面外框沿用官網色彩（白底、深灰字、淡藍點綴）；手機內的畫面照 LINE iOS 的樣子，不隨主題變色。 */
+:root{
+  --bg:#ffffff; --surface:#f6f7f9; --border:#e2e5ea; --text:#1f2328; --muted:#4a505b;
+  --accent:#1d6fb8; --accent-soft:#e1eefb; --accent-line:#b9d5f1; --focus:#3b6fd4; --stagebg:#eef3f9;
+  --dur:.45s;
+  --font:"Noto Sans TC",-apple-system,"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14171c; --surface:#1b1f26; --border:#2d343e; --text:#e7eaef; --muted:#aab2bf;
+  --accent:#8db5e8; --accent-soft:#1c2a3d; --accent-line:#3c5a82; --focus:#8db5e8; --stagebg:#1f242c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171c; --surface:#1b1f26; --border:#2d343e; --text:#e7eaef; --muted:#aab2bf;
+  --accent:#8db5e8; --accent-soft:#1c2a3d; --accent-line:#3c5a82; --focus:#8db5e8; --stagebg:#1f242c; color-scheme:dark}
+@media (prefers-reduced-motion:reduce){:root{--dur:.01s}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.65;font-size:15px;
+  padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1160px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1,h2,h3,p{margin:0}
+h1{font-size:clamp(24px,3.4vw,32px);line-height:1.25}
+h2{font-size:22px;line-height:1.3}
+h3{font-size:15px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.sub{color:var(--muted);font-size:14px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--border)}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font-weight:500;color:var(--muted);margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent);font-weight:700}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;align-items:flex-end}
+.head .txt{display:flex;flex-direction:column;gap:6px;max-width:62ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line)}
+.chip.alt{background:var(--surface);color:var(--muted);border-color:var(--border)}
+.viewer{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:820px){.viewer{grid-template-columns:minmax(0,1fr)}}
+.left{display:flex;flex-direction:column;gap:12px;align-items:center;background:var(--stagebg);border:1px solid var(--border);border-radius:16px;padding:22px 24px}
+.phonewrap{width:calc(418px*var(--ps,.8));height:calc(872px*var(--ps,.8))}
+.ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;width:100%;justify-content:center}
+.btn{border:1px solid var(--border);background:var(--bg);border-radius:10px;padding:7px 14px;font-weight:500}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#10151c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#10151c}}
+.dots{display:flex;gap:6px}
+.dots button{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--accent-line);background:var(--bg);padding:0}
+.dots button[aria-current="step"]{background:var(--accent);border-color:var(--accent)}
+.dots button.done{background:var(--accent-line)}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted)}
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.stp{width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:12px;padding:9px 12px;display:grid;grid-template-columns:28px minmax(0,1fr);gap:2px 10px}
+.stp:hover{background:var(--surface)}
+.stp .n{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--accent-line);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.stp .t{font-weight:500;color:var(--muted)}
+.stp .body{grid-column:2;display:none;flex-direction:column;gap:8px;margin-top:4px}
+.stp[aria-current="step"]{background:var(--accent-soft);border-color:var(--accent-line)}
+.stp[aria-current="step"] .n{background:var(--accent);border-color:var(--accent);color:#fff}
+.stp[aria-current="step"] .t{color:var(--text);font-weight:700}
+.stp[aria-current="step"] .body{display:flex}
+.body .d{font-size:14.5px}
+.body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:13.5px;color:var(--muted)}
+
+/* ===== iPhone ===== */
+.phone{position:relative;width:418px;height:872px;border-radius:64px;background:#0d0f12;padding:14px;transform:scale(var(--ps,.8));transform-origin:0 0;
+  box-shadow:inset 0 0 0 2px #3a3f47,0 28px 50px rgba(0,0,0,.28)}
+.screen{position:relative;width:390px;height:844px;border-radius:50px;overflow:hidden;background:#fff;color:#111;display:flex;flex-direction:column;font-family:var(--font)}
+.island{position:absolute;left:50%;top:11px;width:122px;height:35px;margin-left:-61px;border-radius:20px;background:#000;z-index:80}
+.status{height:54px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 30px 9px 38px;font-size:17px;font-weight:600;z-index:70;background:#fff;color:#111}
+.status.dark{background:#000;color:#fff}
+.hdr{height:46px;flex:none;background:#fff;display:flex;align-items:center;gap:6px;padding:0 14px 0 8px;border-bottom:1px solid #e6e8ec;z-index:5}
+.hdr .nm{flex:1;min-width:0;font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr .cnt{font-size:15px;color:#7a8089;font-weight:500}
+.hdr svg{flex:none}
+.hdr.liff{justify-content:space-between;padding:0 16px}
+.hdr.liff .tt{flex:1;text-align:center;line-height:1.15}
+.hdr.liff .tt b{display:block;font-size:16px}
+.hdr.liff .tt i{display:block;font-style:normal;font-size:11px;color:#7a8089}
+.chat{flex:1;min-height:0;background:#9db6df;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:10px 12px 12px;gap:10px}
+.m{display:flex;gap:8px;align-items:flex-end}
+.m.bot,.m.gm{align-items:flex-start}
+.m.me{justify-content:flex-end}
+.av{width:40px;height:40px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:16px;color:#fff;background:var(--c,#e1eefb)}
+.mc{display:flex;flex-direction:column;gap:3px;align-items:flex-start;min-width:0}
+.mc .nm{font-size:12px;color:#35507a;padding-left:2px}
+.row{display:flex;gap:6px;align-items:flex-end}
+.m.me .row{flex-direction:row-reverse}
+.bub{background:#fff;border-radius:6px 20px 20px 20px;padding:10px 14px;font-size:17px;line-height:1.45;max-width:246px}
+.m.me .bub{background:#8be25b;border-radius:20px 6px 20px 20px}
+.time{font-size:10.5px;color:#3d5278;white-space:nowrap;text-align:right;line-height:1.2}
+.date{align-self:center;background:rgba(40,60,100,.35);color:#fff;font-size:12px;padding:2px 12px;border-radius:12px}
+.photo{width:210px;border-radius:16px;overflow:hidden;background:#fff;border:3px solid #fff}
+.photo svg{display:block;width:100%;height:auto}
+.voice{display:flex;align-items:center;gap:8px;width:190px}
+.voice .pl{width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:none}
+.wave{display:flex;gap:2.5px;align-items:center;height:26px;flex:1}
+.wave i{display:block;width:3px;border-radius:2px;background:#2b5a1a;opacity:.75}
+.card{width:282px;background:#fff;border-radius:6px 20px 20px 20px;overflow:hidden;flex:none}
+.card.sm{width:196px}
+.hero{background:#fbf8ef;display:block;width:100%;line-height:0}
+.hero svg{display:block;width:100%;height:auto}
+.cb{padding:13px 16px 6px}
+.ct{font-size:20px;font-weight:700;line-height:1.3}
+.cd{font-size:16px;color:#3f444c;line-height:1.5;margin-top:5px}
+.cbtn{padding:10px 14px 14px;display:flex;flex-direction:column;gap:8px}
+.b1,.b2{height:46px;border-radius:10px;display:grid;place-items:center;font-size:17px;font-weight:700;text-align:center}
+.b1{background:#06c755;color:#fff}
+.b2{background:#fff;border:1.5px solid #cfd5dd;color:#333}
+.car{display:flex;gap:8px;margin-left:48px;overflow:hidden;width:326px}
+.quick{display:flex;gap:8px;flex-wrap:wrap}
+.qk{background:#fff;border:1.5px solid #cdd5e0;border-radius:999px;padding:9px 18px;font-size:16.5px;font-weight:700}
+.mbar{height:50px;flex:none;background:#fff;border-top:1px solid #e1e4e9;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:16px;font-weight:700;color:#333}
+.rich{height:252px;flex:none;background:#fff;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:3px;background:#fff;border-top:3px solid #fff}
+.cell{background:#e9f1fb;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font-size:20px;font-weight:700;color:#1d3a5c}
+.cell svg{width:46px;height:46px}
+.ibar{height:56px;flex:none;background:#fff;border-top:1px solid #e1e4e9;display:flex;align-items:center;gap:14px;padding:0 14px}
+.ibar .in{flex:1;height:38px;border-radius:19px;background:#eff1f4;display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#9aa0a8;font-size:17px}
+.home{height:34px;flex:none;background:#fff;display:grid;place-items:center}
+.home i{display:block;width:134px;height:5px;border-radius:3px;background:#111}
+.ring{position:absolute;width:66px;height:66px;margin:-33px 0 0 -33px;border-radius:50%;border:4px solid #2f6fb7;background:rgba(47,111,183,.12);box-shadow:0 0 0 7px rgba(47,111,183,.14);z-index:90;pointer-events:none;animation:pulse 1.1s ease-in-out infinite}
+.ring.hold{width:84px;height:84px;margin:-42px 0 0 -42px}
+@keyframes pulse{0%,100%{transform:scale(.9)}50%{transform:scale(1.12)}}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.pop{opacity:0;animation:pop .5s ease forwards;animation-delay:var(--d,0s)}
+.fadein{animation:fade .45s ease both}
+.ring.ringin{opacity:0;animation:fade .3s ease forwards,pulse 1.1s ease-in-out infinite;animation-delay:var(--d,1.6s)}
+.noanim *,.noanim{animation:none!important}
+.noanim .pop,.noanim .ringin{opacity:1}
+/* 其他畫面 */
+.cam{flex:1;background:#000;position:relative;display:flex;flex-direction:column}
+.cam .vf{flex:1;margin:0;position:relative;background:linear-gradient(160deg,#cdb99a,#b49a74);overflow:hidden}
+.cam .vf svg{position:absolute;left:50%;top:50%;width:360px;transform:translate(-50%,-52%) rotate(-3deg);filter:drop-shadow(0 10px 18px rgba(0,0,0,.35))}
+.cam .grid{position:absolute;inset:0;background:linear-gradient(#ffffff40,#ffffff40) 33.3% 0/1px 100% no-repeat,linear-gradient(#ffffff40,#ffffff40) 66.6% 0/1px 100% no-repeat,linear-gradient(#ffffff40,#ffffff40) 0 33.3%/100% 1px no-repeat,linear-gradient(#ffffff40,#ffffff40) 0 66.6%/100% 1px no-repeat}
+.cam .bar{height:150px;display:flex;align-items:center;justify-content:space-around;background:#000}
+.shutter{width:76px;height:76px;border-radius:50%;border:5px solid #fff;display:grid;place-items:center}
+.shutter i{display:block;width:60px;height:60px;border-radius:50%;background:#fff}
+.camtop{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;padding:14px 20px;z-index:3}
+.liffb{flex:1;min-height:0;background:#f4f6f9;display:flex;flex-direction:column;position:relative}
+.liffb .scroll{flex:1;overflow:hidden;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.pane{background:#fff;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 0 #e6e9ee}
+.lbl{font-size:14px;color:#6a717b;font-weight:500}
+.big{font-size:19px;font-weight:700;line-height:1.35}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tg{font-size:14px;padding:3px 11px;border-radius:999px;background:#e9f1fb;color:#1d5f9c;font-weight:700}
+.tg.on{background:#06c755;color:#fff}
+.vrow{display:flex;align-items:center;gap:10px;background:#f1f4f8;border-radius:14px;padding:10px 12px}
+.pbtn{width:42px;height:42px;border-radius:50%;background:#06c755;display:grid;place-items:center;flex:none}
+.pbtn.t{background:#2f6fb7}
+.stage{height:230px;border-radius:14px;position:relative;display:grid;place-items:center;background:
+  conic-gradient(#e7eaee 25%,#fff 0 50%,#e7eaee 0 75%,#fff 0) 0 0/20px 20px}
+.stage svg{height:210px;width:auto}
+.fbar{padding:10px 16px 8px;background:#fff;border-top:1px solid #e6e9ee}
+.fbtn{height:52px;border-radius:12px;background:#06c755;color:#fff;display:grid;place-items:center;font-size:19px;font-weight:700}
+.overlay{position:absolute;inset:0;background:rgba(10,18,32,.55);z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:70px;gap:22px}
+.vbub{background:#fff;border-radius:22px;padding:16px 20px;width:290px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.vbub .wave{height:42px;justify-content:center;flex:none;width:100%}
+.vbub .wave i{background:#06c755;opacity:1;width:4px}
+.vbub b{font-size:19px}
+.vbub span{font-size:15px;color:#555}
+.micbig{width:86px;height:86px;border-radius:50%;background:#06c755;display:grid;place-items:center;box-shadow:0 0 0 12px rgba(6,199,85,.3)}
+.prow{display:flex;align-items:center;gap:12px;padding:11px 16px;background:#fff;border-bottom:1px solid #eef0f3;font-size:17px;font-weight:500}
+.prow .ck{margin-left:auto;width:26px;height:26px;border-radius:50%;border:2px solid #c4c9d1;display:grid;place-items:center}
+.prow .ck.on{background:#06c755;border-color:#06c755}
+.sec{background:#f4f6f9;padding:8px 16px;font-size:13px;color:#6a717b}
+.react{background:#fff;border-radius:14px;padding:2px 9px;font-size:13px;display:inline-flex;gap:4px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.stk{width:200px;line-height:0}
+.stk svg{width:100%;height:auto}
+body.still{background:transparent;padding:0;margin:0}
+body.still .wrap>*:not(#stillhost){display:none!important}
+body.still .wrap{padding:0;margin:0;max-width:none;display:block}
+body.still #stillhost{display:block}
+#stillhost{display:none}
+</style>
+
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:8px">
+    <div class="eyebrow">產品部 · LINE 數位中樞 · 介面動畫</div>
+    <h1>LINE 數位中樞介面動畫</h1>
+    <p class="sub" style="max-width:68ch">三個功能都在 LINE 官方帳號裡完成，不用下載 App。每個功能是一段可自動播放的 iPhone 操作，藍色圓圈是該步驟要點的位置。畫面中的帳號名稱、人物與作品都是示意用的假資料。</p>
+  </header>
+  <nav class="tabs" role="tablist" aria-label="功能" id="tabs"></nav>
+  <section id="panel"></section>
+  <div id="stillhost"></div>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const Q=new URLSearchParams(location.search);
+const STILL=Q.has('still');
+
+/* ---------- 圖示 ---------- */
+const I={
+ back:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+ search:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></svg>',
+ menu:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+ close:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+ more:'<svg width="24" height="24" viewBox="0 0 24 24" fill="#111"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>',
+ kb:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>',
+ chev:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
+ plus:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ cam:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>',
+ img:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M4 16l5-5 4 4 3-3 4 4"/></svg>',
+ mic:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.9" stroke-linecap="round"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3"/></svg>',
+ micw:'<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><rect x="9" y="3.5" width="6" height="11" rx="3" fill="#fff"/><path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3"/></svg>',
+ smile:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8a9099" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14c1 1.6 2.2 2.3 3.5 2.3s2.5-.7 3.5-2.3M9 10h.01M15 10h.01"/></svg>',
+ play:'<svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M7 4l13 8-13 8z"/></svg>',
+ playg:'<svg width="14" height="14" viewBox="0 0 24 24" fill="#1c8a3d"><path d="M7 4l13 8-13 8z"/></svg>',
+ phone:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z"/></svg>',
+ flash:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M13 2L5 13h6l-1 9 8-11h-6z"/></svg>',
+ flip:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0114-3l2 2M20 15a8 8 0 01-14 3l-2-2M20 4v4h-4M4 20v-4h4"/></svg>',
+ chk:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>',
+ brush:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d6fb8" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c-5 1-9 5-10 9l2 2c4-1 8-5 8-11zM9.5 14.5C7 14.5 6 16 6 18c0 1-1 2-2 2 3 1 8 .5 8.5-3.5"/></svg>'
+};
+const MI={
+ pencil:'<svg viewBox="0 0 48 48" fill="none" stroke="#2f6fb7" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40l2-9L31 10l7 7L17 38z"/><path d="M27 14l7 7"/></svg>',
+ aid:'<svg viewBox="0 0 48 48" fill="none" stroke="#2f6fb7" stroke-width="2.6" stroke-linecap="round"><rect x="7" y="13" width="34" height="26" rx="5"/><path d="M17 13V9h14v4M24 20v12M18 26h12"/></svg>',
+ ask:'<svg viewBox="0 0 48 48" fill="none" stroke="#2f6fb7" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="17" y="6" width="14" height="22" rx="7"/><path d="M10 24a14 14 0 0028 0M24 38v5"/></svg>',
+ sun:'<svg viewBox="0 0 48 48" fill="none" stroke="#2f6fb7" stroke-width="2.6" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M37 11l-4 4M15 33l-4 4"/></svg>',
+ heart:'<svg viewBox="0 0 48 48" fill="none" stroke="#2f6fb7" stroke-width="2.6" stroke-linejoin="round"><path d="M24 40S7 30 7 18a9 9 0 0117-4 9 9 0 0117 4c0 12-17 22-17 22z"/></svg>',
+ folder:'<svg viewBox="0 0 48 48" fill="none" stroke="#2f6fb7" stroke-width="2.6" stroke-linejoin="round"><path d="M6 14a3 3 0 013-3h10l4 5h16a3 3 0 013 3v17a3 3 0 01-3 3H9a3 3 0 01-3-3z"/></svg>'
+};
+
+/* ---------- 插圖（SVG） ---------- */
+function lcg(seed){let s=seed;return()=>((s=(s*1664525+1013904223)%4294967296)/4294967296)}
+function floret(cx,cy,r,col,rot){let o='';for(let k=0;k<4;k++)o+=`<ellipse cx="${cx}" cy="${cy-r*.5}" rx="${r*.42}" ry="${r*.62}" transform="rotate(${k*90+rot} ${cx} ${cy})" fill="${col}" fill-opacity=".86" stroke="#fff" stroke-opacity=".5" stroke-width=".8"/>`;return o+`<circle cx="${cx}" cy="${cy}" r="${r*.16}" fill="#fff" fill-opacity=".8"/>`}
+function hyd(o={}){
+  const rnd=lcg(11),cols=['#8fa8e8','#a58fe0','#c4a0e8','#7fb6ea','#b4c6f2','#d6a8e0','#9bb4ee'];
+  let s=`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><defs><filter id="bl" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter></defs>`;
+  if(o.paper)s+=`<rect width="200" height="200" fill="#fffdf6"/>`;
+  s+=`<path d="M100 120C86 140 62 150 44 146c8-18 30-30 56-26z" fill="#6fae82" fill-opacity=".85"/><path d="M104 122c14 20 36 30 56 28-10-18-32-30-56-28z" fill="#5f9d7a" fill-opacity=".85"/><path d="M100 118c0 22-2 44 0 66" stroke="#5f8f6a" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  for(let i=0;i<34;i++){const a=rnd()*6.283,r=Math.sqrt(rnd())*60;s+=floret(100+Math.cos(a)*r,84+Math.sin(a)*r*.88,15+rnd()*6,cols[Math.floor(rnd()*cols.length)],rnd()*90)}
+  if(o.smudge)s+=`<ellipse cx="66" cy="112" rx="40" ry="26" fill="#6f8be0" fill-opacity=".6" filter="url(#bl)"/>`;
+  return s+'</svg>'}
+function stepArt(n){
+  let s=`<svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg"><rect width="280" height="160" fill="#fbf8ef"/>`;
+  const C=[[140,70,26],[108,98,24],[172,98,24]];
+  const g='#7d8590';
+  if(n>=3)for(const [x,y,r] of C)s+=`<circle cx="${x}" cy="${y}" r="${r+8}" fill="${x===140?'#a58fe0':x<140?'#8fa8e8':'#7fb6ea'}" fill-opacity=".4"/>`;
+  for(const [x,y,r] of C)s+=`<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${g}" stroke-width="3" stroke-linecap="round"/>`;
+  if(n>=2)for(const [x,y,r] of C)for(let k=0;k<5;k++){const a=k*72-90;s+=`<ellipse cx="${x+Math.cos(a*Math.PI/180)*(r+9)}" cy="${y+Math.sin(a*Math.PI/180)*(r+9)}" rx="9" ry="12" transform="rotate(${a+90} ${x+Math.cos(a*Math.PI/180)*(r+9)} ${y+Math.sin(a*Math.PI/180)*(r+9)})" fill="none" stroke="${g}" stroke-width="2.4"/>`}
+  if(n>=3)s+=`<path d="M140 128c-4 12-4 22 0 30" stroke="#5f8f6a" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M140 146c16-6 26-4 34 2-10 4-24 4-34-2z" fill="#6fae82"/>`;
+  return s+'</svg>'}
+function sticker(o={}){
+  return `<svg viewBox="0 0 220 250" xmlns="http://www.w3.org/2000/svg"><g transform="translate(8,0) scale(.96)">${hyd().replace(/<svg[^>]*>|<\/svg>/g,'').replace(/<defs>[\s\S]*?<\/defs>/,'')}</g>
+  <text x="110" y="214" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="40" font-weight="700" fill="#2f5fa8" stroke="#fff" stroke-width="8" paint-order="stroke" stroke-linejoin="round">早安！</text>
+  <text x="110" y="240" text-anchor="middle" font-family="Noto Sans TC,sans-serif" font-size="17" font-weight="700" fill="#3c4a63" stroke="#fff" stroke-width="5" paint-order="stroke" stroke-linejoin="round">用心手繪的祝福</text></svg>`}
+function waveHtml(n,seed){const r=lcg(seed);let o='';for(let i=0;i<n;i++)o+=`<i style="height:${6+Math.round(r()*18)}px"></i>`;return `<div class="wave">${o}</div>`}
+
+/* ---------- 畫面元件 ---------- */
+const OA='旬常｜樂齡畫畫生活';
+const avOA=`<div class="av" style="background:#e1eefb">${I.brush}</div>`;
+let uid=0;
+const tapAttr=id=>id?` data-tap="${id}"`:'';
+function mBot(inner,tm){return `<div class="m bot pop">${avOA}<div class="mc"><div class="nm">旬常</div><div class="row">${inner}<div class="time">${tm||'上午<br>9:41'}</div></div></div></div>`}
+const T={
+ date:t=>`<div class="date pop">${t}</div>`,
+ bot:(t,tm)=>mBot(`<div class="bub">${t}</div>`,tm),
+ me:(t,rd)=>`<div class="m me pop"><div class="row"><div class="bub">${t}</div><div class="time">${rd?'已讀<br>':''}上午<br>9:42</div></div></div>`,
+ meimg:(k)=>`<div class="m me pop"><div class="row"><div class="photo">${hyd({paper:true,smudge:k==='smudge'})}</div><div class="time">已讀<br>上午<br>9:43</div></div></div>`,
+ mevoice:(d)=>`<div class="m me pop"><div class="row"><div class="bub voice"><div class="pl">${I.playg}</div>${waveHtml(18,5)}<span style="font-size:13px">${d}</span></div><div class="time">已讀<br>上午<br>9:44</div></div></div>`,
+ card:(c)=>mBot(`<div class="card"><div class="hero">${c.art}</div><div class="cb"><div class="ct">${c.title}</div><div class="cd">${c.desc}</div></div><div class="cbtn">${c.btns.map(b=>`<div class="${b[1]||'b1'}"${tapAttr(b[2])}>${b[0]}</div>`).join('')}</div></div>`,c.tm),
+ cars:(items)=>`<div class="car pop">${items.map(c=>`<div class="card sm"><div class="hero">${c.art}</div><div class="cb" style="padding-top:10px"><div class="ct" style="font-size:17px">${c.title}</div></div><div class="cbtn" style="padding-top:6px"><div class="b1"${tapAttr(c.tap)} style="height:42px;font-size:16px">選這張</div></div></div>`).join('')}</div>`,
+ quick:(arr)=>`<div class="quick pop" style="--d:.35s">${arr.map(q=>`<div class="qk"${tapAttr(q[1])}>${q[0]}</div>`).join('')}</div>`,
+ gm:(name,c,t)=>`<div class="m gm pop"><div class="av" style="--c:${c}">${name[0]}</div><div class="mc"><div class="nm">${name}</div><div class="row"><div class="bub">${t}</div><div class="time">上午<br>9:52</div></div></div></div>`,
+ stk:()=>`<div class="m me pop"><div class="mc" style="align-items:flex-end"><div class="row"><div class="stk">${sticker()}</div><div class="time">已讀 6<br>上午<br>9:51</div></div><div class="react">❤ 3</div></div></div>`
+};
+const MENU=[['pencil','起筆引導'],['aid','救畫急診'],['ask','課堂問診'],['sun','早安貼圖'],['heart','家人讚賞'],['folder','我的作品']];
+const bottomMenu=()=>`<div class="mbar"><span style="display:flex">${I.kb}</span><span style="display:flex;gap:4px;align-items:center">選單 ${I.chev}</span><span style="width:26px"></span></div><div class="rich">${MENU.map((m,i)=>`<div class="cell" data-tap="m${i}">${MI[m[0]]}<span>${m[1]}</span></div>`).join('')}</div><div class="home"><i></i></div>`;
+const bottomInput=()=>`<div class="ibar">${I.plus}${I.cam}${I.img}<div class="in"><span>Aa</span>${I.smile}</div>${I.mic}</div><div class="home"><i></i></div>`;
+const hdrOA=()=>`<div class="hdr">${I.back}<span class="cnt">12</span><span class="nm">${OA}</span>${I.search}${I.menu}</div>`;
+const hdrGroup=()=>`<div class="hdr">${I.back}<span class="cnt">3</span><span class="nm">一家人 <span style="font-weight:500;color:#7a8089">(6)</span></span>${I.phone}${I.search}${I.menu}</div>`;
+const hdrLiff=(t,d)=>`<div class="hdr liff">${I.close}<div class="tt"><b>${t}</b><i>${d||'liff.line.me'}</i></div>${I.more}</div>`;
+const status=(dark)=>`<div class="status${dark?' dark':''}"><span>9:41</span><span style="display:flex;gap:6px;align-items:center"><svg width="20" height="13" viewBox="0 0 20 13" fill="${dark?'#fff':'#111'}"><rect x="0" y="8" width="3.4" height="5" rx="1"/><rect x="5.5" y="5.5" width="3.4" height="7.5" rx="1"/><rect x="11" y="3" width="3.4" height="10" rx="1"/><rect x="16.5" y="0" width="3.4" height="13" rx="1"/></svg><svg width="18" height="13" viewBox="0 0 18 13" fill="none" stroke="${dark?'#fff':'#111'}" stroke-width="2" stroke-linecap="round"><path d="M1.5 4.6a10.5 10.5 0 0115 0M4.2 7.6a6.7 6.7 0 019.6 0M7 10.5a2.8 2.8 0 014 0"/></svg><svg width="28" height="13" viewBox="0 0 28 13"><rect x=".6" y=".6" width="23" height="11.8" rx="3.6" fill="none" stroke="${dark?'#fff':'#111'}" stroke-opacity=".45"/><rect x="2" y="2" width="20" height="9" rx="2.4" fill="${dark?'#fff':'#111'}"/><rect x="25" y="4" width="2" height="5" rx="1" fill="${dark?'#fff':'#111'}" fill-opacity=".5"/></svg></span></div>`;
+
+function chatScreen(s){
+  const msgs=s.msgs.map(m=>T[m[0]](...m.slice(1))).join('');
+  const body=`<div class="chat">${msgs}</div>`;
+  const ov=s.voice?`<div class="overlay"><div class="vbub">${waveHtml(26,9)}<b>錄音中　0:08</b><span>手指不要放開，說說你卡在哪裡</span></div><div class="micbig" data-tap="mic">${I.micw}</div></div>`:'';
+  return `${status()}${s.hdr==='group'?hdrGroup():hdrOA()}${body}${s.bottom==='menu'?bottomMenu():bottomInput()}${ov}`;
+}
+function camScreen(s){
+  return `${status(true)}<div class="cam"><div class="camtop">${I.flash}<span style="color:#fff;font-size:17px;font-weight:600">取消</span></div><div class="vf"><div class="grid"></div>${hyd({paper:true,smudge:true}).replace('<svg ','<svg style="border-radius:6px" ')}</div><div class="bar"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#333"></div><div class="shutter" data-tap="shutter"><i></i></div>${I.flip}</div></div><div class="home" style="background:#000"><i style="background:#fff"></i></div>`;
+}
+function liffScreen(s){
+  return `${status()}${hdrLiff(s.title,s.dom)}<div class="liffb"><div class="scroll">${s.body}</div>${s.foot||''}</div><div class="home"><i></i></div>`;
+}
+function pickerScreen(){
+  const row=(n,c,on,sub)=>`<div class="prow"><div class="av" style="--c:${c};width:44px;height:44px">${n[0]}</div><div>${n}${sub?`<div style="font-size:13px;color:#7a8089;font-weight:400">${sub}</div>`:''}</div><div class="ck${on?' on':''}">${on?I.chk:''}</div></div>`;
+  return `${status()}${hdrLiff('選擇分享對象','')}<div class="liffb" style="background:#fff"><div class="sec">群組</div>${row('一家人','#f08a4b',true,'6 人')}${row('畫室同學','#5aa7a0',false,'12 人')}<div class="sec">好友</div>${row('小宇（孫）','#7a8de0',false)}${row('美玲（女兒）','#d86f9a',false)}${row('阿國','#8a8f98',false)}<div style="flex:1"></div><div class="fbar"><div class="fbtn" data-tap="send">傳送 (1)</div></div></div><div class="home"><i></i></div>`;
+}
+function render(f,i){
+  const s=F[f].steps[i].screen;
+  const kind=s.t;
+  let h=kind==='chat'?chatScreen(s):kind==='cam'?camScreen(s):kind==='liff'?liffScreen(s):pickerScreen(s);
+  return h;
+}
+
+/* ---------- 內容：三個功能 ---------- */
+const cardPaint={art:'<div style="padding:8px 0;background:#fbf8ef">'+hyd({paper:false}).replace('<svg ','<svg style="height:150px;width:auto;margin:auto;display:block" ')+'</div>'};
+const stepCard=(n,title,desc,btns)=>({art:stepArt(n),title,desc,btns});
+const F=[
+{key:'guide',tab:'功能一　步驟引導教學',title:'AI 極簡起筆引導',tag:'不會畫也沒關係，每一步只畫一點點。',
+ chips:['PRIMARY｜Persona A 低壓型','EXTENSION｜Persona B'],
+ steps:[
+ {title:'加入好友，點選單「起筆引導」',op:'掃手撕日曆上的 QR 加入官方帳號，看到歡迎訊息後，點選單的「起筆引導」。',
+  notes:['不用下載 App，LINE 裡就有','選單六格，字大、一格一件事'],tap:'m0',
+  screen:{t:'chat',bottom:'menu',msgs:[['date','今天'],['bot','歡迎來到旬常！我是你的畫畫小幫手。'],['bot','不用下載任何 App，想畫就點下面的選單。']]}},
+ {title:'今日主題，點「開始畫」',op:'官方帳號送來今天的主題卡，點「開始畫」。',
+  notes:['主題對應手撕日曆當天這一頁，紙本先成立','AI 把主題拆成 3 個簡單步驟'],tap:'go',
+  screen:{t:'chat',bottom:'input',msgs:[['me','起筆引導'],['card',{art:cardPaint.art,title:'今天來畫繡球花',desc:'我把它拆成 3 步，每一步只畫一點點。',btns:[['開始畫','b1','go'],['換個主題','b2']]}]]}},
+ {title:'第 1 步：三個小圓',op:'照步驟圖，在紙上畫三個疊在一起的小圓，畫好後點「畫好了」。',
+  notes:['一張圖配一句話，不用讀長文','每步只出現一張卡片'],tap:'ok',
+  screen:{t:'chat',bottom:'input',msgs:[['me','開始畫'],['card',{...stepCard(1,'第 1 步　畫三個小圓','像三顆湯圓，輕輕疊在一起，不用畫得像。',[['畫好了，下一步','b1','ok'],['我卡住了','b2']])}]]}},
+ {title:'第 2 步：圍一圈花瓣',op:'在每個圓外面圍一圈小花瓣，畫好後點「畫好了」。',
+  notes:['卡住時按「我卡住了」，換更簡單的畫法'],tap:'ok',
+  screen:{t:'chat',bottom:'input',msgs:[['me','畫好了，下一步'],['card',{...stepCard(2,'第 2 步　圍一圈花瓣','每個圓外面畫五片小橢圓，歪一點更自然。',[['畫好了，下一步','b1','ok'],['我卡住了','b2']])}]]}},
+ {title:'第 3 步：淡淡上色，拍給我看',op:'用淡藍紫色輕輕上色，完成後點「畫好了，拍給我看」。',
+  notes:['色彩只給兩三個建議，不一次丟太多選擇'],tap:'ok',
+  screen:{t:'chat',bottom:'input',msgs:[['me','畫好了，下一步'],['card',{...stepCard(3,'第 3 步　淡淡上色','藍、紫、粉各取一點，水多一點會更透。',[['畫好了，拍給我看','b1','ok'],['我卡住了','b2']])}]]}},
+ {title:'傳作品照，收到讚賞',op:'拍下完成的畫傳上去，立刻收到回饋，可選「做成早安貼圖」。',
+  notes:['回饋用具體的話，例如「顏色很柔和」','「做成早安貼圖」接到功能三'],tap:'stk',
+  screen:{t:'chat',bottom:'input',msgs:[['meimg','paint'],['bot','好漂亮！這個藍紫色很柔和。'],['bot','要把它收藏起來，還是做成早安貼圖傳給家人？'],['quick',[['存進作品集'],['做成早安貼圖','stk']]]]}}
+ ]},
+{key:'rescue',tab:'功能二　救畫急診與課堂問診',title:'救畫急診與課堂問診',tag:'畫壞了不丟臉，拍給官方帳號，沒人知道。',
+ chips:['PRIMARY｜Persona C 謹慎防衛型','EXTENSION｜Persona D 校準型'],
+ steps:[
+ {title:'點選單「救畫急診」',op:'畫到一半顏色暈開了，打開 LINE，點選單的「救畫急診」。',
+  notes:['入口跟起筆引導同一個選單，不用多學'],tap:'m1',
+  screen:{t:'chat',bottom:'menu',msgs:[['bot','今天畫得怎麼樣？有需要隨時叫我。']]}},
+ {title:'私密說明，點「拍照」',op:'官方帳號說明這裡是私密的，點「拍照」。',
+  notes:['第一句就講私密：只有你和官方帳號看得到','不會公開、不會自動分享'],tap:'cam',
+  screen:{t:'chat',bottom:'input',msgs:[['me','救畫急診'],['bot','這裡是私密急診室，只有你和我看得到，不會傳給任何人。'],['bot','把你的畫拍給我看，我來想辦法。'],['quick',[['拍照','cam'],['從相簿選']]]]}},
+ {title:'相機：拍下作品',op:'對準畫紙，按下快門。',
+  notes:['直接用 LINE 內建相機，不跳去別的 App'],tap:'shutter',screen:{t:'cam'}},
+ {title:'收到處方卡，點「我照做了」',op:'官方帳號看出問題，送來「處方卡」，照著做後點「我照做了」。',
+  notes:['處方卡一次只給一個辦法','處方內容需畫室老師審定，避免 AI 亂給建議'],tap:'did',
+  screen:{t:'chat',bottom:'input',msgs:[['meimg','smudge'],['bot','看到了：藍色暈開，花瓣邊緣有點糊。別擔心，還救得回來。'],['card',{art:'<div style="padding:8px 0;background:#fbf8ef">'+hyd({smudge:true}).replace('<svg ','<svg style="height:150px;width:auto;margin:auto;display:block" ')+'</div>',title:'處方 A　用衛生紙輕壓',desc:'趁還沒乾，拿乾淨的衛生紙輕壓暈開處，吸掉多餘的水，會變成柔霧的效果。',btns:[['我照做了','b1','did'],['換個辦法','b2']]}]]}},
+ {title:'還是不行：按住麥克風錄問題',op:'處理後還是不滿意，按住麥克風，說出疑問，放開就送出。',
+  notes:['不用打字，直接說','放開手指就自動存成「問診卡」，語音附上作品照'],tap:'mic',
+  screen:{t:'chat',bottom:'input',voice:true,msgs:[['me','還是不行'],['bot','沒關係。按住麥克風，說說你卡在哪裡，下週上課帶去問老師。']]}},
+ {title:'下週在畫室，打開問診卡給老師',op:'上課前一天收到提醒。到畫室打開問診卡，按播放給老師聽，老師當場錄音回覆。',
+  notes:['把每週 2 小時課堂和居家 166 小時串起來','老師的回覆也存在同一張卡'],tap:'play',
+  screen:{t:'liff',title:'問診卡',dom:'旬常｜樂齡畫畫生活',body:`<div class="pane"><div class="tags"><span class="tg">10/15（三）</span><span class="tg">暈染</span><span class="tg">水彩</span></div><div style="border-radius:12px;overflow:hidden;border:1px solid #e6e9ee">${hyd({paper:true,smudge:true}).replace('<svg ','<svg style="display:block;width:100%;height:auto;max-height:190px" ')}</div></div><div class="pane"><div class="lbl">我的問題</div><div class="vrow"><div class="pbtn t" data-tap="play">${I.play}</div>${waveHtml(22,3)}<span style="font-size:13px;color:#555">0:12</span></div><div class="big" style="font-size:16px;font-weight:500">這裡的藍色為什麼會暈開？</div></div><div class="pane" style="border:2px dashed #b9c8da;box-shadow:none"><div class="lbl">老師的回覆</div><div class="vrow"><div class="pbtn">${I.play}</div>${waveHtml(22,8)}<span style="font-size:13px;color:#555">0:20</span></div></div>`,foot:''}}
+ ]},
+{key:'sticker',tab:'功能三　早安貼圖跨代反饋',title:'早安貼圖',tag:'把自己的畫變成貼圖，傳給家人。',
+ chips:['PRIMARY｜Persona A 低壓型','EXTENSION｜家庭禮物'],
+ steps:[
+ {title:'點選單「早安貼圖」',op:'畫好了，想送給家人，點選單的「早安貼圖」。',
+  notes:['同一個選單，同一個位置'],tap:'m3',
+  screen:{t:'chat',bottom:'menu',msgs:[['bot','今天畫得真好。想不想把它變成早安貼圖？']]}},
+ {title:'選一張作品，點「選這張」',op:'畫過的作品排成一排，往左右滑動，點「選這張」。',
+  notes:['作品來自「我的作品」，拍過的都在'],tap:'pick',
+  screen:{t:'chat',bottom:'input',msgs:[['me','早安貼圖'],['bot','選一張要做成貼圖的畫吧。'],['cars',[{art:hyd({paper:true}).replace('<svg ','<svg style="height:120px;width:auto;margin:auto;display:block" '),title:'繡球花　10/15',tap:'pick'},{art:hyd({paper:true}).replace('<svg ','<svg style="height:120px;width:auto;margin:auto;display:block;opacity:.8" '),title:'牽牛花　10/08'},{art:hyd({paper:true}).replace('<svg ','<svg style="height:120px;width:auto;margin:auto;display:block;opacity:.6" '),title:'茶杯　10/01'}]]]}},
+ {title:'自動去背，選祝福語',op:'畫面已自動把花朵去背，選一句祝福語，點「完成」。',
+  notes:['AI 去背，不用自己描邊','祝福語只給三句，字放大'],tap:'done',
+  screen:{t:'liff',title:'做早安貼圖',dom:'旬常｜樂齡畫畫生活',body:`<div class="pane"><div class="lbl">AI 已幫你把花朵去背</div><div class="stage">${sticker()}</div></div><div class="pane"><div class="lbl">選一句祝福語</div><div class="tags"><span class="tg on" style="font-size:16px;padding:6px 14px">用心手繪的祝福</span><span class="tg" style="font-size:16px;padding:6px 14px">平安喜樂</span><span class="tg" style="font-size:16px;padding:6px 14px">今天也要開心</span></div></div>`,foot:`<div class="fbar"><div class="fbtn" data-tap="done">完成</div></div>`}},
+ {title:'貼圖完成，點「分享到 LINE 聊天室」',op:'貼圖做好了，點「分享到 LINE 聊天室」。',
+  notes:['也可以按「存進貼圖冊」，留給自己'],tap:'share',
+  screen:{t:'chat',bottom:'input',msgs:[['me','完成'],['card',{art:'<div style="padding:8px 0;background:#fff;text-align:center">'+sticker().replace('<svg ','<svg style="height:170px;width:auto;margin:auto;display:block" ')+'</div>',title:'你的早安貼圖完成了',desc:'可以傳給家人，也能存進貼圖冊。',btns:[['分享到 LINE 聊天室','b1','share'],['存進貼圖冊','b2']]}]]}},
+ {title:'選家人群組，點「傳送」',op:'選擇要送的對象，例如「一家人」群組，點「傳送」。',
+  notes:['用 LINE 原本的選人畫面，長輩已經會用','可以一次選多位'],tap:'send',screen:{t:'picker'}},
+ {title:'家人收到，立刻回應',op:'貼圖出現在群組，家人馬上回覆、按愛心。',
+  notes:['長輩的作品變成家人會用的禮物，有質感的自尊','作品也收進「家庭貼圖冊」'],tap:'',
+  screen:{t:'chat',hdr:'group',bottom:'input',msgs:[['date','今天'],['stk'],['gm','小宇','#7a8de0','阿嬤畫得好美！！'],['gm','美玲','#d86f9a','這張可以當手機桌布嗎？']]}}
+ ]}
+];
+
+/* ---------- 播放引擎 ---------- */
+let cur=0,idx=0,timer=null,playing=false,prevN=-1;
+function ringAt(scr,id,hold){
+  if(!id)return;const t=scr.querySelector(`[data-tap="${id}"]`);if(!t)return;
+  const sr=scr.getBoundingClientRect(),k=sr.width/scr.offsetWidth,r=t.getBoundingClientRect();
+  const d=document.createElement('div');d.className='ring ringin'+(hold?' hold':'');
+  const wide=r.width/k>150;d.style.left=((wide?r.right-52-sr.left:r.left+r.width/2-sr.left)/k)+'px';d.style.top=((r.top+r.height/2-sr.top)/k)+'px';
+  d.style.setProperty('--d',STILL?'0s':'1.5s');scr.appendChild(d);
+}
+function show(f,i,animate){
+  const scr=$('#scr');if(!scr)return;
+  const step=F[f].steps[i];
+  scr.innerHTML=render(f,i);
+  scr.classList.toggle('fadein',animate&&step.screen.t!=='chat');
+  // 聊天畫面：已有的訊息不重播動畫
+  if(animate&&step.screen.t==='chat'&&prevN>=0){
+    const prev=F[f].steps[prevN];
+    if(prev&&prev.screen.t==='chat'){
+      const olds=prev.screen.msgs.length;
+      [...scr.querySelectorAll('.chat>.pop')].forEach((e,k)=>{if(k<olds&&prev.screen.msgs[k]&&JSON.stringify(prev.screen.msgs[k])===JSON.stringify(step.screen.msgs[k])){e.classList.remove('pop');e.style.opacity=1}else{e.style.setProperty('--d',(0.15+k*0.0)+'s')}});
+    }
+  }
+  if(animate){const pops=[...scr.querySelectorAll('.pop')];pops.forEach((e,k)=>e.style.setProperty('--d',(0.1+k*0.35)+'s'))}
+  ringAt(scr,step.tap,step.tap==='mic');
+  prevN=i;
+}
+function mount(){
+  const f=F[cur];
+  $('#panel').innerHTML=`<div style="display:flex;flex-direction:column;gap:18px">
+   <div class="head"><div class="txt"><h2>${f.title}</h2><p class="sub">${f.tag}</p></div><div class="chips">${f.chips.map((c,k)=>`<span class="chip${k?' alt':''}">${c}</span>`).join('')}</div></div>
+   <div class="viewer"><div class="left"><div class="phonewrap"><div class="phone"><div class="island"></div><div class="screen" id="scr"></div></div></div>
+   <div class="ctrl"><button class="btn" id="bp">◀ 上一步</button><button class="btn primary" id="bpl">▶ 播放</button><button class="btn" id="bn">下一步 ▶</button></div>
+   <div class="ctrl"><div class="dots" id="dots"></div><span class="count" id="cnt"></span></div></div>
+   <ol class="steps" id="steps"></ol></div></div>`;
+  $('#steps').innerHTML=f.steps.map((s,k)=>`<li><button class="stp" data-i="${k}"><span class="n">${k+1}</span><span class="t">${s.title}</span><span class="body"><span class="d">${s.op}</span><ul>${s.notes.map(n=>`<li>${n}</li>`).join('')}</ul></span></button></li>`).join('');
+  $('#dots').innerHTML=f.steps.map((_,k)=>`<button data-i="${k}" aria-label="第 ${k+1} 步"></button>`).join('');
+  $('#bp').onclick=()=>{stop();go(idx-1)};$('#bn').onclick=()=>{stop();go(idx+1)};
+  $('#bpl').onclick=()=>playing?stop():play();
+  $('#steps').onclick=e=>{const b=e.target.closest('.stp');if(b){stop();go(+b.dataset.i)}};
+  $('#dots').onclick=e=>{const b=e.target.closest('button');if(b){stop();go(+b.dataset.i)}};
+  fitPhone();prevN=-1;go(0);
+}
+function paint(){
+  const f=F[cur];
+  [...document.querySelectorAll('.stp')].forEach((b,k)=>b.setAttribute('aria-current',k===idx?'step':'false'));
+  [...document.querySelectorAll('#dots button')].forEach((b,k)=>{b.setAttribute('aria-current',k===idx?'step':'false');b.classList.toggle('done',k<idx)});
+  $('#cnt').textContent=(idx+1)+'/'+f.steps.length;
+}
+function go(i){idx=Math.max(0,Math.min(F[cur].steps.length-1,i));show(cur,idx,true);paint()}
+function stop(){clearInterval(timer);timer=null;playing=false;const b=$('#bpl');if(b)b.textContent='▶ 播放'}
+function play(){stop();playing=true;$('#bpl').textContent='❚❚ 暫停';if(idx>=F[cur].steps.length-1){prevN=-1;go(0)}
+  timer=setInterval(()=>{if(idx>=F[cur].steps.length-1){stop();return}go(idx+1)},4800)}
+function fitPhone(){const w=document.documentElement.clientWidth;document.documentElement.style.setProperty('--ps',w<520?Math.max(.62,(w-80)/418):.8)}
+addEventListener('resize',fitPhone);
+$('#tabs').innerHTML=F.map((f,k)=>`<button role="tab" aria-selected="${k===0}" data-k="${k}">${f.tab}</button>`).join('');
+$('#tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;stop();cur=+b.dataset.k;[...$('#tabs').children].forEach((x,k)=>x.setAttribute('aria-selected',k===cur));mount();try{history.replaceState(null,'','#f'+(cur+1))}catch(_){}};
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'){stop();go(idx+1)}else if(e.key==='ArrowLeft'){stop();go(idx-1)}else if(e.key===' '&&document.activeElement===document.body){e.preventDefault();playing?stop():play()}});
+
+if(STILL){
+  document.body.classList.add('still');
+  const f=(+Q.get('f')||1)-1,s=(+Q.get('s')||1)-1;cur=f;
+  document.documentElement.style.setProperty('--ps',1);
+  $('#stillhost').innerHTML=`<div class="phone noanim" style="transform:none"><div class="island"></div><div class="screen" id="scr"></div></div>`;
+  document.fonts.ready.then(()=>{show(f,s,false);document.title='ready'});
+}else{
+  const h=(location.hash.match(/f([123])/)||[])[1];if(h)cur=+h-1;
+  [...$('#tabs').children].forEach((x,k)=>x.setAttribute('aria-selected',k===cur));
+  mount();
+}
+</script>

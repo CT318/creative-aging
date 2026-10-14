@@ -1,0 +1,585 @@
+<title>外出小盒提案</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<style>
+/* 版面概念：上方分頁切換提案；每案左側為可操作的立體示範＋步驟播放，右側為步驟說明；下方放零件、機構與待確認事項。
+   色彩沿用官網 tokens（白底、深灰字、淡藍點綴），物件色另設。 */
+:root{
+  --bg:#ffffff; --surface:#f5f8fc; --border:#e3e8ef; --text:#2b2f36; --muted:#4a505b;
+  --accent:#3f6fa8; --accent-soft:#e8f1fb; --accent-line:#a9c7e8; --focus:#3b6fd4;
+  --stage:#eef3f9; --table:#dde6f0; --cover:#3b4350; --cover-in:#4d5666; --paper:#fffef9; --edge:#2e343d;
+  --mod-w:#c9dcf2; --mod-s:#e4ddcc; --mod-edge:#8da7c7; --hand:rgba(63,111,168,.14); --hand2:rgba(63,111,168,.3);
+  --ink:#22262d; --lidbg:rgba(255,255,255,.64); --groove:#7f98b8; --pen1:#22262d; --pen2:#8a5a3b; --brushc:#4a7fb5;
+  --warn:#9a5b13; --warn-soft:#fbf1e0;
+  --dur:1.5s;
+  --font:"Noto Sans TC",system-ui,-apple-system,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14171c; --surface:#1b1f26; --border:#2d343e; --text:#e7eaef; --muted:#aab2bf;
+  --accent:#8db5e8; --accent-soft:#1c2a3d; --accent-line:#3c5a82; --focus:#8db5e8;
+  --stage:#1f242c; --table:#29303a; --cover:#5a6579; --cover-in:#6b778c; --paper:#efece2; --edge:#3d4551;
+  --mod-w:#3d5878; --mod-s:#6b6553; --mod-edge:#7f9ec4; --hand:rgba(141,181,232,.16); --hand2:rgba(141,181,232,.32);
+  --ink:#1d2127; --lidbg:rgba(20,24,30,.55); --groove:#8fa6c3; --warn:#e3b36b; --warn-soft:#2c2415; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14171c; --surface:#1b1f26; --border:#2d343e; --text:#e7eaef; --muted:#aab2bf;
+  --accent:#8db5e8; --accent-soft:#1c2a3d; --accent-line:#3c5a82; --focus:#8db5e8;
+  --stage:#1f242c; --table:#29303a; --cover:#5a6579; --cover-in:#6b778c; --paper:#efece2; --edge:#3d4551;
+  --mod-w:#3d5878; --mod-s:#6b6553; --mod-edge:#7f9ec4; --hand:rgba(141,181,232,.16); --hand2:rgba(141,181,232,.32);
+  --ink:#1d2127; --lidbg:rgba(20,24,30,.55); --groove:#8fa6c3; --warn:#e3b36b; --warn-soft:#2c2415; color-scheme:dark}
+@media (prefers-reduced-motion:reduce){:root{--dur:.01s}}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.65;font-size:15px;
+  padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{margin:0;line-height:1.3;text-wrap:balance}
+h1{font-size:clamp(24px,3.4vw,32px);font-weight:700;letter-spacing:.02em}
+h2{font-size:21px;font-weight:700}
+h3{font-size:15px;font-weight:700}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.mono{font-family:var(--mono)}
+
+header.top{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.lede{max-width:68ch;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line)}
+
+nav.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--border)}
+nav.tabs button{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;font-weight:500;color:var(--muted);margin-bottom:-1px}
+nav.tabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent);font-weight:700}
+
+.prop{display:flex;flex-direction:column;gap:18px}
+.prop-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 24px}
+.prop-head .txt{display:flex;flex-direction:column;gap:6px;min-width:0;max-width:64ch}
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:10px;padding:3px;background:var(--surface);gap:2px}
+.seg button{border:0;background:none;padding:7px 14px;border-radius:8px;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--bg);color:var(--text);box-shadow:0 0 0 1px var(--accent-line);font-weight:700}
+
+.viewer{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:900px){.viewer{grid-template-columns:minmax(0,1fr)}}
+.left{display:flex;flex-direction:column;gap:12px;min-width:0}
+.box{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:stretch}
+.box.has-side{grid-template-columns:minmax(0,1fr) 150px}
+@media (max-width:560px){.box.has-side{grid-template-columns:minmax(0,1fr)}}
+.stage{position:relative;height:clamp(380px,58vw,590px);background:var(--stage);border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.stage .cap{position:absolute;left:12px;top:10px;font-size:12px;color:var(--muted);font-family:var(--mono);z-index:2}
+.side{margin:0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:10px 8px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.side svg{width:100%;max-width:150px;height:auto;max-height:420px}
+.side figcaption{font-size:11.5px;line-height:1.45;color:var(--muted);text-align:center}
+.legend{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:center;font-size:11px;color:var(--muted)}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+
+.ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.btn{border:1px solid var(--border);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:500}
+.btn:hover{border-color:var(--accent-line)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#10151c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.primary{color:#10151c}}
+.dots{display:flex;gap:6px;flex:1;min-width:120px;flex-wrap:wrap}
+.dots button{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--accent-line);background:var(--bg);padding:0}
+.dots button[aria-current="step"]{background:var(--accent);border-color:var(--accent)}
+.dots button.done{background:var(--accent-line)}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted);min-width:3.2em;text-align:right}
+
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.stp{width:100%;text-align:left;background:none;border:1px solid transparent;border-radius:12px;padding:9px 12px;display:grid;grid-template-columns:28px minmax(0,1fr);gap:2px 10px}
+.stp:hover{background:var(--surface)}
+.stp .n{grid-row:1;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--accent-line);display:grid;place-items:center;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.stp .t{font-weight:500;color:var(--muted)}
+.stp .body{grid-column:2;display:none;flex-direction:column;gap:8px;margin-top:4px}
+.stp[aria-current="step"]{background:var(--accent-soft);border-color:var(--accent-line)}
+.stp[aria-current="step"] .n{background:var(--accent);border-color:var(--accent);color:#fff}
+.stp[aria-current="step"] .t{color:var(--text);font-weight:700}
+.stp[aria-current="step"] .body{display:flex}
+.body .d{font-size:14.5px}
+.body ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--muted)}
+.tag{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:5px;background:var(--warn-soft);color:var(--warn);margin-right:4px;white-space:nowrap}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.card{border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;background:var(--bg);min-width:0}
+.card.alt{background:var(--surface)}
+.card ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:14px}
+.card li b{font-weight:700}
+.card.rec{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-line)}
+.sub{font-size:13px;color:var(--muted)}
+.sec{display:flex;flex-direction:column;gap:12px}
+
+.tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th,td{text-align:left;padding:11px 14px;vertical-align:top;border-bottom:1px solid var(--border)}
+tr:last-child td,tr:last-child th{border-bottom:0}
+thead th{background:var(--surface);font-weight:700}
+tbody th{font-weight:500;color:var(--muted);width:9.5em;white-space:nowrap}
+figure.fp{margin:0;display:flex;flex-direction:column;gap:8px}
+figure.fp svg{width:100%;height:auto;max-width:760px;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+figure.fp figcaption{font-size:13px;color:var(--muted)}
+svg text{font-family:var(--font)}
+.tick{font-family:var(--mono)}
+
+/* ===== 3D 場景共用 ===== */
+.vp{position:absolute;inset:0;perspective:1700px}
+.world{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;
+  transform:scale(var(--k,.8)) rotateX(var(--rx)) rotateY(var(--ry))}
+.rig{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d}
+.world *{transform-style:preserve-3d}
+.face{position:absolute;inset:0;display:block}
+.wall{position:absolute;display:block;background:var(--edge)}
+.wallr{left:var(--w);top:0;width:var(--d);height:var(--h);transform-origin:0 50%;transform:rotateY(-90deg)}
+.walll{left:0;top:0;width:var(--d);height:var(--h);transform-origin:0 50%;transform:rotateY(-90deg)}
+.wallt{left:0;top:0;width:var(--w);height:var(--d);transform-origin:50% 0;transform:rotateX(90deg)}
+.wallb{left:0;top:var(--h);width:var(--w);height:var(--d);transform-origin:50% 0;transform:rotateX(90deg)}
+.cface{position:absolute;inset:0;backface-visibility:hidden;border-radius:4px}
+.cout{background:var(--cover)}
+.cin{background:var(--cover-in);transform:rotateX(180deg)}
+.groove{position:absolute;border:1.5px dashed var(--groove);border-radius:8px;opacity:.9}
+.mag{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--groove)}
+.art{position:absolute;inset:0;width:100%;height:100%}
+.stroke{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .4s ease}
+[data-draw="1"] .stroke{stroke-dashoffset:0;transition:stroke-dashoffset 1.7s ease .55s}
+.wash{opacity:0;transition:opacity .4s ease}
+[data-draw="1"][data-scen="wt"] .wash{opacity:.62;transition:opacity 1.2s ease 1.9s}
+
+/* 模組（兩案共用） */
+.mod{position:absolute;left:calc(var(--mw)/-2);top:calc(var(--mh)/-2);width:var(--mw);height:var(--mh);border-radius:8px;
+  background:var(--mod-bg);box-shadow:0 0 0 1.5px var(--mod-edge),3px 4px 10px rgba(0,0,0,.22);
+  transform:translate3d(calc(var(--mx)*1px),calc(var(--my)*1px),calc(var(--mz)*1px)) rotateZ(calc(var(--mr)*1deg));
+  transition:transform var(--dur) ease-in-out}
+.mod.mw{--mod-bg:var(--mod-w);overflow:hidden}
+.mod.ms{--mod-bg:var(--mod-s)}
+.mface{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;padding:9px;color:var(--ink)}
+.mlabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-align:center;color:var(--ink);opacity:.8}
+.pans{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pans i{aspect-ratio:1;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1.5px rgba(0,0,0,.18)}
+.sponge{height:22px;border-radius:6px;background:repeating-linear-gradient(45deg,#d9c58a 0 4px,#cdb677 4px 8px);flex:none}
+.brush{flex:1;min-height:30px;display:flex;justify-content:center;transition:transform var(--dur) ease-in-out;transform:translateY(calc(var(--bp)*-.5px))}
+.brush i{width:13px;height:100%;border-radius:7px 7px 3px 3px;background:linear-gradient(var(--brushc) 0 22%,#dfe6ee 22% 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.lid{position:absolute;inset:0;background:var(--lidbg);backdrop-filter:blur(1px);border-radius:8px;box-shadow:inset 0 0 0 1.5px var(--mod-edge);
+  display:flex;align-items:flex-start;justify-content:center;padding-top:9px;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink);
+  transform:translateY(calc(var(--lid)*-104%));transition:transform var(--dur) ease-in-out}
+.chan{flex:1;display:flex;justify-content:center;gap:14px;padding-top:4px;position:relative}
+.bpen{width:15px;height:calc(100% - 4px);border-radius:8px 8px 4px 4px;background:linear-gradient(var(--pc) 0 12%,var(--pb) 12% 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);transition:transform var(--dur) ease-in-out}
+.bpen.b1{--pc:#444b55;--pb:var(--pen1);transform:translateY(calc(var(--bp)*-1px))}
+.bpen.b2{--pc:#7a5237;--pb:var(--pen2)}
+[data-scen="sk"] .wt-only,[data-scen="wt"] .sk-only{display:none}
+
+/* ===== A ===== */
+#boxA .world{--rx:6deg;--ry:-32deg}
+#boxA .rig{transform:translateY(40px)}
+.abody{position:absolute;left:-105px;top:-148px;width:210px;height:296px}
+.aback{background:#2a2f37}
+.apaper{background:var(--paper);transform:translateZ(14px);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.apaper .spine{position:absolute;left:0;right:0;top:0;height:11px;background:linear-gradient(#cfc9b8,#e3dece)}
+.acover{position:absolute;left:-105px;top:-148px;width:210px;height:296px;transform-origin:50% 0;
+  transform:translateZ(calc(var(--cz)*1px)) rotateX(calc(var(--cr)*1deg));transition:transform var(--dur) ease-in-out}
+.acover .groove{left:6px;top:20px;width:98px;height:208px}
+.acover .m1{left:10px;top:30px}.acover .m2{left:10px;top:208px}
+.sleeve{position:absolute;left:16px;right:16px;top:12px;bottom:26px;border-radius:6px;background:rgba(0,0,0,.22);display:flex;justify-content:space-around;align-items:stretch;padding:0 18px}
+.sleeve i{width:18px;margin:8px 0;background:rgba(255,255,255,.12);border-radius:9px}
+.apen{position:absolute;top:-12px;width:13px;height:270px;border-radius:7px 7px 3px 3px;
+  background:linear-gradient(var(--pc) 0 14%,var(--pb) 14% 100%);transition:transform var(--dur) ease-in-out,clip-path var(--dur) ease-in-out}
+.apen.p1{left:62px;--pc:#444b55;--pb:var(--pen1);transform:translateY(calc(var(--pen)*-1px));
+  clip-path:inset(0 0 calc(100% - (var(--stub)*12 + var(--pen))*1px) 0)}
+.apen.p2{left:132px;--pc:#7a5237;--pb:var(--pen2);clip-path:inset(0 0 calc(100% - var(--stub)*12px) 0)}
+[data-scen="wt"] .apen.p1{--pc:#2f5b8a;--pb:#dfe6ee}
+[data-scen="wt"] .apen.p1{background:linear-gradient(#2f5b8a 0 14%,var(--brushc) 14% 24%,#dfe6ee 24% 100%)}
+[data-scen="sk"] .amod{display:none}
+.a-palm{position:absolute;left:-150px;top:10px;width:236px;height:330px;border-radius:96px;background:var(--hand);border:1.5px dashed var(--accent-line);transform:translateZ(-30px)}
+.a-thumb{position:absolute;left:-150px;top:34px;width:118px;height:46px;border-radius:23px;background:var(--hand2);transform:translateZ(46px) rotateZ(-20deg)}
+.a-tag{position:absolute;font-size:12px;color:var(--accent);font-weight:700}
+
+/* ===== B ===== */
+#boxB .world{--rx:54deg;--ry:0deg}
+.btable{position:absolute;left:-400px;top:-215px;width:800px;height:430px;border-radius:26px;background:var(--table);transform:translateZ(-1px)}
+.bbase{position:absolute;left:0;top:-128px;width:192px;height:256px}
+.bbase .btop{transform:translateZ(5px);background:var(--cover-in);border-radius:3px}
+.bcover{position:absolute;left:0;top:-128px;width:192px;height:256px;transform-origin:0 50%;
+  transform:translateZ(calc(var(--cz)*1px)) rotateY(calc(var(--cr)*1deg));transition:transform var(--dur) ease-in-out}
+.bcover .cout{transform:translateZ(5px);border-radius:3px}
+.bcover .cin{transform:rotateY(180deg);border-radius:3px}
+.bcover .groove{left:96px;top:8px;width:86px;height:240px}
+.dock{position:absolute;top:8px;bottom:8px;width:86px;border:1.5px dashed var(--groove);border-radius:8px}
+.dock::before,.dock::after{content:"";position:absolute;left:50%;margin-left:-5px;width:10px;height:10px;border-radius:50%;background:var(--groove)}
+.dock::before{top:14px}.dock::after{bottom:14px}
+.dr{right:4px}.dl{left:4px}
+.hinge{position:absolute;left:-2px;top:-128px;width:4px;height:256px;background:var(--edge);transform:translateZ(5.5px)}
+.block{position:absolute;left:-52px;top:-127px;width:104px;height:7px;border-radius:4px;background:var(--accent);opacity:var(--lock);transform:translateZ(7px);transition:opacity var(--dur) ease-in-out}
+.block.b2{top:120px}
+.bpad{position:absolute;left:8px;top:-120px;width:176px;height:240px;background:var(--paper);border-radius:2px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.1);transform:translate3d(calc(var(--px)*1px),0,6px);transition:transform var(--dur) ease-in-out}
+.bpad .bind{position:absolute;left:0;right:0;top:0;height:12px;background:linear-gradient(#cfc9b8,#e3dece)}
+.bmod{--mw:80px;--mh:240px}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">產品部 · 隨行寫生小盒 · 提案階段 · 2026-10-15</div>
+  <h1>外出小盒提案</h1>
+  <p class="lede">同一套設定，兩種做法。手札盒極薄、與小手札同大；畫具模組有兩種，一種放兩支筆（隨興速寫），一種放幾色小格水彩、水筆和小海綿（小水彩）。下面兩案都能點開逐步操作，也能並排比較。</p>
+  <div class="chips"><span class="chip">手札盒＋畫具模組</span><span class="chip">模組：速寫 / 小水彩</span><span class="chip">尺寸皆為暫定，請修正</span></div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="提案分頁">
+  <button role="tab" id="tab-a" data-tab="a" aria-selected="true">提案 A　flip 手札</button>
+  <button role="tab" id="tab-b" data-tab="b" aria-selected="false">提案 B　左右翻小本</button>
+  <button role="tab" id="tab-cmp" data-tab="cmp" aria-selected="false">並排比較</button>
+  <button role="tab" id="tab-qa" data-tab="qa" aria-selected="false">待你確認</button>
+</nav>
+
+<!-- ===== A ===== -->
+<section class="prop" id="pa" data-panel="a" aria-labelledby="tab-a">
+  <div class="prop-head">
+    <div class="txt">
+      <h2>A　flip 手札</h2>
+      <p class="sub">單手可握的直式小本子。封面以上緣為軸，由下往上翻到背面（手背那側），筆袋開口朝天。水彩模組取下、轉 90°、掛在本體底部。</p>
+    </div>
+    <div class="seg" role="group" aria-label="使用情境（提案 A）">
+      <button data-scen="sk" data-key="A" aria-pressed="true">隨興速寫</button>
+      <button data-scen="wt" data-key="A" aria-pressed="false">小水彩</button>
+    </div>
+  </div>
+  <div class="viewer">
+    <div class="left">
+      <div class="box has-side" id="boxA" data-scen="sk" data-draw="0">
+        <div class="stage" id="stA"><span class="cap">立體示意（斜前方看）</span><div class="vp"><div class="world" id="wA"></div></div></div>
+        <figure class="side">
+          <svg viewBox="86 12 100 216" role="img" aria-label="側視剖面：封面以上緣為軸轉到本體背面，筆袋夾在封面內，水彩模組先在封面外側，之後掛在本體底部">
+            <defs><marker id="arrA" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="currentColor"/></marker></defs>
+            <rect x="94" y="64" width="11" height="118" rx="5" fill="var(--hand)" stroke="var(--accent-line)" stroke-dasharray="3 2" stroke-width=".8"/>
+            <text x="99.5" y="125" font-size="6" fill="var(--accent)" text-anchor="middle" transform="rotate(-90 99.5 125)">手</text>
+            <rect x="112" y="30" width="7" height="148" fill="var(--edge)"/>
+            <rect x="118.4" y="31" width="1.2" height="146" fill="var(--paper)"/>
+            <g id="sCover" style="transform-origin:120.5px 30px;transform:translateX(calc(var(--sx)*1px)) rotate(calc(var(--sr)*1deg));transition:transform var(--dur) ease-in-out">
+              <rect x="118.5" y="30" width="4" height="148" rx="1" fill="var(--cover)"/>
+              <rect x="119.6" y="33" width="1.8" height="141" rx=".9" fill="var(--bg)" opacity=".75"/>
+              <line x1="120.5" y1="34" x2="120.5" y2="170" stroke="var(--pen1)" stroke-width="1.3" stroke-linecap="round" style="transform:translateY(calc(var(--penu)*-1px));transition:transform var(--dur) ease-in-out"/>
+            </g>
+            <rect x="115.5" y="27" width="8" height="3.2" rx="1.6" fill="var(--accent)"/>
+            <g style="transform:translate(calc(var(--smx)*1px),calc(var(--smy)*1px)) scale(1,var(--smsy));transition:transform var(--dur) ease-in-out" class="wt-only">
+              <rect x="-2" y="-50" width="4" height="100" rx="1" fill="var(--mod-w)" stroke="var(--mod-edge)" stroke-width=".7"/>
+            </g>
+            <text x="146" y="22" font-size="6.5" fill="currentColor" opacity=".7">折線（上緣）</text>
+            <line x1="145" y1="21" x2="124" y2="27.5" stroke="currentColor" stroke-width=".5" opacity=".6"/>
+          </svg>
+          <div class="legend"><span><i style="background:var(--edge)"></i>本體</span><span><i style="background:var(--cover)"></i>封面＋筆袋</span><span class="wt-only"><i style="background:var(--mod-w)"></i>模組</span></div>
+          <figcaption>側視剖面：看封面怎麼繞過上緣</figcaption>
+        </figure>
+      </div>
+      <div class="ctrl" id="ctA"></div>
+    </div>
+    <ol class="steps" id="stepsA"></ol>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>零件</h3><ul id="partsA"></ul></div>
+    <div class="card alt"><h3>關鍵機構</h3><ul id="mechA"></ul></div>
+  </div>
+</section>
+
+<!-- ===== B ===== -->
+<section class="prop" id="pb" data-panel="b" aria-labelledby="tab-b" hidden>
+  <div class="prop-head">
+    <div class="txt">
+      <h2>B　左右翻小本</h2>
+      <p class="sub">量體較大的小筆記本，左右翻開。翻開後兩半卡成硬平面，模組從封面移到平面邊緣的磁吸座，與紙同一平面；紙墊往另一側滑開。</p>
+    </div>
+    <div class="seg" role="group" aria-label="使用情境（提案 B）">
+      <button data-scen="sk" data-key="B" aria-pressed="true">隨興速寫</button>
+      <button data-scen="wt" data-key="B" aria-pressed="false">小水彩</button>
+    </div>
+  </div>
+  <div class="viewer">
+    <div class="left">
+      <div class="box" id="boxB" data-scen="sk" data-draw="0">
+        <div class="stage" id="stB"><span class="cap">立體示意（桌面斜上方看）</span><div class="vp"><div class="world" id="wB"></div></div></div>
+      </div>
+      <div class="ctrl" id="ctB"></div>
+    </div>
+    <ol class="steps" id="stepsB"></ol>
+  </div>
+  <div class="cols">
+    <div class="card"><h3>零件</h3><ul id="partsB"></ul></div>
+    <div class="card alt"><h3>關鍵機構</h3><ul id="mechB"></ul></div>
+  </div>
+  <div class="sec">
+    <h2>紙張怎麼固定</h2>
+    <p class="sub">你說還沒想清楚，我先整理出三種做法。上面的動畫用的是甲。重點限制只有一個：闔上時紙墊不能跨在中間折線上，所以紙墊寬度要小於單邊半頁，闔上前一定要退回單邊。</p>
+    <div class="cols">
+      <div class="card rec"><h3>甲　磁吸紙墊＋淺溝槽（建議）</h3>
+        <ul><li>紙墊背面貼薄鐵片，平面內嵌磁鐵條，紙墊可在整個平面上滑動</li><li>平面上壓出一條淺溝，邊緣有止擋，紙不會歪</li><li>左右手互換只要把紙墊滑到另一邊</li><li>換紙：整墊取下，或整墊撕頁</li></ul>
+        <p class="sub">風險：磁力太強長輩撕不開，太弱會被畫筆壓力推動；要做原型測。</p></div>
+      <div class="card"><h3>乙　滑軌紙夾</h3>
+        <ul><li>上下緣各一條軌道，紙墊的硬書背卡在軌道上滑動</li><li>固定最穩，不怕壓力</li><li>軌道要跨過中間折線，結構較複雜</li></ul></div>
+      <div class="card"><h3>丙　彈性帶／角套</h3>
+        <ul><li>紙固定在單邊，用橡皮帶或角套壓住</li><li>最簡單、最便宜</li><li>紙位置不能動，左右手只能靠換模組那一側，等於放棄「紙往另一邊移」</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 比較 ===== -->
+<section class="prop" id="pcmp" data-panel="cmp" aria-labelledby="tab-cmp" hidden>
+  <div class="sec">
+    <h2>並排比較</h2>
+    <figure class="fp">
+      <svg viewBox="0 0 560 250" role="img" aria-label="佔用面積比例圖：A 案闔上 105×148，掛水彩模組後 105×193；B 案闔上 120×160，翻開後 240×160">
+        <g transform="translate(20,18)">
+          <text x="0" y="0" font-size="12" fill="currentColor" font-weight="700">A　flip 手札</text>
+          <rect x="0" y="12" width="105" height="148" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="52" y="90" font-size="11" text-anchor="middle" fill="currentColor" class="tick">闔上</text>
+          <text x="52" y="104" font-size="11" text-anchor="middle" fill="currentColor" class="tick">105×148</text>
+          <rect x="130" y="12" width="105" height="148" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+          <rect x="130" y="160" width="105" height="45" rx="4" fill="var(--mod-w)" stroke="var(--mod-edge)" stroke-width="1.5"/>
+          <text x="182" y="84" font-size="11" text-anchor="middle" fill="currentColor" class="tick">使用（水彩）</text>
+          <text x="182" y="98" font-size="11" text-anchor="middle" fill="currentColor" class="tick">105×193</text>
+          <text x="182" y="187" font-size="10.5" text-anchor="middle" fill="currentColor" class="tick">模組 100×45</text>
+        </g>
+        <g transform="translate(270,18)">
+          <text x="0" y="0" font-size="12" fill="currentColor" font-weight="700">B　左右翻小本</text>
+          <rect x="0" y="12" width="120" height="160" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+          <text x="60" y="90" font-size="11" text-anchor="middle" fill="currentColor" class="tick">闔上</text>
+          <text x="60" y="104" font-size="11" text-anchor="middle" fill="currentColor" class="tick">120×160</text>
+          <rect x="135" y="12" width="240" height="160" rx="4" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.5"/>
+          <line x1="255" y1="12" x2="255" y2="172" stroke="var(--accent)" stroke-dasharray="4 3"/>
+          <rect x="143" y="20" width="110" height="144" rx="2" fill="var(--paper)" stroke="var(--accent-line)"/>
+          <rect x="320" y="20" width="50" height="144" rx="3" fill="var(--mod-w)" stroke="var(--mod-edge)"/>
+          <text x="198" y="90" font-size="10.5" text-anchor="middle" fill="var(--ink)" class="tick">紙墊 110</text>
+          <text x="345" y="90" font-size="10.5" text-anchor="middle" fill="var(--ink)" class="tick" transform="rotate(-90 345 90)">模組 50</text>
+          <text x="255" y="196" font-size="11" text-anchor="middle" fill="currentColor" class="tick">翻開 240×160（中間虛線為折線）</text>
+        </g>
+        <text x="20" y="238" font-size="11" fill="currentColor" opacity=".7" class="tick">比例 1:1（單位 mm），尺寸為我暫定。B 案翻開後約有 80 mm 寬的空地可擱手。</text>
+      </svg>
+      <figcaption>A 案縱向長（模組掛底部時），B 案橫向寬。兩案都是同一套模組概念，差在模組放哪裡、紙怎麼配合。</figcaption>
+    </figure>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th>A　flip 手札</th><th>B　左右翻小本</th></tr></thead>
+      <tbody>
+        <tr><th>使用姿勢</th><td>單手握持，站著走動也能畫</td><td>放桌上，或雙手托著；單手不實際</td></tr>
+        <tr><th>闔上尺寸</th><td>約 105×148 mm（小手札大小）</td><td>約 120×160 mm，量體比 A 大一圈</td></tr>
+        <tr><th>隨興速寫</th><td>翻到背面，一個動作，筆袋固定在封面內</td><td>取下模組→翻開→放到側邊→抽筆，4 個動作</td></tr>
+        <tr><th>小水彩</th><td>取下→轉 90°→掛底部→翻開，4 個動作</td><td>取下→翻開→紙墊滑開→模組放側邊，4 個動作</td></tr>
+        <tr><th>紙面</th><td>完整一頁，不被模組佔掉</td><td>單頁紙墊，模組占一側，紙另一側移動</td></tr>
+        <tr><th>慣用手</th><td>不分左右手，單手握持換邊即可</td><td>模組可放左或右，紙往另一邊移</td></tr>
+        <tr><th>主要風險</th><td>軟質封面的耐用度與挺度；水彩模組掛底部讓重心下移</td><td>翻平後的平整度；紙墊定位；量體與攜帶性</td></tr>
+        <tr><th>比較適合</th><td>走到哪畫到哪的隨興族</td><td>坐下來慢慢畫、想要大一點畫面的人</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sub">表中尺寸與動作數都是依你的描述推算，不是定案數字。</p>
+  </div>
+</section>
+
+<!-- ===== 待確認 ===== -->
+<section class="prop" id="pqa" data-panel="qa" aria-labelledby="tab-qa" hidden>
+  <div class="sec">
+    <h2>待你確認</h2>
+    <p class="sub">你的描述裡有幾處我必須補一個設計才能畫出來。標示「假設」的是我補的，請逐項確認或推翻。</p>
+    <div class="cols" id="qaCols"></div>
+  </div>
+</section>
+
+<p class="sub">這份視覺化屬提案階段的溝通用圖，不是工程圖；立體示意是機構示意，沒有畫外型細節與材質。</p>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+
+/* ---------- 共用片段 ---------- */
+const walls=(w,h,d)=>['r','l','t','b'].map(k=>`<i class="wall wall${k}" style="--w:${w}px;--h:${h}px;--d:${d}px"></i>`).join('');
+const DRAW=`<svg class="art" viewBox="0 0 210 296" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<g class="wash"><path d="M70 210 L140 210 L130 255 L80 255 Z" fill="#c96a4a"/><path d="M105 170 C75 160 70 140 85 130 C95 145 100 155 105 170 Z" fill="#5f9d7a"/><path d="M105 150 C135 145 145 125 135 115 C118 122 108 135 105 150 Z" fill="#7bb08a"/></g>
+<path class="stroke" pathLength="1" d="M70 210 L140 210 L130 255 L80 255 Z"/>
+<path class="stroke" pathLength="1" d="M105 210 C104 170 108 150 104 120"/>
+<path class="stroke" pathLength="1" d="M105 170 C75 160 70 140 85 130 C95 145 100 155 105 170"/>
+<path class="stroke" pathLength="1" d="M105 150 C135 145 145 125 135 115 C118 122 108 135 105 150"/>
+<path class="stroke" pathLength="1" d="M55 255 L155 255"/></svg>`;
+const PANS=['#c96a4a','#e0a93b','#5f9d7a','#4a7fb5','#8a6bb0','#7a5a45'].map(c=>`<i style="--c:${c}"></i>`).join('');
+const modWater=(brush)=>`<div class="mface"><div class="pans">${PANS}</div><div class="sponge"></div>${brush?'<div class="brush"><i></i></div>':''}</div><div class="lid">水彩</div>`;
+const modSketch=`<div class="mface"><div class="mlabel">速寫</div><div class="chan"><i class="bpen b1"></i><i class="bpen b2"></i></div></div>`;
+
+/* ---------- 場景 DOM ---------- */
+$('#wA').innerHTML=`<div class="rig">
+ <div class="a-palm"></div>
+ <div class="abody"><i class="face aback"></i><div class="face apaper">${DRAW}<span class="spine"></span></div>${walls(210,296,14)}</div>
+ <div class="acover">
+   <div class="cface cout"><span class="groove"></span><span class="mag m1"></span><span class="mag m2"></span></div>
+   <div class="cface cin"><span class="sleeve"><i></i><i></i></span></div>
+   <i class="apen p1"></i><i class="apen p2"></i>
+ </div>
+ <div class="mod mw amod" style="--mw:90px;--mh:200px">${modWater(false)}</div>
+ <div class="a-thumb"></div>
+</div>`;
+$('#wB').innerHTML=`<div class="rig">
+ <div class="btable"></div>
+ <div class="bbase"><i class="face btop"><span class="dock dr"></span></i>${walls(192,256,5)}</div>
+ <div class="bcover">
+   <div class="cface cout"><span class="groove"></span></div>
+   <div class="cface cin"><span class="dock dl"></span></div>
+   ${walls(192,256,5)}
+ </div>
+ <i class="hinge"></i><i class="block b1"></i><i class="block b2"></i>
+ <div class="bpad">${DRAW}<span class="bind"></span></div>
+ <div class="mod bmod mw wt-only">${modWater(true)}</div>
+ <div class="mod bmod ms sk-only">${modSketch}</div>
+</div>`;
+
+/* ---------- 步驟資料 ---------- */
+const T=(label)=>`<span class="tag">${label}</span>`;
+const ASSUME=T('假設'), TEST=T('待測');
+function build(base,list){let cur={...base};return list.map(s=>{cur={...cur,...(s.v||{})};return{...s,vars:{...cur}}})}
+
+const baseA={cr:0,cz:17,pen:0,stub:0,mx:-50,my:-24,mz:24,mr:0,lid:0,draw:0};
+const A_SK=build(baseA,[
+ {t:'握持，闔上',d:'直式小本子，單手握住，拇指壓在封面下緣。封面是軟質材料（PU 皮或織布），與本體背面是同一片，上緣就是折線。',
+  n:['本體約 105×148 mm（小手札大小），厚度暫定控制在 14 mm 內','封面外側留有磁吸溝槽（虛線框）；速寫版不裝模組，溝槽空著']},
+ {t:'由下往上掀',d:'拇指把封面下緣往上頂，封面以上緣為軸向上掀起。',v:{cr:125},
+  n:['看右邊側視圖：封面離開本體往前、再往上轉，不是向側邊翻','此時封面內側朝向你，可以看到筆袋']},
+ {t:'翻到背面',d:'封面繼續繞過上緣，貼到本體背面，也就是手背那側。紙面完整露出，兩支筆的筆頭從上緣冒出來。',v:{cr:360,cz:-8,stub:1},
+  n:[ASSUME+'不需要鉸鏈：軟質封面直接繞折線翻過去，一般手帳封套就是這樣做','筆袋做在封面夾層內，開口在折線端，所以翻開後開口朝天（側視圖的淡色長條）',ASSUME+'筆頭外露約 6 mm，方便用指尖捏住']},
+ {t:'抽筆，開畫',d:'另一手從筆袋抽出筆，隨興速寫。握持的手只托著本體，紙面不被任何東西擋住。',v:{pen:110,draw:1},
+  n:['筆身用磁吸或摩擦固定，倒過來也不會掉出來 '+TEST]},
+ {t:'收筆，闔上',d:'筆插回筆袋，封面反向翻回，闔上收進包包。',v:{pen:0,stub:0,cr:0,cz:17},
+  n:['整套動作單手完成是設計目標 '+TEST]}
+]);
+const A_WT=build(baseA,[
+ {t:'握持，闔上',d:'水彩模組（約 45×100 mm，薄型）吸在封面外側的磁吸溝槽，出門是這個樣子。',
+  n:['模組裝 6 色固體水彩與小海綿','水筆放在筆袋裡（你的設定），模組內不必留筆位']},
+ {t:'取下模組',d:'模組往外拉，磁力脫開。',v:{mz:110},
+  n:['磁力要單手拉得開，又不能在包包裡自己掉 '+TEST]},
+ {t:'轉 90°',d:'直式變橫式，橫過來的寬度約 100 mm，剛好跟本體一樣寬。',v:{mr:90},
+  n:['模組尺寸要跟本體寬度對齊，否則掛上去會突出一截']},
+ {t:'掛在底部',d:'橫式模組卡進本體底緣的掛槽，磁吸定位，在紙面正下方延伸出去。',v:{mx:0,my:187,mz:7},
+  n:[ASSUME+'掛槽在本體底緣，不在封面上，所以封面翻開時碰不到模組','重量集中在底緣，單手握持的重心會偏下 '+TEST]},
+ {t:'翻開到背面',d:'封面向上翻到背面，筆袋開口朝天。動作與速寫版完全一樣。',v:{cr:360,cz:-8,stub:1},
+  n:['封面離開之後，模組就在你拇指下方，不受影響']},
+ {t:'畫水彩',d:'模組滑蓋推開，水筆從筆袋抽出。紙在手上，顏料在拇指下方就拿得到。',v:{lid:1,pen:110,draw:1},
+  n:['畫完紙面可以直接放著乾，不必闔上']},
+ {t:'收筆，闔上',d:'水筆擦乾放回筆袋，滑蓋推回，封面翻回闔上。模組仍掛在底部。',v:{pen:0,lid:0,cr:0,cz:17,stub:0},
+  n:['闔上時模組在外面，要先完成下一步才能放進包包']},
+ {t:'取下模組',d:'模組從底緣取下，轉回直式。',v:{mz:110,mr:0,mx:-50,my:-24},
+  n:['取下與轉回是一個連貫的手勢']},
+ {t:'吸回封面',d:'模組吸回封面溝槽，回到出門狀態。',v:{mz:24},
+  n:['全程三個模組動作：取下、轉 90°、掛上；收回時反向']}
+]);
+
+const baseB={cr:0,cz:8,lock:0,px:0,mx:140,my:0,mz:14,mr:0,lid:0,bp:0,draw:0};
+const B_STEPS=(sk)=>build(baseB,[
+ {t:'闔上，放在桌上',d:'左側裝訂的小筆記本。薄型模組吸在封面的磁吸溝槽，出門是這個樣子。',
+  n:['封面外側的溝槽是共用的，速寫模組和水彩模組都吸得上',ASSUME+'暫定本體 120×160 mm，比 A 案大一圈']},
+ {t:'先取下模組',d:'把模組取下來。因為翻開後封面外側會朝下，模組留在上面會被壓住。',v:{mx:300,mz:50},
+  n:['這是 B 案多出來的一個動作']},
+ {t:'翻開，兩半卡成硬平面',d:'封面向左翻開，翻平後兩片板的邊緣磁吸（藍色細條）互吸，把兩半吸成一個平面。',v:{cr:-180,cz:5,lock:1},
+  n:[ASSUME+'做法跟精裝書一樣：兩片薄硬板＋中間軟質折線，不用機械鉸鏈；板邊各嵌小磁鐵防止中間陷下','翻開後左右邊緣各有一組磁吸座（虛線框），隨時可放模組']},
+ {t:'紙墊滑向另一側',d:'以右手慣用為例：模組要放右邊，所以紙墊沿平面往左滑。左手慣用就反過來。',v:{px:-192},
+  n:['紙墊用背面鐵片＋平面磁吸固定，淺溝槽定位（方案甲，見下方「紙張怎麼固定」）','紙墊寬度要小於單邊半頁，闔上前才能退回單邊']},
+ {t:'模組放上磁吸座',d:'模組沿邊緣放下，被磁吸座吸住，與紙面同一平面。',v:{mx:148,mz:6},
+  n:['模組比紙薄，貼在同一平面，手腕順著平面移動不會卡到']},
+ {t:sk?'抽筆開畫':'推開滑蓋，上色',d:sk?'從模組抽出筆開始畫。紙在中間偏左，模組在慣用手邊。':'滑蓋推開，水彩、小海綿、水筆都在慣用手邊。',v:{lid:sk?0:1,bp:sk?60:40,draw:1},
+  n:[sk?'兩支筆躺在模組溝槽裡，抽出方向朝上':'水筆放在模組下方的長槽，畫面左側是整頁紙']},
+ {t:'收納：模組取下，紙墊退回',d:'模組取下，紙墊退回單邊半頁。',v:{lid:0,bp:0,mx:300,mz:50,px:0},
+  n:['紙墊一定要先退回單邊，闔上時才不會被折線折到']},
+ {t:'拉開板邊磁吸，闔上',d:'把兩板邊緣拉開，封面往右蓋回。',v:{cr:0,cz:8,lock:0},
+  n:['闔上時，封面蓋在紙墊上方']},
+ {t:'模組吸回封面',d:'模組吸回封面，回到出門狀態。',v:{mx:140,mz:14},
+  n:['整套動作比 A 案多，但紙面大、姿勢穩']}
+]);
+const STEPS={A:{sk:A_SK,wt:A_WT},B:{sk:B_STEPS(true),wt:B_STEPS(false)}};
+
+/* ---------- 零件／機構／待確認 ---------- */
+const LISTS={
+ partsA:['<b>本體</b>：背板＋紙塊，上緣裝訂，約 105×148 mm','<b>封面</b>：軟質（PU 皮或織布）夾薄板保持平整，外側有磁吸溝槽，夾層內是筆袋（2 支筆）','<b>軟質封面</b>：PU 皮或織布，與背面同一片，上緣是折線，不需鉸鏈','<b>水彩模組</b>：直式約 45×100 mm，橫放約 100×45 mm；6 色水彩＋小海綿＋滑蓋','<b>底緣掛槽</b>：本體下緣的卡溝＋磁鐵，專門掛橫式模組'],
+ mechA:['<b>單手翻面</b>：拇指頂封面下緣，封面繞上緣轉到背面。這是 A 案的主要賣點','<b>筆袋朝天</b>：開口在折線端，不管封面在哪個位置都朝上','<b>磁吸取放</b>：模組在封面（出門）與底緣（使用）之間搬家','<b>為什麼掛在底部</b>：封面要翻到背面，所以模組不能留在封面上；掛在本體上才不受影響'],
+ partsB:['<b>本體</b>：背板兼右半頁，約 120×160 mm','<b>封面</b>：兼左半頁，外側有磁吸溝槽','<b>兩片薄硬板＋軟質折線</b>：精裝書做法，翻平後板邊磁吸成硬平面','<b>紙墊</b>：背面鐵片，可在平面上滑動','<b>邊緣磁吸座 ×2</b>：平面左右緣各一，放模組','<b>模組</b>：薄型 50×150 mm，速寫（2 支筆）或水彩（6 色＋小海綿＋水筆）'],
+ mechB:['<b>硬平面</b>：兩半卡成一個平面，可以放桌上畫，也不會中間陷下去','<b>模組換邊</b>：左右兩個磁吸座，可依慣用手選擇','<b>紙墊滑動</b>：模組在哪一側，紙墊就往另一側移，所以畫面不是滿版','<b>闔上限制</b>：紙墊不跨折線，所以紙墊寬度 ≤ 單邊半頁']
+};
+$$('[id^=parts],[id^=mech]').forEach(ul=>{ul.innerHTML=LISTS[ul.id].map(x=>`<li>${x}</li>`).join('')});
+
+const QA=[
+ {h:'A 案：需要你拍板',items:['<b>筆袋是固定在封面，還是可拆的「隨興模組」？</b>我畫成固定在封面夾層內，因為你說翻開後筆袋在那一側。如果要讓兩種模組共用同一個溝槽，筆袋就得是可拆的，但可拆的模組翻到背面會被夾在手和本體之間。','<b>水彩模組的水筆放哪？</b>你說放筆袋，我照畫。水筆約 130 mm，模組橫放只有 100 mm，放不進模組裡，所以只能放筆袋或改用短水筆。']},
+ {h:'A 案：我補的假設',items:['封面用軟質材料一體折過去，不用鉸鏈。','筆袋開口在折線端，筆頭外露約 6 mm。','掛槽在本體底緣，不在封面上。','水彩模組掛在底部，單手握持的重心會偏下，需要實機測。']},
+ {h:'B 案：需要你拍板',items:['<b>紙墊用哪一種固定？</b>動畫用的是「磁吸紙墊＋淺溝槽」，另有滑軌、彈性帶兩種備案（見 B 案分頁下方）。','<b>要不要做慣用手切換？</b>目前設計成模組放左或右都行，紙墊往另一邊移。這會多一組磁吸座，但值得。']},
+ {h:'B 案：我補的假設',items:['兩片薄硬板＋軟質折線，板邊小磁鐵吸成硬平面，不用鉸鏈。','紙墊寬度小於單邊半頁，闔上前必須退回單邊。','本體暫定 120×160 mm，闔上厚度約 20 mm。']},
+ {h:'兩案都要想的事',items:['<b>樂齡使用者：</b>磁力要能單手拉開，滑蓋、板邊磁吸要大拇指就能操作。','<b>模組公差：</b>模組尺寸要跟本體對齊，不然外掛看起來像臨時補丁。','<b>下一步建議：</b>用厚紙板＋磁鐵先做 A、B 各一個等大模型，讓長輩實際翻一次。']}
+];
+$('#qaCols').innerHTML=QA.map(g=>`<div class="card ${g.h.includes('需要')?'rec':'alt'}"><h3>${g.h}</h3><ul>${g.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
+
+/* ---------- 播放控制 ---------- */
+const SC={A:'sk',B:'sk'}, IDX={A:0,B:0};
+let timer=null, playingKey=null;
+const DIMS={A:[620,720],B:[800,540]};
+
+function setVars(key){
+  const s=STEPS[key][SC[key]][IDX[key]], box=$('#box'+key), v=s.vars;
+  for(const k in v) box.style.setProperty('--'+k,v[k]);
+  box.dataset.draw=v.draw?'1':'0'; box.dataset.scen=SC[key];
+  if(key==='A'){
+    const set=(k,val)=>box.style.setProperty('--'+k,val);
+    set('sr',-v.cr); set('sx',(v.cz-17)/2); set('penu',v.pen/2);
+    set('smx',112+v.mz/2); set('smy',30+(v.my+148)/2); set('smsy',1-.55*(v.mr/90));
+  }
+}
+function renderSteps(key){
+  const list=STEPS[key][SC[key]], ol=$('#steps'+key);
+  ol.innerHTML=list.map((s,i)=>`<li><button class="stp" data-i="${i}" aria-current="${i===IDX[key]?'step':'false'}"><span class="n">${i+1}</span><span class="t">${s.t}</span><span class="body"><span class="d">${s.d}</span><ul>${s.n.map(x=>`<li>${x}</li>`).join('')}</ul></span></button></li>`).join('');
+  $('#ct'+key).innerHTML=`<button class="btn" data-act="prev" aria-label="上一步">◀ 上一步</button><button class="btn primary" data-act="play">▶ 播放</button><button class="btn" data-act="next" aria-label="下一步">下一步 ▶</button><div class="dots" role="group" aria-label="步驟">${list.map((_,i)=>`<button data-i="${i}" aria-label="第 ${i+1} 步" aria-current="${i===IDX[key]?'step':'false'}" class="${i<IDX[key]?'done':''}"></button>`).join('')}</div><span class="count">${IDX[key]+1}/${list.length}</span>`;
+  const pb=$('[data-act=play]',$('#ct'+key)); if(playingKey===key) pb.textContent='❚❚ 暫停';
+}
+function go(key,i){
+  const n=STEPS[key][SC[key]].length; IDX[key]=Math.max(0,Math.min(n-1,i));
+  setVars(key); renderSteps(key);
+}
+function stop(){clearInterval(timer);timer=null;playingKey=null;$$('[data-act=play]').forEach(b=>b.textContent='▶ 播放')}
+function play(key){
+  stop(); playingKey=key;
+  if(IDX[key]>=STEPS[key][SC[key]].length-1) go(key,0);
+  $('[data-act=play]',$('#ct'+key)).textContent='❚❚ 暫停';
+  timer=setInterval(()=>{
+    if(IDX[key]>=STEPS[key][SC[key]].length-1){stop();renderSteps(key);return}
+    go(key,IDX[key]+1);
+  },3300);
+}
+['A','B'].forEach(key=>{
+  $('#ct'+key).addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b) return;
+    if(b.dataset.act==='prev'){stop();go(key,IDX[key]-1)}
+    else if(b.dataset.act==='next'){stop();go(key,IDX[key]+1)}
+    else if(b.dataset.act==='play'){playingKey===key?(stop(),renderSteps(key)):play(key)}
+    else if(b.dataset.i!==undefined){stop();go(key,+b.dataset.i)}
+  });
+  $('#steps'+key).addEventListener('click',e=>{const b=e.target.closest('.stp');if(b){stop();go(key,+b.dataset.i)}});
+  go(key,0);
+});
+$$('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  const key=b.dataset.key; stop(); SC[key]=b.dataset.scen; IDX[key]=0;
+  $$('.seg button[data-key='+key+']').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  go(key,0);
+}));
+
+/* ---------- 舞台縮放 ---------- */
+function fit(key){
+  const st=$('#st'+key), [dw,dh]=DIMS[key], r=st.getBoundingClientRect();
+  if(!r.width) return;
+  $('#w'+key).style.setProperty('--k',Math.min(r.width/dw,r.height/dh).toFixed(3));
+}
+['A','B'].forEach(k=>{ if('ResizeObserver' in window) new ResizeObserver(()=>fit(k)).observe($('#st'+k)); });
+addEventListener('resize',()=>{fit('A');fit('B')});
+
+/* ---------- 分頁 ---------- */
+function showTab(t){
+  if(!['a','b','cmp','qa'].includes(t)) t='a';
+  $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==t);
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t?'true':'false'));
+  stop(); $$('[data-act=play]').forEach(b=>b.textContent='▶ 播放');
+  requestAnimationFrame(()=>{fit('A');fit('B')});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>{showTab(b.dataset.tab);try{history.replaceState(null,'','#'+b.dataset.tab)}catch(e){}}));
+addEventListener('keydown',e=>{
+  const t=$$('nav.tabs button').find(b=>b.getAttribute('aria-selected')==='true')?.dataset.tab;
+  const key=t==='a'?'A':t==='b'?'B':null; if(!key||/INPUT|TEXTAREA/.test(e.target.tagName)) return;
+  if(e.key==='ArrowRight'){stop();go(key,IDX[key]+1)} else if(e.key==='ArrowLeft'){stop();go(key,IDX[key]-1)}
+});
+showTab((location.hash||'#a').slice(1));
+</script>
