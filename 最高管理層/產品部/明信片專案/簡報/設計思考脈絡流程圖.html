@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>設計思考脈絡流程圖</title>
+<style>
+html,body{margin:0;background:#E9EDF3}
+.slide{width:1920px;height:1080px;box-sizing:border-box;background:#FAFBFD;color:#14213D;font-family:'Microsoft JhengHei','PingFang TC','Noto Sans TC',Arial,sans-serif;position:relative;overflow:hidden}
+.slide *{box-sizing:border-box}
+h2{position:absolute;left:110px;top:64px;margin:0;font-size:60px;font-weight:800;letter-spacing:2px}
+.hmw{position:absolute;left:110px;right:110px;top:176px;height:104px;background:#14213D;border-radius:22px;display:flex;align-items:center;gap:28px;padding:0 40px}
+.hmw .k{background:#0A7BBF;color:#fff;font-weight:800;font-size:30px;padding:6px 22px;border-radius:999px;letter-spacing:2px;white-space:nowrap}
+.hmw p{margin:0;color:#fff;font-size:27px;line-height:1.5;font-weight:600}
+.lab{position:absolute;left:110px;font-size:22px;font-weight:800;letter-spacing:3px;color:#0A7BBF}
+.col{position:absolute;width:210px}
+.step{height:270px;background:#fff;border:3px solid #0A7BBF;border-radius:22px;display:flex;flex-direction:column;align-items:center;padding-top:18px;text-align:center}
+.step .n{width:44px;height:44px;border-radius:50%;background:#0A7BBF;color:#fff;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.step svg{width:76px;height:76px;margin:14px 0 8px;stroke:#0A7BBF;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.step .t{font-size:32px;font-weight:800;line-height:1.35}
+.val{height:210px;margin-top:62px;background:#EAF4FB;border-radius:22px;padding:22px 10px;text-align:center;display:flex;align-items:center;justify-content:center;position:relative}
+.val p{margin:0;font-size:28px;line-height:1.55;font-weight:700;color:#1B2E4E}
+.val::before{content:"";position:absolute;left:50%;top:-44px;height:36px;border-left:3px dotted #7FA9C9}
+svg.arr{position:absolute;top:0;left:0;width:1920px;height:1080px;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="slide" id="s">
+  <h2>設計思考脈絡</h2>
+
+  <div class="hmw">
+    <span class="k">HMW</span>
+    <p>幫助退休後的樂齡族群，讓藝術成為生活的一部分，無壓力且低負擔地長期參與日常藝術創作，達到「藝術創齡」。</p>
+  </div>
+
+  <div class="lab" style="top:358px">流程</div>
+  <div class="lab" style="top:692px">價值思考</div>
+
+  <svg class="arr" viewBox="0 0 1920 1080">
+    <defs><marker id="ah" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M1 1 L12 7 L1 13 Z" fill="#0A7BBF"/></marker></defs>
+    <g stroke="#0A7BBF" stroke-width="3" fill="none" marker-end="url(#ah)">
+      <path d="M324 535H354"/><path d="M572 535H602"/><path d="M820 535H850"/>
+      <path d="M1068 535H1098"/><path d="M1316 535H1346"/><path d="M1564 535H1594"/>
+    </g>
+  </svg>
+
+  <div class="col" style="left:110px;top:400px">
+    <div class="step"><span class="n">1</span>
+      <svg viewBox="0 0 64 64"><path d="M12 30A20 20 0 0 1 48 20"/><path d="M48 8v12H36"/><path d="M52 34A20 20 0 0 1 16 44"/><path d="M16 56V44h12"/></svg>
+      <span class="t">長期參與<br>日常</span></div>
+    <div class="val"><p>不只體驗一次<br>要能留得住</p></div></div>
+
+  <div class="col" style="left:358px;top:400px">
+    <div class="step"><span class="n">2</span>
+      <svg viewBox="0 0 64 64"><rect x="10" y="14" width="44" height="40" rx="6"/><path d="M10 26h44"/><path d="M22 8v12M42 8v12"/><path d="M22 36h4M30 36h4M38 36h4M22 44h4M30 44h4"/></svg>
+      <span class="t">以日曆<br>為載體</span></div>
+    <div class="val"><p>日常、低負擔<br>不必學新流程</p></div></div>
+
+  <div class="col" style="left:606px;top:400px">
+    <div class="step"><span class="n">3</span>
+      <svg viewBox="0 0 64 64"><rect x="4" y="22" width="18" height="20" rx="3"/><rect x="42" y="22" width="18" height="20" rx="3"/><path d="M24 32h12" stroke-dasharray="3 5"/><path d="M34 26l6 6-6 6"/></svg>
+      <span class="t">接起循環圖<br>斷差</span></div>
+    <div class="val"><p>收藏接回<br>下一次創作</p></div></div>
+
+  <div class="col" style="left:854px;top:400px">
+    <div class="step"><span class="n">4</span>
+      <svg viewBox="0 0 64 64"><path d="M32 10L54 22 32 34 10 22Z"/><path d="M10 32l22 12 22-12"/><path d="M10 42l22 12 22-12"/></svg>
+      <span class="t">慢慢累積<br>成作品</span></div>
+    <div class="val"><p>未完成感<br>帶來創作動力</p></div></div>
+
+  <div class="col" style="left:1102px;top:400px">
+    <div class="step"><span class="n">5</span>
+      <svg viewBox="0 0 64 64"><rect x="12" y="8" width="40" height="48" rx="4" stroke-dasharray="6 5"/><path d="M22 40q8-16 20-6"/></svg>
+      <span class="t">虛線空白紙<br>自己創作</span></div>
+    <div class="val"><p>沒有範本<br>低負擔</p></div></div>
+
+  <div class="col" style="left:1350px;top:400px">
+    <div class="step"><span class="n">6</span>
+      <svg viewBox="0 0 64 64"><rect x="6" y="14" width="52" height="36" rx="5"/><rect x="42" y="20" width="10" height="10" rx="1"/><path d="M14 36h22M14 43h16"/></svg>
+      <span class="t">明信片＋<br>線上社群</span></div>
+    <div class="val"><p>作品成為人際<br>交流的媒介</p></div></div>
+
+  <div class="col" style="left:1598px;top:400px">
+    <div class="step"><span class="n">7</span>
+      <svg viewBox="0 0 64 64"><rect x="16" y="8" width="32" height="48" rx="4"/><rect x="22" y="14" width="20" height="12" rx="1"/><rect x="22" y="32" width="20" height="12" rx="1"/><path d="M6 30h6M52 30h6M8 20l5 3M56 20l-5 3"/></svg>
+      <span class="t">收藏成<br>燈箱模組</span></div>
+    <div class="val"><p>明信片疊放<br>展示累積成果</p></div></div>
+</div>
+</body>
+</html>
