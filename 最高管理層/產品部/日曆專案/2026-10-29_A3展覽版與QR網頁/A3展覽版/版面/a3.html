@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>A3展覽版</title>
+<style>
+@page{size:420mm 297mm;margin:0}
+:root{--board:#F2E9D5;--cream:#FBF5E6;--wood:#DEC6A0;--ink:#2E2218;--ink2:#4D3B2C;--red:#A33F2A;--edge:#B99A6A;--mute:#7C6B58}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:420mm;height:297mm;background:var(--board)}
+body{position:relative;overflow:hidden;color:var(--ink);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-weight:500}
+.serif{font-family:'Noto Serif TC','PMingLiU',serif}
+/* 主圖：設計版（背景已校成與版面底色一致，無框、無遮罩，物件直接坐落在版面上） */
+.hero{position:absolute;left:189mm;top:8mm;width:235.2mm;height:179.2mm}
+.hero img{width:100%;height:100%;display:block}
+h1{position:absolute;left:14mm;top:12mm;font-size:17mm;line-height:1.1;font-weight:900;letter-spacing:.05em;white-space:nowrap}
+.card{position:absolute;border-radius:5mm}
+.red{background:var(--red);color:var(--cream)}
+.box{background:var(--cream);border:.9mm solid var(--edge)}
+.pack{position:absolute;width:49.5mm;height:13.5mm;border-radius:3.2mm;background:var(--board);border:.6mm solid var(--edge);display:flex;align-items:center;justify-content:center;font-size:5.2mm;font-weight:700;color:var(--ink2);letter-spacing:.1em}
+/* 右側三個網頁步驟：不加外框，介面圖直接呈現，底部淡出示意可往下捲 */
+.step{position:absolute;top:196mm;width:72mm}
+.step .shot{position:relative;width:72mm;height:66mm;overflow:hidden;border-radius:4mm;
+ -webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,#000 80%,transparent 100%)}
+.step .shot img{width:100%;display:block}
+.step .shot.photo img{height:100%;object-fit:cover}
+.shotbox{position:relative;width:72mm;height:66mm;filter:drop-shadow(0 .8mm 2mm rgba(60,40,20,.28))}
+.cap{margin-top:3mm}
+.cap b{display:block;font-size:6.2mm;font-weight:900;color:var(--ink);letter-spacing:.03em;white-space:nowrap}
+.cap b em{font-style:normal;color:var(--red);margin-right:2mm}
+.cap span{display:block;font-size:4.4mm;line-height:1.5;color:var(--ink2);margin-top:1mm}
+.arr{position:absolute;top:222mm;color:var(--red);font-size:9mm;font-weight:900;line-height:1;width:8mm;text-align:center}
+.note{position:absolute;left:14mm;top:287.2mm;font-size:3.2mm;color:var(--mute)}
+
+.lab{position:absolute;font-size:4.4mm;font-weight:700;letter-spacing:.2em;color:var(--red)}
+.mini{position:absolute;background:var(--cream);border:.7mm solid var(--edge);border-radius:3.6mm;display:flex;flex-direction:column;align-items:center;padding-top:3mm;text-align:center}
+.mini .n{width:6.4mm;height:6.4mm;border-radius:50%;background:var(--red);color:var(--cream);font-size:4mm;font-weight:900;display:flex;align-items:center;justify-content:center}
+.mini svg{width:13mm;height:13mm;margin:4mm 0 3mm;stroke:var(--red);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.mini .t{font-size:4.2mm;font-weight:700;line-height:1.5;color:var(--ink);white-space:nowrap}
+.marr{position:absolute;width:3.8mm;text-align:center;color:var(--red);font-size:6mm;font-weight:900;line-height:1}
+.bigarr{position:absolute;width:8mm;text-align:center;color:var(--red);font-size:12mm;font-weight:900;line-height:1}
+.hmw{position:absolute;left:14mm;top:258mm;width:149.4mm;height:23mm;border-radius:4mm;background:var(--ink);color:var(--cream);padding:3.6mm 5mm;font-size:4.8mm;line-height:1.6;font-weight:500}
+.hmw b{display:inline-block;margin-right:2.4mm;padding:.2mm 2.6mm;border-radius:9mm;background:var(--red);font-size:4.2mm;letter-spacing:.14em}
+
+</style></head><body>
+
+<div class="hero"><img src="素材/主圖_設計版.png" alt=""></div>
+
+<h1 class="serif">跟著日曆去旅行</h1>
+
+<!-- 旅遊 -->
+<div class="card red" style="left:14mm;top:56mm;width:60mm;height:112mm;padding:9mm 6mm">
+  <div style="font-size:4.8mm;font-weight:700;opacity:.85;letter-spacing:.1em">聚焦的主題</div>
+  <div class="serif" style="font-size:16.5mm;font-weight:900;line-height:1.1;margin:11mm 0 10mm;letter-spacing:.03em;white-space:nowrap">旅遊</div>
+  <div style="width:11mm;height:.8mm;background:var(--cream);opacity:.6;margin-bottom:7mm"></div>
+  <div style="font-size:5.4mm;font-weight:700;line-height:1.75">想去哪裡，<br>常與自己的喜好、<br>生活經驗和<br>親友話題有關</div>
+</div>
+<div style="position:absolute;left:74.5mm;top:106mm;width:9mm;text-align:center;color:var(--red);font-size:11mm;font-weight:900;line-height:1">›</div>
+
+<!-- 自選主題包 -->
+<div class="card box" style="left:84mm;top:56mm;width:112mm;height:112mm">
+  <div class="serif" style="position:absolute;left:0;right:0;top:7mm;text-align:center;font-size:9.6mm;font-weight:900;letter-spacing:.1em">自選主題包</div>
+  <div style="position:absolute;left:0;right:0;top:21mm;text-align:center;font-size:4.5mm;color:var(--ink2)">依照自己的喜好與生活經驗和親友話題選擇</div>
+  <div class="pack" style="left:4.5mm;top:33mm">世界城市</div><div class="pack" style="left:58mm;top:33mm">台灣城市</div>
+  <div class="pack" style="left:4.5mm;top:50mm">日本城市</div><div class="pack" style="left:58mm;top:50mm">澳洲城市⋯</div>
+  <div class="red" style="position:absolute;left:4.5mm;top:69mm;width:103mm;height:38mm;border-radius:4mm;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 5mm;text-align:center">
+    <div class="serif" style="font-size:13mm;font-weight:900;letter-spacing:.12em;white-space:nowrap;line-height:1.1">內在動力</div>
+    <div style="font-size:5.4mm;line-height:1.5;margin-top:3.5mm;font-weight:500">選自己有興趣的</div>
+  </div>
+</div>
+<div class="mini" style="left:14.0mm;top:196.0mm;width:27.0mm;height:56.0mm"><span class="n">1</span><svg viewBox="0 0 64 64"><path d="M12 30A20 20 0 0 1 48 20"/><path d="M48 8v12H36"/><path d="M52 34A20 20 0 0 1 16 44"/><path d="M16 56V44h12"/></svg><span class="t">長期參與<br>日常</span></div><div class="marr" style="left:40.8mm;top:221.0mm">›</div><div class="mini" style="left:44.6mm;top:196.0mm;width:27.0mm;height:56.0mm"><span class="n">2</span><svg viewBox="0 0 64 64"><rect x="10" y="14" width="44" height="40" rx="6"/><path d="M10 26h44"/><path d="M22 8v12M42 8v12"/><path d="M22 36h4M30 36h4M38 36h4M22 44h4M30 44h4"/></svg><span class="t">日曆載體<br>自選主題</span></div><div class="marr" style="left:71.4mm;top:221.0mm">›</div><div class="mini" style="left:75.2mm;top:196.0mm;width:27.0mm;height:56.0mm"><span class="n">3</span><svg viewBox="0 0 64 64"><rect x="4" y="22" width="18" height="20" rx="3"/><rect x="42" y="22" width="18" height="20" rx="3"/><path d="M24 32h12" stroke-dasharray="3 5"/><path d="M34 26l6 6-6 6"/></svg><span class="t">接起循環<br>圖斷差</span></div><div class="marr" style="left:102.0mm;top:221.0mm">›</div><div class="mini" style="left:105.8mm;top:196.0mm;width:27.0mm;height:56.0mm"><span class="n">4</span><svg viewBox="0 0 64 64"><path d="M32 10L54 22 32 34 10 22Z"/><path d="M10 32l22 12 22-12"/><path d="M10 42l22 12 22-12"/></svg><span class="t">慢慢累積<br>成作品</span></div><div class="marr" style="left:132.6mm;top:221.0mm">›</div><div class="mini" style="left:136.4mm;top:196.0mm;width:27.0mm;height:56.0mm"><span class="n">5</span><svg viewBox="0 0 64 64"><polygon points="22.0,13.0 31.5,18.5 31.5,29.5 22.0,35.0 12.5,29.5 12.5,18.5"/><polygon points="41.0,13.0 50.5,18.5 50.5,29.5 41.0,35.0 31.5,29.5 31.5,18.5"/><polygon points="31.5,29.5 41.0,35.0 41.0,46.0 31.5,51.5 22.0,46.0 22.0,35.0"/></svg><span class="t">卡扣拼接<br>世界城市</span></div>
+<div class="lab" style="left:14mm;top:187mm">設計思考脈絡</div>
+<div class="lab" style="left:170.0mm;top:187mm">掃 QR 之後，在手機上看到的三步</div>
+<div class="bigarr" style="left:163.6mm;top:218.0mm">›</div>
+<div class="step" style="left:170.0mm"><div class="shotbox"><div class="shot photo"><img src="素材/背面_含QR.jpg" style="object-position:66% 56%" alt=""></div></div>
+  <div class="cap"><b class="serif"><em>1</em>掃描</b><span>掃底座背面的 QR，免下載免註冊</span></div></div>
+<div class="arr" style="left:242.0mm">›</div>
+<div class="step" style="left:252.0mm"><div class="shotbox"><div class="shot"><img src="../../介面/截圖/step2_city.png" alt=""></div></div>
+  <div class="cap"><b class="serif"><em>2</em>認識城市</b><span>台北的故事，點開進入留言板</span></div></div>
+<div class="arr" style="left:324.0mm">›</div>
+<div class="step" style="left:334.0mm"><div class="shotbox"><div class="shot"><img src="../../介面/截圖/step3_wall.png" alt=""></div></div>
+  <div class="cap"><b class="serif"><em>3</em>城市主題留言板</b><span>照片、文字、語音都能留言</span></div></div>
+<div class="hmw"><b>HMW</b>幫助退休後的樂齡族群，讓藝術成為生活的一部分，<br>無壓力且低負擔地長期參與日常藝術創作，達到「藝術創齡」。</div>
+
+</body></html>

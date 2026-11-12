@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>A3展覽版</title>
+<style>
+@page{size:420mm 297mm;margin:0}
+:root{--board:#F2E9D5;--cream:#FBF5E6;--wood:#DEC6A0;--ink:#2E2218;--ink2:#4D3B2C;--red:#A33F2A;--edge:#B99A6A;--mute:#7C6B58}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:420mm;height:297mm;background:var(--board)}
+body{position:relative;overflow:hidden;color:var(--ink);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-weight:500}
+.serif{font-family:'Noto Serif TC','PMingLiU',serif}
+/* 主圖：設計版（背景已校成與版面底色一致，無框、無遮罩，物件直接坐落在版面上） */
+.hero{position:absolute;left:189mm;top:8mm;width:235.2mm;height:179.2mm}
+.hero img{width:100%;height:100%;display:block}
+h1{position:absolute;left:14mm;top:12mm;font-size:17mm;line-height:1.1;font-weight:900;letter-spacing:.05em;white-space:nowrap}
+.card{position:absolute;border-radius:5mm}
+.red{background:var(--red);color:var(--cream)}
+.box{background:var(--cream);border:.9mm solid var(--edge)}
+.pack{position:absolute;width:49.5mm;height:13.5mm;border-radius:3.2mm;background:var(--board);border:.6mm solid var(--edge);display:flex;align-items:center;justify-content:center;font-size:5.2mm;font-weight:700;color:var(--ink2);letter-spacing:.1em}
+/* 右側三個網頁步驟：不加外框，介面圖直接呈現，底部淡出示意可往下捲 */
+.step{position:absolute;top:196mm;width:72mm}
+.step .shot{position:relative;width:72mm;height:66mm;overflow:hidden;border-radius:4mm;
+ -webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent 100%);mask-image:linear-gradient(to bottom,#000 80%,transparent 100%)}
+.step .shot img{width:100%;display:block}
+.step .shot.photo img{height:100%;object-fit:cover}
+.shotbox{position:relative;width:72mm;height:66mm;filter:drop-shadow(0 .8mm 2mm rgba(60,40,20,.28))}
+.cap{margin-top:3mm}
+.cap b{display:block;font-size:6.2mm;font-weight:900;color:var(--ink);letter-spacing:.03em;white-space:nowrap}
+.cap b em{font-style:normal;color:var(--red);margin-right:2mm}
+.cap span{display:block;font-size:4.4mm;line-height:1.5;color:var(--ink2);margin-top:1mm}
+.arr{position:absolute;top:222mm;color:var(--red);font-size:9mm;font-weight:900;line-height:1;width:8mm;text-align:center}
+.note{position:absolute;left:14mm;top:287.2mm;font-size:3.2mm;color:var(--mute)}
+/*CSS*/
+</style></head><body>
+
+<div class="hero"><img src="素材/主圖_設計版.png" alt=""></div>
+
+<h1 class="serif">跟著日曆去旅行</h1>
+
+<!-- 旅遊 -->
+<div class="card red" style="left:14mm;top:56mm;width:60mm;height:112mm;padding:9mm 6mm">
+  <div style="font-size:4.8mm;font-weight:700;opacity:.85;letter-spacing:.1em">聚焦的主題</div>
+  <div class="serif" style="font-size:16.5mm;font-weight:900;line-height:1.1;margin:11mm 0 10mm;letter-spacing:.03em;white-space:nowrap">旅遊</div>
+  <div style="width:11mm;height:.8mm;background:var(--cream);opacity:.6;margin-bottom:7mm"></div>
+  <div style="font-size:5.4mm;font-weight:700;line-height:1.75">想去哪裡，<br>常與自己的喜好、<br>生活經驗和<br>親友話題有關</div>
+</div>
+<div style="position:absolute;left:74.5mm;top:106mm;width:9mm;text-align:center;color:var(--red);font-size:11mm;font-weight:900;line-height:1">›</div>
+
+<!-- 自選主題包 -->
+<div class="card box" style="left:84mm;top:56mm;width:112mm;height:112mm">
+  <div class="serif" style="position:absolute;left:0;right:0;top:7mm;text-align:center;font-size:9.6mm;font-weight:900;letter-spacing:.1em">自選主題包</div>
+  <div style="position:absolute;left:0;right:0;top:21mm;text-align:center;font-size:4.5mm;color:var(--ink2)">依照自己的喜好與生活經驗和親友話題選擇</div>
+  <div class="pack" style="left:4.5mm;top:33mm">世界城市</div><div class="pack" style="left:58mm;top:33mm">台灣城市</div>
+  <div class="pack" style="left:4.5mm;top:50mm">日本城市</div><div class="pack" style="left:58mm;top:50mm">澳洲城市⋯</div>
+  <div class="red" style="position:absolute;left:4.5mm;top:69mm;width:103mm;height:38mm;border-radius:4mm;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 5mm;text-align:center">
+    <div class="serif" style="font-size:13mm;font-weight:900;letter-spacing:.12em;white-space:nowrap;line-height:1.1">內在動力</div>
+    <div style="font-size:5.4mm;line-height:1.5;margin-top:3.5mm;font-weight:500">選自己有興趣的</div>
+  </div>
+</div>
+<!--BOTTOM-->
+</body></html>

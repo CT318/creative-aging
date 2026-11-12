@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<title>LINE 測試版簡報</title>
+<style>
+@font-face{font-family:'NSTC';src:url('../../LINE官方帳號草模/後端/scripts/fonts/NotoSansTC.ttf');font-weight:100 900}
+:root{--paper:#FBF6EC;--warm:#F3EADB;--line:#E4D6BF;--btn:#B84A18;--ink:#3A2E27;--ink2:#6A594C;--leaf:#5C6A4B;--chat:#9DB1D6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#FFFDF8}body{width:1920px;height:1080px;overflow:hidden;background:#FFFDF8;font-family:'NSTC','Microsoft JhengHei',sans-serif;color:var(--ink)}
+.slide{width:1920px;height:1080px;padding:36px 64px 0;position:relative}
+.kicker{font-size:18px;font-weight:700;letter-spacing:2px;color:var(--btn)}
+h1{font-size:50px;font-weight:800;line-height:1.15;margin-top:2px}
+.sub{font-size:21px;color:var(--ink2);margin-top:6px}
+.tag{position:absolute;right:64px;top:36px;display:flex;align-items:center;gap:14px;background:var(--warm);border:2px solid var(--line);border-radius:24px;padding:12px 22px 12px 14px;font-size:21px;font-weight:700}
+.tag .cell{width:84px;height:84px;border-radius:16px;background:#FBF6EC url('../../LINE官方帳號草模/後端/public/menu.jpg') no-repeat;background-size:250px 84px}
+.tag small{display:block;font-size:15px;font-weight:500;color:var(--ink2)}
+.panel{position:absolute;left:64px;right:64px;top:170px;bottom:40px;align-items:center;background:var(--warm);border:2px solid var(--line);border-radius:30px;display:flex;justify-content:center;gap:34px;padding:16px 20px 0}
+.col{display:flex;flex-direction:column;align-items:center;width:316px}
+.lab{height:62px;text-align:center}
+.lab .st{font-size:15px;font-weight:700;letter-spacing:3px;color:var(--btn)}
+.lab .tt{font-size:23px;font-weight:800;margin-top:2px}
+.lab .bd{display:inline-block;font-size:14px;font-weight:700;color:#fff;background:var(--leaf);border-radius:12px;padding:1px 12px;margin-left:8px;vertical-align:middle}
+.lab .bd.o{background:var(--btn)}
+.cap{margin-top:12px;font-size:17px;line-height:1.4;text-align:center;color:var(--ink);min-height:48px}
+.arrow{align-self:center;margin-top:20px;font-size:26px;color:var(--btn);margin-left:-26px;margin-right:-26px;z-index:2}
+/* phone */
+.phone{width:312px;height:632px;border-radius:44px;background:#15151a;padding:8px;box-shadow:0 8px 26px rgba(58,46,39,.25);flex:none}
+.scr{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.notch{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:84px;height:22px;border-radius:12px;background:#15151a;z-index:5}
+.sb{height:32px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 24px 3px;font-size:13px;font-weight:700}
+.hd{height:38px;flex:none;display:flex;align-items:center;gap:6px;padding:0 12px;font-size:14px;font-weight:700;border-bottom:1px solid #eee}
+.hd i{font-style:normal;font-size:20px;font-weight:400}
+.chat{flex:1;background:var(--chat);display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:10px 9px;overflow:hidden}
+.bar{height:44px;flex:none;background:#fff;display:flex;align-items:center;gap:10px;padding:0 12px;font-size:17px;color:#777}
+.bar .in{flex:1;height:28px;border-radius:14px;background:#f1f1f1}
+.menubar{flex:none;background:#fff;text-align:center;font-size:12px;color:#555;padding:4px 0;border-top:1px solid #eee}
+.menu{flex:none;height:106px;background:url('../../LINE官方帳號草模/後端/public/menu.jpg') center/100% 100% no-repeat;position:relative}
+.row{display:flex;gap:6px;align-items:flex-start}
+.av{width:28px;height:28px;border-radius:50%;flex:none;background:url('../../LINE官方帳號草模/後端/public/avatar.png') center/cover}
+.bub{background:#fff;border-radius:6px 16px 16px 16px;padding:8px 12px;font-size:14px;line-height:1.4;max-width:210px}
+.me{align-self:flex-end;background:#8DE055;border-radius:16px 6px 16px 16px;padding:7px 12px;font-size:14px}
+.card{width:222px;background:var(--paper);border-radius:14px;overflow:hidden;position:relative}
+.card img{display:block;width:100%}
+.card .b{padding:12px 14px 8px}
+.card .t{font-size:17px;font-weight:800;line-height:1.3}
+.card .p{font-size:14px;line-height:1.45;margin-top:6px}
+.card .r{display:flex;gap:9px;align-items:center;font-size:14px;margin-top:7px}
+.card .r i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--btn);color:#fff;font-style:normal;font-weight:800;font-size:13px;text-align:center;line-height:22px}
+.card .f{padding:2px 12px 12px;display:flex;flex-direction:column;gap:8px}
+.btn{position:relative;height:38px;border-radius:10px;background:var(--btn);color:#fff;font-weight:800;font-size:15px;text-align:center;line-height:38px}
+.btn.s{background:var(--paper);color:var(--btn);border:2px solid var(--btn);line-height:34px}
+.ring{position:absolute;right:16px;top:3px;width:36px;height:36px;border-radius:50%;border:3px solid #2f6fde;background:rgba(47,111,222,.22);z-index:4}
+.ring.c{right:auto;left:50%;margin-left:-18px}
+.img{width:180px;border-radius:12px;display:block;position:relative}
+.voice{display:flex;align-items:center;gap:8px;border-radius:18px;padding:8px 12px;font-size:12px;width:170px}
+.voice.w{background:#fff;border-radius:6px 18px 18px 18px}.voice.g{background:#8DE055;align-self:flex-end;border-radius:18px 6px 18px 18px}
+.voice b{width:24px;height:24px;border-radius:50%;background:#2d2d2d;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.voice .wv{flex:1;height:16px;background:repeating-linear-gradient(90deg,#444 0 2px,transparent 2px 5px);-webkit-mask:linear-gradient(0deg,#000 0 100%);opacity:.55}
+.pop{position:absolute;left:0;top:-98px;background:#2b2b2b;border-radius:12px;display:flex;flex-wrap:wrap;width:196px;padding:6px 4px;color:#fff;font-size:12px;text-align:center;z-index:3}
+.pop span{width:25%;padding:5px 0;position:relative}.pop em{display:block;font-style:normal;font-size:16px}
+.share{flex:1;background:#fff;display:flex;flex-direction:column;position:relative}
+.share .li{display:flex;align-items:center;gap:10px;padding:9px 14px;font-size:14px;border-bottom:1px solid #eee}
+.share .li s{width:34px;height:34px;border-radius:50%;flex:none;text-decoration:none;color:#fff;text-align:center;line-height:34px;font-weight:700;font-size:14px}
+.share .li u{margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid #bbb;text-decoration:none;color:#fff;font-size:12px;text-align:center;line-height:16px}
+.share .li u.on{background:#06c755;border-color:#06c755}
+.share .grp{background:#f4f4f4;font-size:12px;color:#888;padding:4px 14px}
+.send{position:absolute;left:12px;right:12px;bottom:14px;height:40px;border-radius:10px;background:#06c755;color:#fff;font-weight:800;text-align:center;line-height:40px;font-size:15px}
+/* overview */
+.ov{position:absolute;left:64px;right:64px;top:196px;display:flex;gap:30px}
+.oc{flex:1;height:800px !important;background:var(--warm);border:2px solid var(--line);border-radius:30px;padding:28px 30px;position:relative;height:640px}
+.oc .numx{position:absolute;right:26px;top:22px;font-size:100px;font-weight:800;color:#E9DCC4;line-height:1}
+.oc .mn{position:relative;width:100%;height:210px;border-radius:18px;background:#FBF6EC url('../../LINE官方帳號草模/後端/public/menu.jpg') center/100% 100% no-repeat;border:2px solid var(--line)}.oc .mn .ring{top:36px;right:auto;width:68px;height:68px;margin-left:-34px}.ovp{border:8px solid #15151a;border-radius:34px;overflow:hidden;background:#fff;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(58,46,39,.2)}.ovp .menu2{position:relative;flex:none}.ovp .menu2 img{display:block;width:100%}.ovp .menu2 .ring{top:50%;margin-top:-34px;margin-left:-34px;width:68px;height:68px;right:auto}.oc .cellx{width:210px;height:212px;border-radius:30px;background:#FBF6EC url('../../LINE官方帳號草模/後端/public/menu.jpg') no-repeat;background-size:630px 212px}
+.oc h2{font-size:36px;font-weight:800;margin-top:20px}
+.oc .one{font-size:21px;color:var(--ink2);margin-top:6px}
+.oc ol{margin-top:22px;list-style:none}
+.oc li{display:flex;gap:12px;font-size:19px;line-height:1.4;margin-top:17px}
+
+.oc li i{flex:none;width:28px;height:28px;border-radius:50%;background:var(--btn);color:#fff;font-style:normal;font-weight:800;font-size:15px;text-align:center;line-height:28px;margin-top:0}
+.oc .end{position:absolute;left:30px;right:30px;bottom:24px;background:#FBF6EC;border:2px dashed var(--line);border-radius:18px;padding:12px 18px;font-size:19px;font-weight:700;color:var(--leaf)}
+.link{position:absolute;top:456px;z-index:3;background:var(--btn);color:#fff;border-radius:20px;padding:6px 14px;font-size:21px;font-weight:700}
+.note{position:absolute;left:64px;right:64px;bottom:34px;height:112px;background:var(--paper);border:2px solid var(--line);border-radius:24px;display:flex;align-items:center;padding:0 34px;gap:44px;font-size:25px;line-height:1.4}
+.note b{color:var(--btn)}
+.note div{flex:1}
+</style></head><body>
+<div id="app"></div>
+<script>
+const IMG='../../LINE官方帳號草模/後端/public/';
+const av='<div class="av"></div>';
+const tap=(c)=>'<span class="ring'+(c?' c':'')+'"></span>';
+const btn=(l,t,s)=>'<div class="btn'+(s?' s':'')+'">'+l+(t?tap():'')+'</div>';
+const card=(o)=>'<div class="row">'+av+'<div class="card">'+(o.hero?'<img src="'+IMG+o.hero+'" style="'+(o.ratio?'aspect-ratio:'+o.ratio+';object-fit:cover':'aspect-ratio:1/1')+'">':'')+
+ '<div class="b"><div class="t">'+o.title+'</div>'+(o.body?'<div class="p">'+o.body+'</div>':'')+(o.rows||[]).map((r,i)=>'<div class="r"><i>'+(i+1)+'</i><span>'+r+'</span></div>').join('')+'</div>'+
+ (o.btns?'<div class="f">'+o.btns.join('')+'</div>':'<div style="height:8px"></div>')+'</div></div>';
+const bot=(t)=>'<div class="row">'+av+'<div class="bub">'+t+'</div></div>';
+const me=(t)=>'<div class="me">'+t+'</div>';
+const phone=(chat,o={})=>'<div class="phone"><div class="scr"><div class="notch"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div>'+
+ '<div class="hd"><i>‹</i>'+(o.head||'畫畫小幫手（測試）')+'</div><div class="chat">'+chat+'</div>'+
+ (o.menu?'<div class="menubar">選單 ⌄</div><div class="menu">'+o.menu+'</div>':'')+
+ '<div class="bar"><span>＋</span><span>▣</span><div class="in"></div><span>🎙</span></div></div></div>';
+const col=(st,tt,bd,ph,cap,o)=>'<div class="col"><div class="lab"><div class="st">'+st+'</div><div class="tt">'+tt+(bd?'<span class="bd'+(o&&o.o?' o':'')+'">'+bd+'</span>':'')+'</div></div>'+ph+'<div class="cap">'+cap+'</div></div>';
+const arr='<div class="arrow">›</div>';
+const head=(k,t,s,cellX,cellN)=>'<div class="kicker">'+k+'</div><h1>'+t+'</h1><div class="sub">'+s+'</div>'+
+ '<div class="tag"><div class="cell" style="background-position:-'+cellX+'px 0"></div><div><small>從選單進入</small>'+cellN+'</div></div>';
+const cellPos=[0,83,166],cellPosO=[0,210,420];
+
+const S=[];
+// ---- 0 總覽
+S[0]=()=>'<div class="slide"><div class="kicker">測試版</div><h1>LINE 數位功能中樞</h1>'+
+ '<div class="sub">長者不用下載 App，掃日曆上的 QR 就能開始。這份測試版有三個功能，各自獨立，也能接起來。</div>'+
+ '<div class="ov">'+
+ oc(0,'01','起筆引導','跟著一步一步畫柿子',['掃日曆 QR 加入好友（或點選單）','看圖照著畫，按【下一步】','共 4 步，畫完收到鼓勵'],'畫完 → 可接「做成早安圖」')+
+ oc(1,'02','救畫與問問題','畫暈開了，不用急',['點選單，看到補救的方法','等乾再補色，按【完成補救】','不確定？按【詢問老師】，說話或打字'],'終點：收到恭喜，或老師語音回覆')+
+ oc(2,'03','早安貼圖','把自己的畫變成早安圖',['點選單，收到一張早安圖','按住圖，點「分享」，選家人傳送','回到對話，按【我傳好了】'],'終點：家人收到，早安圖送達')+
+ '</div>'+
+ '</div>';
+function oc(i,n,name,one,steps,end){return '<div class="oc"><div class="ovp"><div class="hd"><i>‹</i>畫畫小幫手（測試）</div><div class="chat" style="flex:none;height:84px"><div class="row">'+av+'<div class="bub">你好，我是畫畫小幫手。</div></div></div><div class="menubar">選單 ⌄</div><div class="menu2"><img src="'+IMG+'menu.jpg"><span class="ring" style="left:'+(16.7+33.3*i)+'%"></span></div><div class="bar"><span>＋</span><span>▣</span><div class="in"></div><span>🎙</span></div></div><h2>'+name+'</h2><div class="one">'+one+'</div><ol>'+
+ steps.map((s,k)=>'<li><i>'+(k+1)+'</i><span>'+s+'</span></li>').join('')+'</ol><div class="end">'+end+'</div></div>';}
+
+// ---- 1 功能一
+S[1]=()=>{
+ const cap=(n,body,btnLabel,ringOn)=>card({hero:'step'+n+'.jpg',title:'第 '+n+' 步',body,btns:[btn('下一步',ringOn)]});
+ return '<div class="slide">'+head('LINE 數位中樞　功能一','起筆引導','不會畫也沒關係。每一步只有一張圖、一句話、一個按鈕。',cellPos[0],'①　起筆引導')+
+ '<div class="panel">'+
+ col('STEP 01','開始','',phone(bot('你好，我是畫畫小幫手。今天來畫柿子。')+card({hero:'step1.jpg',title:'第 1 步',body:'用鉛筆輕輕畫兩個圓圓的柿子。',btns:[btn('下一步',1)]})),'掃日曆 QR 加入好友，自動出現第 1 步')+arr+
+ col('STEP 02','第 2 步','',phone(me('下一步')+card({hero:'step2.jpg',title:'第 2 步',body:'筆沾多一點水，淡淡鋪上黃橘色。',btns:[btn('下一步',1)]})),'照著圖畫，畫好按【下一步】')+arr+
+ col('STEP 03','第 3 步','',phone(me('下一步')+card({hero:'step3.jpg',title:'第 3 步',body:'等半乾，再疊一層橘色。',btns:[btn('下一步',1)]})),'等一等，再疊一層顏色')+arr+
+ col('STEP 04','第 4 步','',phone(me('下一步')+card({hero:'step4.jpg',title:'第 4 步',body:'用咖啡色畫蒂頭和細樹枝。',btns:[btn('下一步',1)]})),'最後畫蒂頭和樹枝')+arr+
+ col('STEP 05','完成','接功能三',phone(me('下一步')+card({hero:'step5.jpg',title:'畫完了，真棒！',btns:[btn('做成早安圖',1)]})),'畫完了！按【做成早安圖】，接到功能三',{o:1})+
+ '</div></div>';
+};
+
+// ---- 2 功能二
+S[2]=()=>{
+ const ask=btn('詢問老師',0,1);
+ return '<div class="slide">'+head('LINE 數位中樞　功能二','救畫與問問題','畫壞了不用急。照著補救，或直接問老師。',cellPos[1],'②　救畫與問問題')+
+ '<div class="panel">'+
+ col('STEP 01','點選單','路線A',phone(me('救畫與問問題')+card({hero:'rescue.jpg',ratio:'20/13',title:'不用急，慢慢補救',body:'用乾淨的衛生紙，輕輕壓一下暈開的地方。',btns:[btn('下一步',1),ask]})),'點選單②，看到補救的第一步')+arr+
+ col('STEP 02','第二步','路線A',phone(me('下一步')+card({title:'第二步',body:'等水乾了，再補一層淡淡的顏色。',btns:[btn('完成補救',1),ask]})),'等乾了再補一層淡淡的顏色')+arr+
+ col('STEP 03','補救完成','路線A・終點',phone(me('完成補救')+card({title:'恭喜！補救成功，畫得很棒。'})),'按【完成補救】，收到一句鼓勵',{o:1})+
+ '<div style="width:34px"></div>'+
+ col('STEP 04','想問老師','路線B',phone(me('詢問老師')+card({title:'想問老師嗎？',body:'可以打字，也可以說話。'}),{}),'任何一步都能按【詢問老師】')+arr+
+ col('STEP 05','收到語音','路線B・終點',phone('<div class="voice g"><b>▶</b><span class="wv"></span><span>0:06</span></div><div class="row">'+av+'<div class="voice w"><b>▶</b><span class="wv"></span><span>0:29</span></div></div>'),'說出問題，收到老師的語音回覆（測試版為預錄語音）',{o:1})+
+ '</div></div>';
+};
+
+// ---- 3 功能三
+S[3]=()=>{
+ const morning='<div class="row">'+av+'<img class="img" src="'+IMG+'morning1.jpg"></div>';
+ const guide=card({title:'分享早安圖',rows:['按住上面的圖','點「分享」','傳送給親朋好友'],btns:[btn('我傳好了')]});
+ const pop='<div class="row">'+av+'<div style="position:relative"><img class="img" src="'+IMG+'morning1.jpg"><div class="pop"><span><em>↩</em>回覆</span><span><em>⎘</em>複製</span><span><em>⤓</em>儲存</span><span style="background:#444;border-radius:8px"><em>➦</em>分享'+''+'</span></div></div></div>';
+ const share='<div class="phone"><div class="scr"><div class="notch"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div><div class="hd"><i>✕</i>選擇分享對象</div><div class="share">'+
+  '<div class="grp">群組</div><div class="li"><s style="background:#E2702B">一</s>一家人<small style="color:#999">（6 人）</small><u class="on">✓</u></div><div class="li"><s style="background:#5C6A4B">畫</s>畫室同學<small style="color:#999">（12 人）</small><u></u></div>'+
+  '<div class="grp">好友</div><div class="li"><s style="background:#6c7bd1">孫</s>孫子<u></u></div><div class="li"><s style="background:#d16c96">女</s>女兒<u></u></div><div class="li"><s style="background:#999">友</s>老朋友<u></u></div>'+
+  '<div class="send">傳送 (1)'+'<span class="ring" style="left:auto;right:30px;top:2px"></span>'+'</div></div></div></div>';
+ const fam='<div class="phone"><div class="scr"><div class="notch"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div><div class="hd"><i>‹</i>一家人（6）</div><div class="chat">'+
+  '<div class="row"><img class="img" src="'+IMG+'morning1.jpg" style="width:170px;margin-left:34px"></div>'+
+  '<div class="row"><div class="av" style="background:#6c7bd1"></div><div class="bub">阿嬤畫的？好漂亮！</div></div>'+
+  '<div class="row"><div class="av" style="background:#d16c96"></div><div class="bub">早安，今天也辛苦了。</div></div></div><div class="bar"><span>＋</span><span>▣</span><div class="in"></div><span>🎙</span></div></div></div>';
+ return '<div class="slide">'+head('LINE 數位中樞　功能三','早安貼圖','把自己的畫做成早安圖，傳給家人。作品不再收在抽屜裡。',cellPos[2],'③　早安貼圖')+
+ '<div class="panel">'+
+ col('STEP 01','收到早安圖','',phone(me('早安貼圖')+morning+guide),'點選單③，收到早安圖和三步說明')+arr+
+ col('STEP 02','按住圖','',phone('<div style="height:120px"></div>'+pop),'按住圖，點「分享」')+arr+
+ col('STEP 03','選家人','',share,'選「一家人」，點「傳送」')+arr+
+ col('STEP 04','家人收到','家人手機',fam,'家人收到早安圖，立刻回應',{o:1})+arr+
+ col('STEP 05','我傳好了','終點',phone(me('我傳好了')+bot('太好了，家人一定很開心！明天見。')),'回到對話，按【我傳好了】',{o:1})+
+ '</div></div>';
+};
+const n=+(new URLSearchParams(location.search).get('s')||0);
+document.getElementById('app').innerHTML=S[n]();
+</script></body></html>

@@ -1,0 +1,66 @@
+{
+ "夜市": {
+  "file": "1_夜市.png",
+  "w": 780,
+  "h": 882,
+  "tab_w": 26.0,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_3u9ujz3u9ujz3u9u.jpg"
+ },
+ "捷運": {
+  "file": "2_捷運.png",
+  "w": 650,
+  "h": 917,
+  "tab_w": 30.666666666666668,
+  "tab_h": 1,
+  "src": "Gemini_Generated_Image_emspy6emspy6emsp.jpg"
+ },
+ "紅樓": {
+  "file": "3_紅樓.png",
+  "w": 1263,
+  "h": 982,
+  "tab_w": 13.666666666666666,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_snnxjfsnnxjfsnnx.jpg"
+ },
+ "迪化街": {
+  "file": "4_迪化街.png",
+  "w": 1019,
+  "h": 961,
+  "tab_w": 96.0,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_y7naaiy7naaiy7na.jpg"
+ },
+ "龍山寺": {
+  "file": "5_龍山寺.png",
+  "w": 1513,
+  "h": 979,
+  "tab_w": 86.66666666666667,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_wg2v09wg2v09wg2v.jpg"
+ },
+ "總統府": {
+  "file": "6_總統府.png",
+  "w": 1261,
+  "h": 1046,
+  "tab_w": 253.66666666666666,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_gmsspcgmsspcgmss.jpg"
+ },
+ "象山": {
+  "file": "7_象山.png",
+  "w": 1423,
+  "h": 974,
+  "tab_w": 16.333333333333332,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_sl5hvfsl5hvfsl5h.jpg"
+ },
+ "101": {
+  "file": "8_101.png",
+  "w": 348,
+  "h": 1102,
+  "tab_w": 117.0,
+  "tab_h": 2,
+  "src": "Gemini_Generated_Image_e1051be1051be105.jpg"
+ }
+}

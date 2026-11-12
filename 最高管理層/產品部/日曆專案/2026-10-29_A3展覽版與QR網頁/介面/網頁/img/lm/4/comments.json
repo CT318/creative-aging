@@ -1,0 +1,97 @@
+{
+ "landmark": "艋舺龍山寺",
+ "photos": [
+  {
+   "file": "p1.jpg",
+   "title": "File:Taipei Taiwan Mengjia-Longshan-Temple-06.jpg",
+   "author": "CEphoto, Uwe Aranas",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Mengjia-Longshan-Temple-06.jpg",
+   "desc": "艋舺龍山寺三川殿正面與前庭，紅瓦屋頂與燕尾脊下有行人走動"
+  },
+  {
+   "file": "p2.jpg",
+   "title": "File:Longshan Temple - Dragon 01.jpg",
+   "author": "Bernard Gagnon",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Longshan_Temple_-_Dragon_01.jpg",
+   "desc": "龍山寺屋簷上的剪黏龍與彩色脊飾，背景為藍天"
+  },
+  {
+   "file": "p3.jpg",
+   "title": "File:Taipei Taiwan Mengjia-Longshan-Temple-05.jpg",
+   "author": "CEphoto, Uwe Aranas",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Mengjia-Longshan-Temple-05.jpg",
+   "desc": "龍山寺前殿庭院的銅香爐，煙霧繚繞，遊客在旁"
+  },
+  {
+   "file": "p4.jpg",
+   "title": "File:Lungshan temple Taipei.jpg",
+   "author": "BindiS",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Lungshan_temple_Taipei.jpg",
+   "desc": "夜晚燈火通明的龍山寺正殿，信眾聚集在殿前"
+  },
+  {
+   "file": "p5.jpg",
+   "title": "File:Longshan Temple, Taipei 01.jpg",
+   "author": "Bernard Gagnon",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Longshan_Temple,_Taipei_01.jpg",
+   "desc": "龍山寺前庭與殿宇，綠樹旁有許多信眾與遊客"
+  }
+ ],
+ "comments": [
+  {
+   "name": "淑華",
+   "badge": "去過",
+   "time": "1 週前",
+   "text": "去年帶孫女來過，站在前庭看那一整排紅瓦燕尾脊，真的很氣派。廣場很寬，慢慢走不累，推薦早上來。",
+   "photo": "p1.jpg",
+   "voice": null,
+   "likes": 11
+  },
+  {
+   "name": "林伯伯",
+   "badge": "去過",
+   "time": "3 天前",
+   "text": "我最愛抬頭看屋簷上那些小龍，顏色五彩的，師傅手藝真好。每次來都拿相機拍，一站就是半小時。",
+   "photo": "p2.jpg",
+   "voice": "0:18",
+   "likes": 8
+  },
+  {
+   "name": "王媽媽",
+   "badge": "去過",
+   "time": "2 週前",
+   "text": "殿前那個大銅香爐，煙裊裊的，一進來就有種安心的感覺。我跟老姊妹來拜拜，拜完還能在附近走走。",
+   "photo": "p3.jpg",
+   "voice": null,
+   "likes": 13
+  },
+  {
+   "name": "志明",
+   "badge": "想去",
+   "time": "5 天前",
+   "text": "看到這張夜景好想去，燈亮起來的龍山寺特別有味道。打算找個晚上帶爸媽去走走，順便看看建築。",
+   "photo": "p4.jpg",
+   "voice": "0:22",
+   "likes": 6
+  },
+  {
+   "name": "陳阿姨",
+   "badge": "想去",
+   "time": "2 週前",
+   "text": "前庭有大樹又有石欄杆，感覺很舒服。等天氣涼一點，約幾個朋友去，邊逛邊看，累了就找地方坐。",
+   "photo": "p5.jpg",
+   "voice": null,
+   "likes": 5
+  }
+ ]
+}

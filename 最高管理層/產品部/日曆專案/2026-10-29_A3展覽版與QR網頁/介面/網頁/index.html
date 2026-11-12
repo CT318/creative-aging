@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>跟著日曆去旅行｜台北</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#F2E9D5;--cream:#FBF5E6;--wood:#DEC6A0;--ink:#2E2218;--ink2:#4D3B2C;--red:#A33F2A;--edge:#B99A6A;--green:#6B7F62;--mute:#8A7A68}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--board);color:var(--ink);font-family:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;font-weight:500;-webkit-text-size-adjust:100%}
+.serif{font-family:'Noto Serif TC','Songti TC','PMingLiU',serif}
+a{color:inherit}
+.app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;background:var(--board)}
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:12px 18px;background:rgba(242,233,213,.94);backdrop-filter:blur(6px);border-bottom:1px solid #E1D3B5;min-height:62px}
+.top .back{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--edge);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ink2);text-decoration:none;flex:none}
+.top.home .back{display:none}
+.top h1{margin:0;font-size:19px;font-weight:900;letter-spacing:.12em;white-space:nowrap}
+.top .tag{margin-left:auto;font-size:13px;color:var(--mute);white-space:nowrap}
+.view{padding-bottom:110px}
+/* 城市頁 */
+.hero{margin:16px 18px 0;border-radius:18px;overflow:hidden;background:var(--cream);position:relative;aspect-ratio:4/3.1}
+.hero img{display:block;width:100%;height:100%;object-fit:cover}
+.name{display:flex;align-items:baseline;gap:12px;padding:18px 22px 0}
+.name b{font-size:44px;letter-spacing:.2em;font-weight:900;line-height:1}
+.name span{font-size:14px;color:var(--ink2)}
+.rule{height:1.5px;background:var(--ink);margin:12px 22px 0;opacity:.8}
+.intro{padding:16px 22px 0;font-size:17px;line-height:1.9;color:var(--ink)}
+.intro p{margin:0 0 10px}
+.sec{padding:22px 22px 0;font-size:13px;letter-spacing:.2em;color:var(--red);font-weight:700}
+.lmgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 18px 0}
+.lm{display:block;text-decoration:none;border-radius:16px;overflow:hidden;background:var(--cream);border:1.2px solid #E1D3B5}
+.lm .art{height:132px;background:var(--wood);display:flex;align-items:center;justify-content:center;padding:12px}
+.lm .art img{max-width:100%;max-height:100%;filter:drop-shadow(0 2px 3px rgba(60,40,20,.3))}
+.lm .info{padding:10px 12px 12px}
+.lm .nm{font-size:17px;font-weight:900;letter-spacing:.04em}
+.lm .tg{font-size:12px;color:var(--red);font-weight:700;margin-top:1px}
+.lm .ct{font-size:13px;color:var(--mute);margin-top:6px}
+.lm .ct b{color:var(--red)}
+.think{margin:14px 18px 0;padding:14px 18px;border-radius:14px;background:var(--wood);font-size:16px;line-height:1.7;color:var(--ink)}
+.think b{color:var(--red)}
+.demo{margin:18px 18px 0;font-size:12px;color:var(--mute);text-align:center;line-height:1.7}
+.demo a{text-decoration:underline}
+/* 地標頁 */
+.dots{display:flex;gap:7px;padding:16px 22px 0;align-items:center}
+.dots i{width:9px;height:9px;border-radius:50%;border:1.4px solid var(--ink2);display:block}
+.dots i.done{background:var(--ink2)}.dots i.now{background:var(--red);border-color:var(--red);width:11px;height:11px}
+.dots span{margin-left:auto;font-size:13px;color:var(--mute)}
+.card{margin:14px 18px 0;border-radius:18px;background:var(--wood);padding:22px 16px 18px;text-align:center;border:1.2px solid var(--edge);position:relative;overflow:hidden}
+.card img{display:block;max-height:230px;max-width:80%;margin:0 auto;filter:drop-shadow(0 3px 5px rgba(60,40,20,.35))}
+.card .big{margin:14px 0 0;font-size:30px;font-weight:900;letter-spacing:.12em}
+.card .sub{margin-top:4px;font-size:15px;color:var(--ink2)}
+.chip{display:inline-block;margin-top:10px;font-size:12px;padding:4px 12px;border-radius:99px;background:var(--red);color:var(--cream);font-weight:700;letter-spacing:.1em}
+.cmt-h{display:flex;justify-content:space-between;align-items:baseline;padding:26px 22px 4px}
+.cmt-h b{font-size:22px;font-weight:900;letter-spacing:.06em}
+.cmt-h span{font-size:13px;color:var(--mute)}
+.post{margin:12px 18px 0;padding:16px 16px 14px;border-radius:16px;background:var(--cream);border:1.2px solid #E1D3B5}
+.who{display:flex;align-items:center;gap:10px}
+.av{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--cream);font-weight:900;font-size:17px;flex:none}
+.who b{font-size:16px;font-weight:700}
+.who small{display:block;font-size:12px;color:var(--mute);font-weight:500;margin-top:1px}
+.badge{margin-left:auto;font-size:12px;padding:4px 9px;border-radius:99px;background:var(--green);color:#fff;font-weight:700}
+.badge.want{background:var(--wood);color:var(--ink2)}
+.post p{margin:12px 0 0;font-size:17px;line-height:1.75}
+.post img.ph{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px;margin-top:12px;cursor:zoom-in;background:#E7DCC2}
+.voice{display:flex;align-items:center;gap:12px;margin-top:12px;padding:9px 14px 9px 9px;border-radius:99px;background:var(--board);border:1.2px solid var(--edge);cursor:pointer;user-select:none}
+.voice .pl{width:38px;height:38px;border-radius:50%;background:var(--red);color:var(--cream);display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+.wave{flex:1;height:26px;display:flex;align-items:center;gap:3px}
+.wave i{display:block;width:3px;border-radius:2px;background:var(--edge)}
+.voice.play .wave i{background:var(--red);animation:b .9s ease-in-out infinite alternate}
+.voice.play .wave i:nth-child(2n){animation-delay:.2s}.voice.play .wave i:nth-child(3n){animation-delay:.4s}
+@keyframes b{from{transform:scaleY(.45)}to{transform:scaleY(1.15)}}
+.voice time{font-size:13px;color:var(--ink2);flex:none}
+.acts{display:flex;gap:18px;margin-top:12px;font-size:14px;color:var(--mute)}
+.acts span{cursor:pointer}.acts span.on{color:var(--red);font-weight:700}
+.next{display:flex;align-items:center;justify-content:space-between;margin:20px 18px 0;padding:16px 18px;border-radius:16px;border:1.5px solid var(--edge);text-decoration:none;background:var(--cream)}
+.next small{display:block;font-size:12px;color:var(--mute)}.next b{font-size:18px;font-weight:900}.next i{font-style:normal;font-size:24px;color:var(--red)}
+.cr{padding:6px 22px 0;font-size:13px;line-height:1.7;color:var(--ink2)}
+.cr div{padding:10px 0;border-bottom:1px solid #E1D3B5;word-break:break-all}
+.cr small{color:var(--mute);display:block}
+/* 發表 */
+.fab{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:6;width:min(444px,calc(100% - 36px));display:none}
+.fab.on{display:block}
+.fab button{width:100%;padding:17px;border:0;border-radius:99px;background:var(--red);color:var(--cream);font-size:19px;font-weight:900;letter-spacing:.1em;font-family:inherit;box-shadow:0 6px 18px rgba(80,40,20,.28)}
+.sheet-bg{position:fixed;inset:0;background:rgba(46,34,24,.45);z-index:8;display:none}
+.sheet-bg.on{display:block}
+.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:min(480px,100%);z-index:9;background:var(--cream);border-radius:22px 22px 0 0;padding:20px 20px calc(24px + env(safe-area-inset-bottom));transition:transform .28s ease}
+.sheet.on{transform:translate(-50%,0)}
+.sheet h3{margin:0 0 4px;font-size:20px;font-weight:900;letter-spacing:.06em}
+.sheet .sub{font-size:14px;color:var(--mute);margin-bottom:14px}
+.sheet textarea{width:100%;height:96px;border:1.5px solid var(--edge);border-radius:12px;padding:12px;font-size:17px;font-family:inherit;background:#fff;color:var(--ink);resize:none}
+.tools{display:flex;gap:10px;margin:12px 0}
+.tools button{flex:1;padding:14px 4px;border:1.5px solid var(--edge);border-radius:14px;background:var(--board);font-size:15px;font-weight:700;color:var(--ink2);font-family:inherit}
+.send{width:100%;padding:16px;border:0;border-radius:99px;background:var(--ink);color:var(--cream);font-size:18px;font-weight:900;letter-spacing:.1em;font-family:inherit}
+.toast{position:fixed;left:50%;top:84px;transform:translateX(-50%);z-index:12;padding:12px 20px;border-radius:12px;background:var(--ink);color:var(--cream);font-size:15px;display:none;max-width:88%;text-align:center;line-height:1.5}
+.lb{position:fixed;inset:0;background:rgba(20,14,8,.88);z-index:14;display:none;align-items:center;justify-content:center;padding:18px}
+.lb.on{display:flex}.lb img{max-width:100%;max-height:100%;border-radius:10px}
+.shot .app{max-width:390px;margin:0}.shot .fab{left:195px;width:354px}.shot .top{max-width:390px}
+body.gr .hero,body.gr .intro,body.gr .rule+.sec{display:none}
+body.cm .dots,body.cm .card,body.cm .intro,body.cm .think{display:none}
+/* 電腦預覽：不改版面，直接在手機尺寸的裝置框裡操作 */
+@media (min-width:760px){
+  html.shot .device{all:unset}
+  body{background:#E2D5B8;min-height:100vh;display:flex;align-items:center;justify-content:center}
+  .device{position:relative;width:410px;height:min(864px,calc(100vh - 32px));border:10px solid var(--ink);border-radius:48px;overflow:hidden;transform:translateZ(0);box-shadow:0 14px 40px rgba(60,40,20,.35);background:var(--board)}
+  .scroller{height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#C9B58D transparent}
+  .app{max-width:none}
+  .fab{width:calc(100% - 36px)}
+  .sheet{width:100%}
+  .sheet-bg,.toast,.lb{position:absolute}
+  .sheet,.fab{position:absolute}
+  .toast{top:70px}
+}
+@media (max-width:759px){.device,.scroller{display:contents}}
+</style>
+</head>
+<body>
+<div class="device"><div class="scroller" id="sc">
+<div class="app">
+  <header class="top home" id="top"><a class="back" id="back" href="#/" aria-label="返回">‹</a><h1 class="serif" id="ttl">台北</h1><span class="tag" id="tag"></span></header>
+  <main class="view" id="view"></main>
+</div></div>
+<div class="fab" id="fab"><button id="open">＋ 我要留言</button></div>
+<div class="sheet-bg" id="bg"></div>
+<div class="sheet" id="sheet">
+  <h3 class="serif" id="shTitle">我要留言</h3>
+  <div class="sub">可以寫幾句、附照片，或直接說給大家聽</div>
+  <textarea id="shText" placeholder="寫下你想說的話⋯"></textarea>
+  <div class="tools"><button data-t="照片">📷 選照片</button><button data-t="語音">🎙 按住錄音</button></div>
+  <button class="send" id="send">送出</button>
+</div>
+<div class="toast" id="toast"></div>
+<div class="lb" id="lb"><img id="lbImg" alt=""></div>
+</div>
+<script src="data.js"></script>
+<script>
+(function(){
+  var D=window.DATA||{landmarks:[]},L=D.landmarks;
+  var root=document.documentElement;if(location.search.indexOf('shot')>-1)root.classList.add('shot');
+  var $=function(i){return document.getElementById(i)},view=$('view'),top_=$('top'),ttl=$('ttl'),tag=$('tag'),fab=$('fab'),sc=$('sc');
+  var COL=['#A33F2A','#6B7F62','#8A6A3A','#4D6A7A','#7A5A6A','#5A6A4A','#7A4A3A'];
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function colorOf(n){var h=0;for(var i=0;i<n.length;i++)h+=n.charCodeAt(i);return COL[h%COL.length]}
+  function wave(){var h=[8,14,20,12,22,16,9,18,24,13,8,19,22,11,15,21,10,17,23,12,8,16,20,11];return h.map(function(x){return '<i style="height:'+x+'px"></i>'}).join('')}
+  function post(c,id){
+    return '<article class="post"><div class="who"><div class="av" style="background:'+colorOf(c.name)+'">'+esc(c.name.charAt(0))+'</div><div><b>'+esc(c.name)+'</b><small>'+esc(c.time)+'</small></div><span class="badge'+(c.badge==='想去'?' want':'')+'">'+esc(c.badge)+'</span></div>'
+      +'<p>'+esc(c.text)+'</p>'
+      +(c.photo?'<img class="ph" loading="lazy" src="img/lm/'+id+'/'+esc(c.photo)+'" alt="">':'')
+      +(c.voice?'<div class="voice"><div class="pl">▶</div><div class="wave">'+wave()+'</div><time>'+esc(c.voice)+'</time></div>':'')
+      +'<div class="acts"><span>♡ '+c.likes+' 有同感</span><span>回應</span></div></article>';
+  }
+  function home(){
+    var h='<div class="hero"><img src="img/hero_101.jpg" alt="台北 101"></div>';
+    h+='<div class="name serif"><b>台北</b><span>台灣　北緯 25.03°　東經 121.57°</span></div><div class="rule"></div>';
+    h+='<div class="sec">這座城市</div><div class="intro serif"><p>清末淡水開港後，大稻埕成為北台灣茶葉與南北貨的集散地。</p><p>如今的台北，老街、廟宇、夜市與捷運交織在一起，一座城市裡住著好幾種生活。</p><p>每一件紙作，都是台北的一個角落，點進去，看看大家在那裡的留言。</p></div>';
+    h+='<div class="sec">七件紙作　點開進入留言板</div><div class="lmgrid">';
+    L.forEach(function(m){h+='<a class="lm" href="#/lm/'+m.id+'"><div class="art"><img src="img/card/'+m.id+'.png" alt="'+esc(m.name)+'"></div><div class="info"><div class="nm serif">'+esc(m.name)+'</div><div class="tg">第 '+m.id+' 件・'+esc(m.tag)+'</div><div class="ct"><b>'+m.comments.length+'</b> 則留言 ›</div></div></a>'});
+    return h+'</div><div class="demo">示範頁面，內容為預先放好的範例<br><a href="#/credits">圖片來源</a></div>';
+  }
+  function lmPage(m){
+    var i=+m.id,n=L[i%L.length],dots='';
+    for(var k=1;k<=L.length;k++)dots+='<i class="'+(k<i?'done':k===i?'now':'')+'"></i>';
+    var h='<div class="dots">'+dots+'<span>第 '+i+' 件 ／ 共 '+L.length+' 件</span></div>';
+    h+='<div class="card"><img src="img/card/'+m.id+'.png" alt="'+esc(m.name)+'"><div class="big serif">'+esc(m.name)+'</div><div class="sub">'+esc(m.sub)+'</div><span class="chip">'+esc(m.tag)+'</span></div>';
+    h+='<div class="intro serif">'+m.intro.map(function(p){return '<p>'+esc(p)+'</p>'}).join('')+'</div>';
+    h+='<div class="cmt-h" id="comments"><b class="serif">城市主題留言板</b><span>共 '+m.comments.length+' 則</span></div>';
+    h+=m.comments.map(function(c){return post(c,m.id)}).join('');
+    return h+'<a class="next" href="#/lm/'+n.id+'"><div><small>下一件</small><b class="serif">'+esc(n.name)+'</b></div><i>›</i></a><div class="demo">示範頁面，留言為預先放好的範例<br><a href="#/credits">圖片來源</a></div>';
+  }
+  function credits(){
+    var h='<div class="sec">圖片來源</div><div class="cr">';
+    function row(p,where){h+='<div>'+esc(p.desc||p.title)+'<small>'+esc(where)+'　'+esc(p.author||'')+'　'+esc(p.license||'')+'</small><small><a href="'+esc(p.source)+'">'+esc(p.source)+'</a></small></div>'}
+    if(D.hero&&D.hero.source)row(D.hero,'台北城市頁主圖');
+    L.forEach(function(m){(m.photos||[]).forEach(function(p){row(p,m.name)})});
+    return h+'</div><div class="demo">照片來自 Wikimedia Commons，依各授權條款使用</div>';
+  }
+  function route(){
+    var hsh=location.hash||'#/',m=hsh.match(/#\/lm\/(\d+)/),lm=m&&L.filter(function(x){return String(x.id)===m[1]})[0];
+    var q=location.search;
+    if(lm){view.innerHTML=lmPage(lm);top_.classList.remove('home');ttl.textContent=lm.name;tag.textContent='第 '+lm.id+' 件';fab.classList.add('on');$('shTitle').textContent='在「'+lm.name+'」留言'}
+    else if(hsh.indexOf('credits')>-1){view.innerHTML=credits();top_.classList.remove('home');ttl.textContent='圖片來源';tag.textContent='';fab.classList.remove('on')}
+    else{view.innerHTML=home();top_.classList.add('home');ttl.textContent='台北';tag.textContent='';fab.classList.remove('on')}
+    window.scrollTo(0,0);sc.scrollTop=0;
+    if(lm&&q.indexOf('scroll=comments')>-1)document.body.classList.add('cm');
+    if(!lm&&hsh.indexOf('credits')<0&&q.indexOf('scroll=grid')>-1)document.body.classList.add('gr');
+  }
+  window.addEventListener('hashchange',route);route();
+  view.addEventListener('click',function(e){
+    var v=e.target.closest('.voice');if(v){var on=v.classList.toggle('play');v.querySelector('.pl').textContent=on?'❚❚':'▶';if(on)setTimeout(function(){v.classList.remove('play');v.querySelector('.pl').textContent='▶'},4000);return}
+    var a=e.target.closest('.acts span:first-child');if(a){a.classList.toggle('on');return}
+    var p=e.target.closest('img.ph');if(p){$('lbImg').src=p.src;$('lb').classList.add('on')}
+  });
+  $('lb').onclick=function(){$('lb').classList.remove('on')};
+  var sh=$('sheet'),bg=$('bg'),tt=$('toast');
+  function toast(m){tt.textContent=m;tt.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(function(){tt.style.display='none'},2200)}
+  function sheet(on){sh.classList.toggle('on',on);bg.classList.toggle('on',on)}
+  $('open').onclick=function(){sheet(true)};bg.onclick=function(){sheet(false)};
+  document.querySelectorAll('.tools button').forEach(function(b){b.onclick=function(){toast('示範：這裡可以'+b.dataset.t.replace('照片','選一張照片').replace('語音','錄下你想說的話'))}});
+  $('send').onclick=function(){sheet(false);toast('這是示範頁面，內容不會真的送出')};
+})();
+</script>
+</body>
+</html>

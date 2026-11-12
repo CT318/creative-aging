@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>A3展覽版</title>
+<style>
+@page{size:420mm 297mm;margin:0}
+:root{--board:#F2E9D5;--cream:#FBF5E6;--wood:#DEC6A0;--ink:#2E2218;--ink2:#4D3B2C;--red:#A33F2A;--edge:#B99A6A;--mute:#7C6B58}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:420mm;height:297mm;background:var(--board)}
+body{position:relative;overflow:hidden;color:var(--ink);font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;font-weight:500}
+.serif{font-family:'Noto Serif TC','PMingLiU',serif}
+.abs{position:absolute}
+h1{position:absolute;left:14mm;top:11mm;font-size:12.5mm;line-height:1.1;font-weight:900;letter-spacing:.04em;white-space:nowrap}
+h1 span{color:var(--red)}
+h1 i{font-style:normal;color:var(--edge);font-weight:400;margin:0 5mm}
+.card{position:absolute;border-radius:5mm}
+.red{background:var(--red);color:var(--cream)}
+.box{background:var(--cream);border:.9mm solid var(--edge)}
+.label{position:absolute;font-size:5mm;font-weight:700;letter-spacing:.35em;color:var(--red)}
+.label small{font-size:3.6mm;letter-spacing:.05em;color:var(--mute);font-weight:500;margin-left:4mm}
+.pack{position:absolute;left:7mm;width:88mm;height:22mm;border-radius:4mm;background:var(--board);border:.7mm solid var(--edge);display:flex;align-items:center;justify-content:center;font-size:8.5mm;font-weight:900;color:var(--ink2);letter-spacing:.14em}
+.step{position:absolute;top:56mm;width:60mm}
+.step .shot{position:relative;width:60mm;height:86mm;border-radius:3mm;overflow:hidden;background:#fff}
+.step .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.phone{background:var(--ink);border-radius:6.5mm;padding:1.6mm;height:86mm;width:40.5mm;margin:0 auto;box-shadow:0 1.2mm 3mm rgba(60,40,20,.28)}
+.phone .scr{width:100%;height:100%;border-radius:5mm;overflow:hidden;background:var(--board)}
+.phone img{width:100%;display:block}
+.cap{margin-top:3mm}
+.cap b{display:block;font-size:6mm;font-weight:900;color:var(--ink);letter-spacing:.04em}
+.cap b em{font-style:normal;color:var(--red);margin-right:2.2mm}
+.cap span{display:block;font-size:4.4mm;line-height:1.45;color:var(--ink2);margin-top:1mm}
+.arr{position:absolute;color:var(--red);font-size:9mm;font-weight:900;line-height:1}
+svg{position:absolute;left:0;top:0;width:420mm;height:297mm;pointer-events:none}
+</style></head><body>
+
+<h1 class="serif">跟著日曆去旅行<i>｜</i><span>選一座想去的城市，收藏成自己的世界</span></h1>
+
+<!-- A 起點 -->
+<div class="card red" style="left:14mm;top:44mm;width:74mm;height:239mm;padding:12mm 9mm">
+  <div style="font-size:5.4mm;font-weight:700;opacity:.85;letter-spacing:.14em">退休者的共同經驗</div>
+  <div class="serif" style="font-size:21mm;font-weight:900;line-height:1.1;margin:24mm 0 24mm;letter-spacing:.04em;white-space:nowrap">旅遊</div>
+  <div style="width:14mm;height:.9mm;background:var(--cream);opacity:.6;margin-bottom:10mm"></div>
+  <div style="font-size:6.6mm;font-weight:700;line-height:1.75;margin-top:6mm">想去哪裡，<br>常與自己的喜好、<br>周遭的親友有關</div>
+</div>
+
+<!-- B 自選主題包 -->
+<div class="card box" style="left:98mm;top:44mm;width:102mm;height:239mm">
+  <div class="serif" style="position:absolute;left:0;right:0;top:9mm;text-align:center;font-size:10.5mm;font-weight:900;letter-spacing:.1em">自選主題包</div>
+  <div style="position:absolute;left:0;right:0;top:25mm;text-align:center;font-size:5mm;color:var(--ink2)">依自己的喜好或周遭親友來選</div>
+  <div class="pack" style="top:42mm">世界包</div>
+  <div class="pack" style="top:70mm">台灣包</div>
+  <div class="pack" style="top:98mm">日本包</div>
+  <div class="pack" style="top:126mm">澳洲包⋯</div>
+  <div style="position:absolute;left:7mm;top:154mm;width:88mm;text-align:center;font-size:5.2mm;color:var(--ink2);line-height:1.5">一包＝一座城市＝兩週<br><span style="color:var(--mute);font-size:4.4mm">一本日曆，單數頁割下創作，雙數頁認識城市</span></div>
+  <div class="red" style="position:absolute;left:7mm;top:180mm;width:88mm;height:46mm;border-radius:4mm;padding:8mm 6mm;text-align:center">
+    <div class="serif" style="font-size:8.6mm;font-weight:900;letter-spacing:.12em">內在動力</div>
+    <div style="font-size:5.2mm;font-weight:500;margin-top:4mm;line-height:1.5">選自己想了解的，<br>就想把它完成</div>
+  </div>
+</div>
+
+<!-- 分叉箭頭 -->
+<svg viewBox="0 0 420 297"><g fill="none" stroke="#A33F2A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M90 163.5 H94 M91.5 160.5 L94.5 163.5 L91.5 166.5" transform="translate(0,0)" opacity="0"/>
+<path d="M202 163.5 H208 V104 H211.5 M209.5 101.5 L212.5 104 L209.5 106.5" />
+<path d="M208 163.5 V230 H211.5 M209.5 227.5 L212.5 230 L209.5 232.5" />
+<path d="M89.5 163.5 H96.5 M94 161 L97 163.5 L94 166" />
+</g></svg>
+
+<!-- 數位 -->
+<div class="label" style="left:216mm;top:44mm">數位 ・ 網頁<small>示範頁面，內容為預先放好的範例</small></div>
+
+<div class="step" style="left:216mm"><div class="shot"><img src="素材/背面_含QR.jpg" style="object-position:50% 38%" alt=""></div>
+  <div class="cap"><b class="serif"><em>01</em>掃描</b><span>手機掃底座背面的 QR，不用下載、不用註冊</span></div></div>
+<div class="arr" style="left:277mm;top:92mm">›</div>
+<div class="step" style="left:282mm"><div class="phone"><div class="scr"><img src="../../介面/截圖/step2_city.png" alt=""></div></div>
+  <div class="cap"><b class="serif"><em>02</em>認識城市</b><span>台北的故事與七件紙作，一頁看完</span></div></div>
+<div class="arr" style="left:343mm;top:92mm">›</div>
+<div class="step" style="left:348mm"><div class="phone"><div class="scr"><img src="../../介面/截圖/step3_wall.png" alt=""></div></div>
+  <div class="cap"><b class="serif"><em>03</em>大家的印象</b><span>看去過的人留下的照片、文字與語音，也留下自己的</span></div></div>
+
+<!-- 實體 -->
+<div class="label" style="left:216mm;top:179mm">實體 ・ 成品</div>
+<div class="abs" style="left:216mm;top:189mm;width:126mm;height:94mm;border-radius:4mm;overflow:hidden;border:.9mm solid var(--edge)"><img src="素材/主圖_裁切.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt=""></div>
+<div class="card box" style="left:346mm;top:189mm;width:60mm;height:94mm;padding:7mm 5mm">
+  <div class="serif" style="font-size:7.4mm;font-weight:900;line-height:1.35;letter-spacing:.04em;color:var(--red)">擺在家裡，<br>就是話題</div>
+  <div style="font-size:5.2mm;font-weight:700;margin-top:6mm;line-height:1.5">一座座城市<br>收進展示櫃</div>
+  <div style="font-size:4.4mm;color:var(--ink2);margin-top:4mm;line-height:1.55">和家人、客人聊起去過、想去的地方</div>
+</div>
+</body></html>

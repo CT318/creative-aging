@@ -1,0 +1,97 @@
+{
+ "landmark": "台北捷運",
+ "photos": [
+  {
+   "file": "p1.jpg",
+   "title": "Taipei Metro train viewed from Jiannan Road station.jpg",
+   "author": "eazytraveler",
+   "license": "CC BY 2.0",
+   "license_url": "https://creativecommons.org/licenses/by/2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_Metro_train_viewed_from_Jiannan_Road_station.jpg",
+   "desc": "高架文湖線的白色列車行駛在綠色隔音牆旁，後方是青翠山景"
+  },
+  {
+   "file": "p2.jpg",
+   "title": "A Taipei Metro C381 train approaching Fuxinggang Station.jpg",
+   "author": "Lokseng01",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:A_Taipei_Metro_C381_train_approaching_Fuxinggang_Station.jpg",
+   "desc": "藍白配色的台北捷運列車從彎道駛近，車頭有捷運標誌"
+  },
+  {
+   "file": "p3.jpg",
+   "title": "2010 07 21540 6835 Da'an District, Taipei, Fuxing Road, Taipei Metro Muzha Line, Viaducts, Composite bridges, Taiwan.JPG",
+   "author": "Lord Koxinga",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2010_07_21540_6835_Da%27an_District,_Taipei,_Fuxing_Road,_Taipei_Metro_Muzha_Line,_Viaducts,_Composite_bridges,_Taiwan.JPG",
+   "desc": "高架捷運列車行駛在大樓與馬路之間的高架橋上"
+  },
+  {
+   "file": "p4.jpg",
+   "title": "Platform 2, MRT Taipei Main Station 20090129.jpg",
+   "author": "Howard61313",
+   "license": "CC BY-SA 3.0",
+   "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+   "source": "https://commons.wikimedia.org/wiki/File:Platform_2,_MRT_Taipei_Main_Station_20090129.jpg",
+   "desc": "台北車站月台上列車停靠，乘客在月台走動"
+  },
+  {
+   "file": "p5.jpg",
+   "title": "Concourse of MRT Taipei Main Station.JPG",
+   "author": "Taiwan Junior",
+   "license": "CC BY 2.5",
+   "license_url": "https://creativecommons.org/licenses/by/2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Concourse_of_MRT_Taipei_Main_Station.JPG",
+   "desc": "台北車站大廳的淡水線指標與出口標示"
+  }
+ ],
+ "comments": [
+  {
+   "name": "阿國",
+   "badge": "去過",
+   "time": "3 天前",
+   "text": "搭文湖線最喜歡坐在靠窗，高架的時候看得到遠遠的山，白色列車從綠色牆邊滑過去，心情都好了。",
+   "photo": "p1.jpg",
+   "voice": "0:18",
+   "likes": 12
+  },
+  {
+   "name": "淑華",
+   "badge": "去過",
+   "time": "1 週前",
+   "text": "這種藍白色的車頭一看就知道是捷運，我常拿敬老卡去搭，上車刷一下就好，帶孫子出門特別輕鬆。",
+   "photo": "p2.jpg",
+   "voice": null,
+   "likes": 9
+  },
+  {
+   "name": "王媽媽",
+   "badge": "想去",
+   "time": "2 週前",
+   "text": "看到這座高架橋就想起高架的捷運，聽說坐在上面能看到街景，好想找天帶孫子去繞一圈。",
+   "photo": "p3.jpg",
+   "voice": "0:25",
+   "likes": 6
+  },
+  {
+   "name": "林伯伯",
+   "badge": "去過",
+   "time": "3 天前",
+   "text": "尖峰時段月台上人真的多，我習慣站在黃線後面慢慢等，車門開了再上，不用急，大家都會讓一下長輩。",
+   "photo": "p4.jpg",
+   "voice": null,
+   "likes": 14
+  },
+  {
+   "name": "美玲",
+   "badge": "想去",
+   "time": "1 週前",
+   "text": "台北車站大廳指標又大又清楚，淡水線、出口都寫得明白，下次想自己搭去北投泡溫泉。",
+   "photo": "p5.jpg",
+   "voice": null,
+   "likes": 5
+  }
+ ]
+}

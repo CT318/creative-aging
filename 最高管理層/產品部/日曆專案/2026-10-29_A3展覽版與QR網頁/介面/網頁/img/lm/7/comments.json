@@ -1,0 +1,106 @@
+{
+ "landmark": "台北 101",
+ "hero": {
+  "file": "../../hero_101.jpg",
+  "title": "Taipei Taiwan Taipei-101-Tower-01.jpg",
+  "author": "CEphoto, Uwe Aranas",
+  "license": "CC BY-SA 3.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Taipei_Taiwan_Taipei-101-Tower-01.jpg",
+  "desc": "傍晚從象山步道遠眺，台北 101 高聳在城市天際線中央"
+ },
+ "photos": [
+  {
+   "file": "p1.jpg",
+   "title": "Taipei 101 20230401.jpg",
+   "author": "Xiaoanan1207",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_101_20230401.jpg",
+   "desc": "跨年夜台北 101 施放煙火，整座塔身被綠色光束包圍"
+  },
+  {
+   "file": "p2.jpg",
+   "title": "Taipei 101 view from below amk.jpg",
+   "author": "AngMoKio",
+   "license": "CC BY-SA 3.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_101_view_from_below_amk.jpg",
+   "desc": "從樓下仰望台北 101 的塔身，可看到一節一節的造型與巨大圓盤"
+  },
+  {
+   "file": "p3.jpg",
+   "title": "Taipei night skyline from Elephant Mountain May 2025 2.jpg",
+   "author": "4300streetcar",
+   "license": "CC BY 4.0",
+   "license_url": "https://creativecommons.org/licenses/by/4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_night_skyline_from_Elephant_Mountain_May_2025_2.jpg",
+   "desc": "從象山看夜晚的台北，101 亮著燈在萬家燈火中特別醒目"
+  },
+  {
+   "file": "p4.jpg",
+   "title": "TWTC ITB, TICC and Taipei 101 20180622.jpg",
+   "author": "Heeheemalu",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:TWTC_ITB,_TICC_and_Taipei_101_20180622.jpg",
+   "desc": "信義區街頭的白天景象，遠處可見台北 101 與周邊大樓、天橋與馬路"
+  },
+  {
+   "file": "p5.jpg",
+   "title": "Taipei skyline at sunset 20150607 (cropped).jpg",
+   "author": "ynes95",
+   "license": "CC BY-SA 2.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Taipei_skyline_at_sunset_20150607_(cropped).jpg",
+   "desc": "黃昏藍調時刻的台北天際線，台北 101 與城市燈火同時亮起"
+  }
+ ],
+ "comments": [
+  {
+   "name": "美玲",
+   "badge": "去過",
+   "time": "3 天前",
+   "text": "跨年那晚我們一家人擠在信義區等煙火，倒數完整座塔都亮起來，大家都在歡呼。人很多，記得穿暖一點、早點占位置。",
+   "photo": "p1.jpg",
+   "voice": "0:18",
+   "likes": 12
+  },
+  {
+   "name": "林伯伯",
+   "badge": "想去",
+   "time": "1 週前",
+   "text": "站在樓下往上看，一節一節像竹子，真的很特別。我想找個天氣好的日子，慢慢走過去拍幾張。",
+   "photo": "p2.jpg",
+   "voice": null,
+   "likes": 6
+  },
+  {
+   "name": "淑華",
+   "badge": "去過",
+   "time": "2 週前",
+   "text": "晚上跟朋友爬象山，看到 101 在夜色裡亮亮的，坐在石頭上吹風好舒服。帶件薄外套，還有手電筒更安心。",
+   "photo": "p3.jpg",
+   "voice": "0:25",
+   "likes": 9
+  },
+  {
+   "name": "阿國",
+   "badge": "去過",
+   "time": "1 週前",
+   "text": "白天去信義區逛逛，一抬頭就看到 101 在大樓後面。我們在附近走走、吃點東西，路上機車很多，過馬路要小心。",
+   "photo": "p4.jpg",
+   "voice": null,
+   "likes": 4
+  },
+  {
+   "name": "王媽媽",
+   "badge": "想去",
+   "time": "3 天前",
+   "text": "看到黃昏時整個台北慢慢亮起來，好想親眼看看。聽說象山不遠，等天氣涼一點，約老朋友一起去。",
+   "photo": "p5.jpg",
+   "voice": null,
+   "likes": 7
+  }
+ ]
+}
