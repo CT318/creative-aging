@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>隧道書週曆示意 v1</title>
+<style>
+  body { font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif; background:#fafaf7; color:#333; margin:24px; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .note { color:#777; font-size:13px; margin-bottom:24px; }
+  .grid { display:flex; flex-wrap:wrap; gap:28px; }
+  .card { background:#fff; border:1px solid #ddd; border-radius:8px; padding:16px; }
+  .card h2 { font-size:16px; margin:0 0 8px; }
+  svg text { font-family: inherit; }
+</style>
+</head>
+<body>
+<h1>隧道書週曆 示意 v1（尺寸皆為暫定，單位 mm）</h1>
+<div class="note">假設每張週曆 210×148（A5 橫式，一張 A4 可印兩張）；四層間距 25；零件長條高度依週次遞增。只為確認結構理解，非定稿。</div>
+<div class="grid">
+
+<!-- 正視：第一週那張 -->
+<div class="card">
+<h2>① 正視：最前面那張（第一週）</h2>
+<svg width="480" height="380" viewBox="0 0 480 380">
+  <g transform="translate(30,30)">
+    <rect x="0" y="0" width="420" height="296" fill="#fff" stroke="#333" stroke-width="2"/>
+    <!-- 日期條 -->
+    <rect x="0" y="0" width="420" height="50" fill="#e8eef6" stroke="#333" stroke-width="1"/>
+    <g font-size="14" text-anchor="middle" fill="#234">
+      <text x="30" y="20">日</text><text x="90" y="20">一</text><text x="150" y="20">二</text><text x="210" y="20">三</text><text x="270" y="20">四</text><text x="330" y="20">五</text><text x="390" y="20">六</text>
+      <text x="30" y="42" font-size="18">31</text><text x="90" y="42" font-size="18">1</text><text x="150" y="42" font-size="18">2</text><text x="210" y="42" font-size="18">3</text><text x="270" y="42" font-size="18">4</text><text x="330" y="42" font-size="18">5</text><text x="390" y="42" font-size="18">6</text>
+    </g>
+    <!-- 中間空白 -->
+    <text x="210" y="140" text-anchor="middle" font-size="15" fill="#999">中間空白：放什麼待定</text>
+    <text x="210" y="162" text-anchor="middle" font-size="12" fill="#aaa">（示範圖／城市介紹／鏤空小窗…）</text>
+    <!-- 撕線 -->
+    <line x1="0" y1="226" x2="420" y2="226" stroke="#c33" stroke-width="2" stroke-dasharray="8 5"/>
+    <text x="414" y="220" text-anchor="end" font-size="12" fill="#c33">撕線：畫完沿此撕掉上半部</text>
+    <!-- 零件長條 -->
+    <path d="M0,296 L0,262 Q40,236 80,258 Q120,240 160,256 L200,244 L240,258 Q300,236 340,254 Q380,242 420,256 L420,296 Z" fill="#f4d9b8" stroke="#a66" stroke-width="1.5"/>
+    <text x="210" y="285" text-anchor="middle" font-size="13" fill="#844">第一週零件長條（高約 35）</text>
+  </g>
+  <text x="240" y="350" text-anchor="middle" font-size="12" fill="#666">寬 210 × 高 148；日期條高約 25</text>
+</svg>
+</div>
+
+<!-- 側視 -->
+<div class="card">
+<h2>② 側視：四層插在底座托盤裡（左＝前）</h2>
+<svg width="560" height="420" viewBox="0 0 560 420">
+  <g transform="translate(40,0)">
+    <!-- 托盤 -->
+    <path d="M0,360 L0,380 L280,380 L280,360" fill="none" stroke="#555" stroke-width="3"/>
+    <line x1="0" y1="380" x2="280" y2="380" stroke="#555" stroke-width="3"/>
+    <text x="140" y="400" text-anchor="middle" font-size="12" fill="#555">3D 列印底座托盤（前後擋住、底部淺溝卡住每層）</text>
+    <!-- 各層：x = 前後位置 -->
+    <!-- 週1 d=15 -->
+    <line x1="30" y1="380" x2="30" y2="84" stroke="#333" stroke-width="2"/>
+    <line x1="30" y1="380" x2="30" y2="310" stroke="#d98b3a" stroke-width="6"/>
+    <rect x="26" y="84" width="8" height="50" fill="#7a9cc6"/>
+    <!-- 週2 d=40 -->
+    <line x1="80" y1="380" x2="80" y2="84" stroke="#333" stroke-width="2"/>
+    <line x1="80" y1="380" x2="80" y2="270" stroke="#d98b3a" stroke-width="6"/>
+    <!-- 週3 d=65 -->
+    <line x1="130" y1="380" x2="130" y2="84" stroke="#333" stroke-width="2"/>
+    <line x1="130" y1="380" x2="130" y2="230" stroke="#d98b3a" stroke-width="6"/>
+    <!-- 週4 d=90 -->
+    <line x1="180" y1="380" x2="180" y2="84" stroke="#333" stroke-width="2"/>
+    <line x1="180" y1="380" x2="180" y2="190" stroke="#d98b3a" stroke-width="6"/>
+    <!-- 背景 d=115 -->
+    <line x1="230" y1="380" x2="230" y2="84" stroke="#6a8f6a" stroke-width="6"/>
+    <!-- 限位帶 -->
+    <line x1="30" y1="374" x2="230" y2="374" stroke="#9a5fb0" stroke-width="2.5"/>
+    <g font-size="12" text-anchor="middle" fill="#333">
+      <text x="30" y="70">週1</text><text x="80" y="70">週2</text><text x="130" y="70">週3</text><text x="180" y="70">週4</text><text x="230" y="70">背景</text>
+    </g>
+    <text x="300" y="110" font-size="12" fill="#7a9cc6">藍：日期條</text>
+    <text x="300" y="128" font-size="12" fill="#7a9cc6">（只看得到最前面那張）</text>
+    <text x="300" y="250" font-size="12" fill="#d98b3a">橘：零件長條</text>
+    <text x="300" y="268" font-size="12" fill="#d98b3a">越後面越高 35/55/75/95</text>
+    <text x="300" y="350" font-size="12" fill="#9a5fb0">紫：中間限位帶</text>
+    <text x="300" y="30" font-size="12" fill="#666">層距 25，總深約 135</text>
+  </g>
+</svg>
+</div>
+
+<!-- 俯視 -->
+<div class="card">
+<h2>③ 俯視：兩側風琴摺＋中間限位帶（下＝前）</h2>
+<svg width="560" height="380" viewBox="0 0 560 380">
+  <g transform="translate(40,40)">
+    <!-- 托盤外框 -->
+    <rect x="-10" y="0" width="440" height="270" fill="#f1f1ec" stroke="#555" stroke-width="2"/>
+    <!-- 各層，y 越大越前 -->
+    <g stroke="#333" stroke-width="2">
+      <line x1="0" y1="240" x2="420" y2="240"/>
+      <line x1="0" y1="190" x2="420" y2="190"/>
+      <line x1="0" y1="140" x2="420" y2="140"/>
+      <line x1="0" y1="90" x2="420" y2="90"/>
+    </g>
+    <line x1="0" y1="40" x2="420" y2="40" stroke="#6a8f6a" stroke-width="5"/>
+    <!-- 風琴摺 左右 -->
+    <polyline points="0,240 -8,215 0,190 -8,165 0,140 -8,115 0,90 -8,65 0,40" fill="none" stroke="#c77" stroke-width="2"/>
+    <polyline points="420,240 428,215 420,190 428,165 420,140 428,115 420,90 428,65 420,40" fill="none" stroke="#c77" stroke-width="2"/>
+    <!-- 限位帶 -->
+    <line x1="210" y1="240" x2="210" y2="40" stroke="#9a5fb0" stroke-width="3" stroke-dasharray="6 4"/>
+    <g font-size="12" fill="#333">
+      <text x="442" y="244">週1（最前）</text>
+      <text x="442" y="194">週2</text>
+      <text x="442" y="144">週3</text>
+      <text x="442" y="94">週4</text>
+      <text x="442" y="44" fill="#6a8f6a">背景</text>
+    </g>
+    <text x="210" y="300" text-anchor="middle" font-size="12" fill="#c77">紅：左右風琴摺（我們預先做好）</text>
+    <text x="210" y="318" text-anchor="middle" font-size="12" fill="#9a5fb0">紫虛線：中間限位帶（拉開時拉直、壓扁時折線往上拱）</text>
+    <text x="210" y="-14" text-anchor="middle" font-size="12" fill="#666">寬 210，托盤外約 230 × 140</text>
+  </g>
+</svg>
+</div>
+
+</div>
+</body>
+</html>
